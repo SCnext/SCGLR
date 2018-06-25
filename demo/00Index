@@ -1,0 +1,4 @@
+scglr             Simple SCGLR example
+scglrCrossVal     Cross validation using SCLGR
+scglrPlots        Plot samples
+scglrPrediction   Prediction using SCGLR
