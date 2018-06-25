@@ -1,3 +1,7 @@
+# version 2.99
+- added scglrTheme and scglrThemeBackward to handle theme oriented selection
+- reworked multivariateFormula to handle themes
+
 # version 2.1
 - Removed LPLS legacy method
 - changed from ING to PING
