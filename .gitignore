@@ -1,9 +1,6 @@
 .Rproj.user
 .Rhistory
 .RData
+inst/doc
 man
-SCGLR.Rproj
 .Rapp.history
-.Rbuildignore
-tmp
-/.project
