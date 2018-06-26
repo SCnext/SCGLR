@@ -1,7 +1,7 @@
 #' @title Function that fits the theme model
 #' @description Calculates the components to predict all the dependent variables.
 #' @export
-#' @param formula an object of class "\code{\link{Formula}}" (or one that can be coerced
+#' @param formula an object of class "\code{\link{MultivariateFormula}}" (or one that can be coerced
 #' to that class): a symbolic description of the model to be fitted. The details
 #' of model specification are given under Details.
 #' @param data data frame.

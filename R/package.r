@@ -9,7 +9,8 @@
 #' The package contains also an ecological
 #' dataset dealing with the abundance of multiple tree genera given a large number of geo-referenced environmental
 #' variables.
-#' @references Bry X., Trottier C., Verron T. and Mortier F. (2013) Supervised Component Generalized Linear Regression using a PLS-extension of the Fisher scoring algorithm. \emph{Journal of Multivariate Analysis}, 119, 47-60.#' @docType package
+#' @references Bry X., Trottier C., Verron T. and Mortier F. (2013) Supervised Component Generalized Linear Regression using a PLS-extension of the Fisher scoring algorithm. \emph{Journal of Multivariate Analysis}, 119, 47-60.#' 
+#' @docType package
 #' @name scglr-package
 #' @author Mortier F., Trottier C., Cornu G., Bry X.
 #' @importFrom Matrix bdiag
@@ -23,5 +24,5 @@ NULL
 }
 
 .onAttach <- function(libname,pkgname) {
-  packageStartupMessage("Experimental version of SCGLR with grouped (theme) covariate extending SCGLR 2.03 version (aka version 2.99)")
+  #packageStartupMessage("Experimental version of SCGLR with grouped (theme) covariate extending SCGLR 2.03 version (aka version 2.99)")
 }
