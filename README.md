@@ -18,7 +18,7 @@ ability for prediction in various biological fields such as genetic
 (Boulesteix and Strimmer [2007](#ref-boulesteix07)) or ecology
 (Carrascal, Galván, and Gordo [2009](#ref-carrascal09)). While PLSR is
 well adapted for continuous variables, maximizing the correlation
-between dependent variables,Y, and covariates, X, **SCGLR** is suited
+between dependent variables, Y, and covariates, X, **SCGLR** is suited
 for non-Gaussian outcomes and non-continuous covariates. It is a
 model-based approach that extends PLS (Tenenhaus
 [1998](#ref-tenenhaus98)), PCA on instrumental variables (Sabatier,
@@ -48,7 +48,7 @@ deal with multiple conceptually homogenous variable groups (Bry et al.
 [2018](#ref-bry18)). **SCGLR** is a set of **R** functions illustrated
 on a floristic data set, *genus*. `scglr` and `scglrTheme` are
 respectively dedicated to fitting the model with one or more thematic
-group of regressors. `scglrCrossVal` and `scglrThemeBackward` are are
+group of regressors. `scglrCrossVal` and `scglrThemeBackward` are
 respectively dedicated to selecting the number of components. `print`,
 `summary` and `plot` methods are also available for the `scglr` and
 `scglrTheme` function results.
