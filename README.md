@@ -8,25 +8,25 @@
 
 **SCGLR** is an open source implementation of the Supervised Component
 Generalized Linear Regression (Bry et al. [2013](#ref-bry13),
-[2016](#ref-bry16), [2018](#ref-bry18)), which identifies the most
-predictive dimensions among a large set of predictors potentially
-multicolinear. **SCGLR** is an extension of partial least square
-regression (PLSR) to the uni- and multivariate generalized linear
-framework. PLSR is particularly well suited for analyzing a large array
-of related predictor variables and many studies have demonstrated its
-ability for prediction in various biological fields such as genetic
+[2016](#ref-bry16), [2018](#ref-bry18)), which identifies, among a large
+set of potentially multicolinear predictors, the strong dimensions most
+predictive of a set of responses. **SCGLR** is an extension of partial
+least square regression (PLSR) to the uni- and multivariate generalized
+linear framework. PLSR is particularly well suited for analyzing a large
+array of explanatory variables and many studies have demonstrated its
+predictive performance in various biological fields such as genetics
 (Boulesteix and Strimmer [2007](#ref-boulesteix07)) or ecology
 (Carrascal, Galván, and Gordo [2009](#ref-carrascal09)). While PLSR is
-well adapted for continuous variables, maximizing the correlation
-between dependent variables, Y, and covariates, X, **SCGLR** is suited
-for non-Gaussian outcomes and non-continuous covariates. It is a
-model-based approach that extends PLS (Tenenhaus
-[1998](#ref-tenenhaus98)), PCA on instrumental variables (Sabatier,
-Lebreton, and Chessel [1989](#ref-sabatier89)), canonical correspondence
-analysis (Ter Braak [1987](#ref-terbraak87)), and other related
-empirical methods, by capturing the trade-off between goodness-of-fit
-and common structural relevance among covariates. The notion of
-structural strength has been extended to structural relevance by (Bry
+well adapted for continuous variables, maximizing the covariance between
+linear combination of dependent variables, and linear combinations of
+covariates, **SCGLR** is suited for non-Gaussian outcomes and
+non-continuous covariates. It is a model-based approach that extends PLS
+(Tenenhaus [1998](#ref-tenenhaus98)), PCA on instrumental variables
+(Sabatier, Lebreton, and Chessel [1989](#ref-sabatier89)), canonical
+correspondence analysis (Ter Braak [1987](#ref-terbraak87)), and other
+related empirical methods, by capturing the trade-off between
+goodness-of-fit and common structural relevance of explanatory
+components. The notion of structural relevance has been introduced (Bry
 and Verron [2015](#ref-bry15)).
 
 ## Installation
@@ -42,22 +42,23 @@ devtools::install_github("billy34/SCGLR")
 ## Main functions and works in progress
 
 **SCGLR** is designed to deal with outcomes from multiple distributions:
-Gaussian, Bernoulli, binomial and Poisson separetly or simultaneousy
+Gaussian, Bernoulli, binomial and Poisson separately or simultaneously
 (Bry et al. [2013](#ref-bry13)). Moereover **SCGLR** is also able to
-deal with multiple conceptually homogenous variable groups (Bry et al.
-[2018](#ref-bry18)). **SCGLR** is a set of **R** functions illustrated
-on a floristic data set, *genus*. `scglr` and `scglrTheme` are
-respectively dedicated to fitting the model with one or more thematic
-group of regressors. `scglrCrossVal` and `scglrThemeBackward` are
-respectively dedicated to selecting the number of components. `print`,
-`summary` and `plot` methods are also available for the `scglr` and
-`scglrTheme` function results.
+deal with multiple conceptually homogeneous explanatory variable groups
+(Bry et al. [2018](#ref-bry18)). **SCGLR** is a set of **R** functions
+illustrated on a floristic data set, *genus*. `scglr` and `scglrTheme`
+are respectively dedicated to fitting the model with one or more
+thematic group of regressors. `scglrCrossVal` and `scglrThemeBackward`
+are respectively dedicated to selecting the number of components.
+`print`, `summary` and `plot` methods are also available for the `scglr`
+and `scglrTheme` function results.
 
-Different works are in progress both dealing with the inclusion of
-random effects extending **SCGLR** to generalized linear mixed model
-framework (Chauvet, Trottier, and Bry
+Different works are in progress both dealing for instance with the
+inclusion of random effects extending **SCGLR** to the generalized
+linear mixed model framework (Chauvet, Trottier, and Bry
 [2018](#ref-chauvet18)[a](#ref-chauvet18),
-[2018](#ref-chauvet18b)[b](#ref-chauvet18b)).
+[2018](#ref-chauvet18b)[b](#ref-chauvet18b)), or the Cox regression
+model.
 
 ## References
 
