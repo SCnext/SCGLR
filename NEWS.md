@@ -1,4 +1,4 @@
-# version 2.99
+# version 3.0
 - added scglrTheme and scglrThemeBackward to handle theme oriented selection
 - reworked multivariateFormula to handle themes
 
