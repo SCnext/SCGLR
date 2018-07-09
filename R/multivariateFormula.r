@@ -186,7 +186,7 @@ multivariateFormula <- function(Y, X=NULL, ..., A=NULL, additional=NULL, data=NU
 #' @param f formula
 #' @param a attribute
 #' @description
-#' S3 helper function to retrieve attributes as if was named values
+#' S3 helper function to retrieve attributes as if it was named values
 #' @examples
 #' frm <- multivariateFormula(y~x+z)
 #' print(frm$Y)
@@ -203,7 +203,11 @@ multivariateFormula <- function(Y, X=NULL, ..., A=NULL, additional=NULL, data=NU
 #' @param ... unused
 print.MultivariateFormula <- function(x, ...) {
 
-  cat("Multivariate formula ",deparse(x),"\n")
+  deparse <- function(x) {
+    paste0(base::deparse(x,60),collapse="\n")
+  }
+  
+  cat("Multivariate formula \n   ",deparse(x),"\n")
 
   # response part
   cat("  Response: \n     Y   = ",deparse(x$Y),"\n")
