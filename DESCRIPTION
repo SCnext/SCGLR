@@ -14,8 +14,7 @@ Authors@R: c(
 Description: 
     SCGLR extends the Fisher Scoring Algorithm so as 
     to combine PLS regression with GLM estimation in
-    the multivariate context. 
-    Deals with multiple groups of covariates (thema)
+    the multivariate context. Multiple groups of covariates can be grouped (thema).
 License: CeCILL-2 | GPL-2
 URL: https://github.com/SCnext/SCGLR
 BugReports: https://github.com/SCnext/SCGLR/issues
@@ -24,8 +23,7 @@ Depends:
 Imports:
     Matrix,Formula,expm,graphics,ggplot2,grid,pROC,ade4
 Suggests:
-    parallel,gridExtra,knitr
+    parallel,gridExtra
 LazyData: yes
-VignetteBuilder: knitr
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
 Encoding: UTF-8

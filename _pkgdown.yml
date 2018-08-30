@@ -1,0 +1,35 @@
+development:
+  mode: unreleased
+home:
+  links:
+    - text: SCnext, the future of supervised component regression
+      href: https://github.com/SCnext
+reference:
+  - title: Building formula
+    desc: ~
+    contents:
+      - '`multivariateFormula`'
+  - title: Computing model
+    contents:
+      - '`scglr`'
+      - '`scglrTheme`'
+  - title: Cross validation
+    contents:
+      - '`scglrCrossVal`'
+      - '`scglrThemeBackward`'
+  - title: Displaying results
+    desc: >
+      Various S3 methods for displaying information and results from scglr and scglrTheme objects.
+    contents:
+      - ends_with(".SCGLR",internal=TRUE)
+      - ends_with(".SCGLRTHM",internal=TRUE)
+      - ends_with(".MultivariateFormula")
+  - title: Miscellaneous
+    contents:
+      - '`customize`'
+      - '`critConvergence`'
+      - '`infoCriterion`'
+      - '`methodSR`'
+  - title: Sample dataset
+    contents:
+      - '`genus`'

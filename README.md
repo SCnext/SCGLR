@@ -43,9 +43,9 @@ devtools::install_github("billy34/SCGLR")
 
 **SCGLR** is designed to deal with outcomes from multiple distributions:
 Gaussian, Bernoulli, binomial and Poisson separately or simultaneously
-(Bry et al. [2013](#ref-bry13)). Moereover **SCGLR** is also able to
-deal with multiple conceptually homogeneous explanatory variable groups
-(Bry et al. [2018](#ref-bry18)). **SCGLR** is a set of **R** functions
+(Bry et al. [2013](#ref-bry13)). Moreover **SCGLR** is also able to deal
+with multiple conceptually homogeneous explanatory variable groups (Bry
+et al. [2018](#ref-bry18)). **SCGLR** is a set of **R** functions
 illustrated on a floristic data set, *genus*. `scglr` and `scglrTheme`
 are respectively dedicated to fitting the model with one or more
 thematic group of regressors. `scglrCrossVal` and `scglrThemeBackward`
