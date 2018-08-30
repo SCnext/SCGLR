@@ -1,4 +1,5 @@
 #' @export
+#' @keywords internal
 #' @title Print SCGLR object
 #' @description Prints inertia per component and residual and null deviance for each Y.
 #' @method print SCGLR

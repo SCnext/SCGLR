@@ -15,3 +15,4 @@
 S3 helper function to print a multivariate formula
 NB use $ semantic to retrieve metadata
 }
+\keyword{internal}

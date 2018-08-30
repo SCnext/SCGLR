@@ -14,3 +14,4 @@
 \description{
 Prints inertia per component and residual and null deviance for each Y.
 }
+\keyword{internal}

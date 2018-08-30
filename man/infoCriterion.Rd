@@ -30,3 +30,4 @@ and each number of components (column).
 \description{
 Function that calculates cross-validation selection criteria
 }
+\keyword{internal}

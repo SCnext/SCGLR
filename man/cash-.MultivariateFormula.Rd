@@ -12,9 +12,10 @@
 \item{a}{attribute}
 }
 \description{
-S3 helper function to retrieve attributes as if was named values
+S3 helper function to retrieve attributes as if it was named values
 }
 \examples{
 frm <- multivariateFormula(y~x+z)
 print(frm$Y)
 }
+\keyword{internal}

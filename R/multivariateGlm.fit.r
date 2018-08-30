@@ -3,6 +3,7 @@
 #' specified by a symbolic formula together with the distributions of the responses.
 #' This function performs a simple GLM fit for each dependent variable with the associated distribution.
 #' @export
+#' @keywords internal
 #' @importFrom stats glm
 #' @param Y matrix of dependent variables.
 #' @param comp matrix of covariates.

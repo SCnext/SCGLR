@@ -1,5 +1,6 @@
 #' @title Function that calculates cross-validation selection criteria
 #' @export
+#' @keywords internal
 #' @importFrom stats dbinom dpois dnorm
 #' @description  Function that calculates cross-validation selection criteria
 #' @param ynew data matrix corresponding to the observations used as test sample.

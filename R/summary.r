@@ -55,6 +55,7 @@ summary.SCGLR <- function(object, ...) {
 }
 
 #' @export
+#' @keywords internal
 #' @rdname summary.SCGLR
 #' @method print summary.SCGLR
 #' @param x an object of class "summary.SCGLR", usually a result of a call to summary.SCGLR.

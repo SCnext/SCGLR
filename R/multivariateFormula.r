@@ -183,6 +183,7 @@ multivariateFormula <- function(Y, X=NULL, ..., A=NULL, additional=NULL, data=NU
 
 #' @title $ operator for multivariate formula
 #' @export
+#' @keywords internal
 #' @param f formula
 #' @param a attribute
 #' @description
@@ -196,6 +197,7 @@ multivariateFormula <- function(Y, X=NULL, ..., A=NULL, additional=NULL, data=NU
 
 #' @title print a multivariate formula
 #' @export
+#' @keywords internal
 #' @description
 #' S3 helper function to print a multivariate formula
 #' NB use $ semantic to retrieve metadata

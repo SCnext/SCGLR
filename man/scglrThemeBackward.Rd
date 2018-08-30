@@ -4,9 +4,10 @@
 \alias{scglrThemeBackward}
 \title{Theme Backward selection}
 \usage{
-scglrThemeBackward(formula, data, H, family, size = NULL, weights = NULL,
-  offset = NULL, na.action = na.omit, crit = list(),
-  method = methodSR(), kfolds = 10, type = "mspe", st = FALSE)
+scglrThemeBackward(formula, data, H, family, size = NULL,
+  weights = NULL, offset = NULL, na.action = na.omit,
+  crit = list(), method = methodSR(), kfolds = 10, type = "mspe",
+  st = FALSE)
 }
 \arguments{
 \item{formula}{an object of class "\code{\link{Formula}}" (or one that can be coerced

@@ -1,22 +1,4 @@
 #'@title Regularization criterion types
-#'@name Methods
-#'@export
-#'@rdname method
-#'@description
-#'\itemize{
-#  \item{\code{LPLS} for PLS-type SCGLR}
-#'  \item{\code{SR} Method iterative normed gradient (ING) for Structural Relevance}
-#'}
-# methodLPLS <- function() {
-#   structure(list(
-#       method="lpls"
-#     ),
-#     class="method.SCGLR",
-#     description="PLS-type SCGLR"
-#     )
-# }
-
-#'@rdname method
 #'@export
 #'@param phi character string describing structura relevance used in the regularization process.
 #' Allowed values are "vpi" for Variable Powered Inertia and "cv" for Component Variance. Default to "vpi".

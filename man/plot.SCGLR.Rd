@@ -4,8 +4,8 @@
 \alias{plot.SCGLR}
 \title{SCGLR generic plot}
 \usage{
-\method{plot}{SCGLR}(x, ..., style = getOption("plot.SCGLR"), plane = c(1,
-  2))
+\method{plot}{SCGLR}(x, ..., style = getOption("plot.SCGLR"),
+  plane = c(1, 2))
 }
 \arguments{
 \item{x}{an object from SCGLR class.}

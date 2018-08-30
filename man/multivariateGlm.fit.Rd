@@ -86,3 +86,4 @@ cor.glm <- diag(cor(pred.glm,genus[sub,ny]))
 points(cor.glm, col="blue")
 }
 }
+\keyword{internal}

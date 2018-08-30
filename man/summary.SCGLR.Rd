@@ -30,3 +30,4 @@ an object of class "summary.SCGLR".
 \description{
 Summary method for class "SCGLR".
 }
+\keyword{internal}

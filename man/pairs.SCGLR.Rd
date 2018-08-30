@@ -4,7 +4,8 @@
 \alias{pairs.SCGLR}
 \title{Pairwise scglr plot on components}
 \usage{
-\method{pairs}{SCGLR}(x, ..., nrow = NULL, ncol = NULL, components = NULL)
+\method{pairs}{SCGLR}(x, ..., nrow = NULL, ncol = NULL,
+  components = NULL)
 }
 \arguments{
 \item{x}{object of class 'SCGLR', usually a result of running \code{\link{scglr}}.}
