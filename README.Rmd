@@ -19,9 +19,11 @@ bibliography: assets/SCGLR.bib
 **SCGLR** is an open source implementation of the Supervised Component Generalized Linear Regression 
 [@bry13;-@bry16;-@bry18], which identifies, among a large set of potentially multicolinear predictors, the strong dimensions  most predictive of a set of responses. 
 
-**SCGLR** is an extension of partial least square regression (PLSR) to the uni- and multivariate generalized linear framework. PLSR is particularly well suited for analyzing a large array of explanatory variables and many studies have demonstrated its predictive performance in various biological fields such as genetics [@boulesteix07] or ecology [@carrascal09].  While PLSR is well adapted for continuous variables, maximizing the covariance between linear combination of dependent variables, and linear combinations of covariates, **SCGLR** is suited for non-Gaussian outcomes and non-continuous covariates. 
+**SCGLR** is an extension of partial least square regression (PLSR) to the uni- and multivariate generalized linear framework. PLSR is particularly well suited for analyzing a large array of explanatory variables and many studies have demonstrated its predictive performance in various biological fields such as genetics [@boulesteix07] or ecology [@carrascal09].  While PLSR is well adapted for continuous variables, maximizing the covariance between linear combination of dependent variables, and linear combinations of covariates, **SCGLR** is suited for non-Gaussian outcomes and non-continuous covariates.
 
-**SCGLR** is a model-based approach that extends PLS [@tenenhaus98], PCA on instrumental variables [@sabatier89], canonical correspondence analysis [@terbraak87], and other related empirical methods, by capturing the trade-off between goodness-of-fit and common structural relevance of explanatory components. The notion of structural relevance has been introduced [@bry15].   
+**SCGLR** is a model-based approach that extends PLS [@tenenhaus98], PCA on instrumental variables [@sabatier89], canonical correspondence analysis [@terbraak87], and other related empirical methods, by capturing the trade-off between goodness-of-fit and common structural relevance of explanatory components. The notion of structural relevance has been introduced [@bry15].
+
+**SCGLR** can deal with covariates partitioned in several groups called "themes", plus a group of additional covariates. Each theme is searched for orthogonal components representing its variables in the model, whereas the additional covariates appear directly in the model, without the mediation of a component [@bry19].
 
 
 ## Installation
