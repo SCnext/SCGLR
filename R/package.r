@@ -17,6 +17,7 @@
 #' @import Formula
 #' @import expm
 #' @importFrom graphics barplot
+#' @importFrom stats screeplot
 #' @import ggplot2
 NULL
 
