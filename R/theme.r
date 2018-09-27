@@ -283,9 +283,10 @@ scglrTheme <- function(formula, data, H, family, size = NULL, weights = NULL,
 
       colnames(result$comp) <- sprintf("%s_%s", theme_labels[r], colnames(result$comp))
       colnames(result$compr) <- sprintf("%s_%s", theme_labels[r], colnames(result$compr))
+      result$label <- theme_labels[r]
 
       # update result
-      out$themes[[r]]<-result
+      out$themes[[r]] <- result
 
       # update stop condition over components
       if(Hr>1){
