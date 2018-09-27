@@ -291,11 +291,11 @@ scglrTheme <- function(formula, data, H, family, size = NULL, weights = NULL,
       # update stop condition over components
       if(Hr>1){
         f_old <- as.matrix(work_data[, names(theme_T[[r]])])
-        f_old <- apply(f_old,2,function(x)x/(sqrt(crossprod(x)/data_size)))
+        f_old <- apply(f_old,2,function(x)x/(sqrt(c(crossprod(x)/data_size))))
         f_new <- as.matrix(result$compr[, 1:Hr])
        } else {
         f_old <- c(work_data[, names(theme_T[[r]])])
-        f_old <- f_old/(sqrt(crossprod(f_old)/data_size))
+        f_old <- f_old/(sqrt(c(crossprod(f_old)/data_size)))
         f_new <- c(result$compr[, 1:Hr])
        }
       tol1[r] <- sum(1 - diag(crossprod(f_old, f_new)/data_size)^2)
