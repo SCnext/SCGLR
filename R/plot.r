@@ -508,7 +508,10 @@ barplot.SCGLRTHM <- function(height, ...) {
 #' @param \dots optional arguments.
 #' @return an object of class ggplot.
 screeplot.SCGLRTHM <- function(x, ...) {
-  plots <- lapply(x$themes, function(t) screeplot.SCGLR(t,...))
+  plots <- lapply(x$themes, function(t) 
+    screeplot.SCGLR(t,...)+
+      labs(title=paste0("Theme ",t$label,": Inertia per component\n"))
+  )
   do.call(arrange, plots)
 }
 
@@ -520,6 +523,9 @@ screeplot.SCGLRTHM <- function(x, ...) {
 #' @param \dots see SCGLR plot method
 #' @return an object of class \code{\link{ggplot}}.
 plot.SCGLRTHM <- function(x, ...) {
-  plots <- lapply(x$themes, function(t) plot.SCGLR(t,...))
+  plots <- lapply(x$themes, function(t) 
+    plot.SCGLR(t,...)+
+      labs(title=paste0("Theme ",t$label,": Correlation plot\n"))
+  )
   do.call(arrange, plots)
 }
