@@ -17,3 +17,4 @@ an object of class ggplot.
 \description{
 Barplot of percent of overall X variance captured by component by theme
 }
+\keyword{internal}

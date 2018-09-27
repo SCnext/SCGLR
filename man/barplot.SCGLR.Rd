@@ -20,3 +20,4 @@ Barplot of percent of overall X variance captured by component
 \seealso{
 For barplot application see examples in \code{\link{plot.SCGLR}}.
 }
+\keyword{internal}

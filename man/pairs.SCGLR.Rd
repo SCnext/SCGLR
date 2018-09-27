@@ -10,7 +10,7 @@
 \arguments{
 \item{x}{object of class 'SCGLR', usually a result of running \code{\link{scglr}}.}
 
-\item{\dots}{optionally, further arguments forwarded to \code{link{plot.SCGLR}}.}
+\item{\dots}{optionally, further arguments forwarded to \code{\link{plot.SCGLR}}.}
 
 \item{nrow}{number of rows of the grid layout.}
 
