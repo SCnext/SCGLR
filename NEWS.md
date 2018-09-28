@@ -1,6 +1,10 @@
 # version 3.0
-- added scglrTheme and scglrThemeBackward to handle theme oriented selection
-- reworked multivariateFormula to handle themes
+This major version introduces a new feature allowing to group covariates in so called **themes**.
+
+- added `scglrTheme` and `scglrThemeBackward` to handle theme oriented selection
+- reworked `multivariateFormula` to handle themes
+- added new plots targeting themes
+- deprecated `barplot` in favor of `screeplot` (same parameters)
 
 # version 2.1
 - Removed LPLS legacy method
