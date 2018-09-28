@@ -24,6 +24,8 @@ reference:
       - ends_with(".SCGLR",internal=TRUE)
       - ends_with(".SCGLRTHM",internal=TRUE)
       - ends_with(".MultivariateFormula")
+      - '-`barplot.SCGLR`'
+      - '-`barplot.SCGLRTHM`'
   - title: Miscellaneous
     contents:
       - '`customize`'

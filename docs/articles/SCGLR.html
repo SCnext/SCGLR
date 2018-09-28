@@ -97,7 +97,7 @@
 <a class="sourceLine" id="cb1-13" data-line-number="13">nx &lt;-nx[<span class="op">!</span>nx<span class="op">%in%</span><span class="kw">c</span>(<span class="st">"geology"</span>,<span class="st">"surface"</span>)]</a>
 <a class="sourceLine" id="cb1-14" data-line-number="14"></a>
 <a class="sourceLine" id="cb1-15" data-line-number="15"><span class="co"># build multivariate formula</span></a>
-<a class="sourceLine" id="cb1-16" data-line-number="16"><span class="co"># we also add "lat*lon" as computed covariate</span></a>
+<a class="sourceLine" id="cb1-16" data-line-number="16"><span class="co"># we also add "lat*lon" as computed covariate to catch spatial spatial patterns</span></a>
 <a class="sourceLine" id="cb1-17" data-line-number="17">form &lt;-<span class="st"> </span><span class="kw"><a href="../reference/multivariateFormula.html">multivariateFormula</a></span>(ny,<span class="kw">c</span>(nx,<span class="st">"I(lat*lon)"</span>),<span class="dt">A=</span><span class="kw">c</span>(<span class="st">"geology"</span>))</a>
 <a class="sourceLine" id="cb1-18" data-line-number="18"></a>
 <a class="sourceLine" id="cb1-19" data-line-number="19"><span class="co"># define family</span></a>
@@ -227,16 +227,70 @@
 <div id="percent-of-variance-captured-by-components" class="section level1">
 <h1 class="hasAnchor">
 <a href="#percent-of-variance-captured-by-components" class="anchor"></a>Percent of variance captured by components</h1>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">barplot</span>(genus.scglr)</a></code></pre></div>
-<p><img src="SCGLR_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">screeplot</span>(genus.scglr)</a></code></pre></div>
+<p><img src="SCGLR_files/figure-html/screeplot-1.png" width="700"></p>
 </div>
 <div id="correlation-plot-for-first-two-components" class="section level1">
 <h1 class="hasAnchor">
 <a href="#correlation-plot-for-first-two-components" class="anchor"></a>Correlation plot for first two components</h1>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">plot</span>(genus.scglr, <span class="dt">predictors=</span><span class="ot">TRUE</span>, <span class="dt">factor=</span><span class="ot">TRUE</span>)</a></code></pre></div>
-<pre><code>## Warning in plot.SCGLR(genus.scglr, predictors = TRUE, factor = TRUE): No
-## factor given, assuming first one! (forest)!</code></pre>
-<p><img src="SCGLR_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">plot</span>(genus.scglr, <span class="dt">title=</span><span class="st">"Correlation plot showing covariates"</span>)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw">plot</span>(genus.scglr,<span class="dt">predictors=</span><span class="ot">TRUE</span>,<span class="dt">covariates=</span><span class="ot">FALSE</span>, <span class="dt">title=</span><span class="st">"Correlation plot showing predictors"</span>)</a></code></pre></div>
+<p><img src="SCGLR_files/figure-html/corr_plots-1.png" width="50%"><img src="SCGLR_files/figure-html/corr_plots-2.png" width="50%"></p>
+</div>
+<div id="comparing-combinations-of-components" class="section level1">
+<h1 class="hasAnchor">
+<a href="#comparing-combinations-of-components" class="anchor"></a>Comparing combinations of components</h1>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">pairs</span>(genus.scglr,<span class="dt">ncol=</span><span class="dv">2</span>)</a></code></pre></div>
+<p><img src="SCGLR_files/figure-html/pairplot-1.png" width="700"></p>
+</div>
+<div id="using-grouped-covariates-theme" class="section level1">
+<h1 class="hasAnchor">
+<a href="#using-grouped-covariates-theme" class="anchor"></a>Using grouped covariates (theme)</h1>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">n &lt;-<span class="st"> </span><span class="kw">names</span>(genus)</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">n &lt;-n[<span class="op">!</span>n<span class="op">%in%</span><span class="kw">c</span>(<span class="st">"geology"</span>,<span class="st">"surface"</span>,<span class="st">"lon"</span>,<span class="st">"lat"</span>,<span class="st">"forest"</span>,<span class="st">"altitude"</span>)]</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">ny &lt;-<span class="st"> </span>n[<span class="kw">grep</span>(<span class="st">"^gen"</span>,n)]    <span class="co"># Y &lt;- names that begins with "gen"</span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">nx1 &lt;-<span class="st"> </span>n[<span class="kw">grep</span>(<span class="st">"^evi"</span>,n)]   <span class="co"># theme 1 with EVI covariates</span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">nx2 &lt;-<span class="st"> </span>n[<span class="op">-</span><span class="kw">c</span>(<span class="kw">grep</span>(<span class="st">"^evi"</span>,n),<span class="kw">grep</span>(<span class="st">"^gen"</span>,n))] <span class="co"># theme 2 with pluviometry covariates</span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7">form &lt;-<span class="st"> </span><span class="kw"><a href="../reference/multivariateFormula.html">multivariateFormula</a></span>(ny,nx1,nx2,<span class="dt">A=</span><span class="kw">c</span>(<span class="st">"geology"</span>))</a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="kw">print</span>(form)</a></code></pre></div>
+<pre><code>## Multivariate formula 
+##     gen1 + gen2 + gen3 + gen4 + gen5 + gen6 + gen7 + gen8 + gen9 + 
+##     gen10 + gen11 + gen12 + gen13 + gen14 + gen15 + gen16 + gen17 + 
+##     gen18 + gen19 + gen20 + gen21 + gen22 + gen23 + gen24 + gen25 + 
+##     gen26 + gen27 ~ evi_1 + evi_2 + evi_3 + evi_4 + evi_5 + evi_6 + 
+##     evi_7 + evi_8 + evi_9 + evi_10 + evi_11 + evi_12 + evi_13 + 
+##     evi_14 + evi_15 + evi_16 + evi_17 + evi_18 + evi_19 + evi_20 + 
+##     evi_21 + evi_22 + evi_23 | pluvio_yr + pluvio_1 + pluvio_2 + 
+##     pluvio_3 + pluvio_4 + pluvio_5 + pluvio_6 + pluvio_7 + pluvio_8 + 
+##     pluvio_9 + pluvio_10 + pluvio_11 + pluvio_12 | geology 
+##   Response: 
+##      Y   =  gen1 + gen2 + gen3 + gen4 + gen5 + gen6 + gen7 + gen8 + gen9 + 
+##     gen10 + gen11 + gen12 + gen13 + gen14 + gen15 + gen16 + gen17 + 
+##     gen18 + gen19 + gen20 + gen21 + gen22 + gen23 + gen24 + gen25 + 
+##     gen26 + gen27 
+##   Covariates:
+##      T1  =  evi_1 + evi_2 + evi_3 + evi_4 + evi_5 + evi_6 + evi_7 + evi_8 + 
+##     evi_9 + evi_10 + evi_11 + evi_12 + evi_13 + evi_14 + evi_15 + 
+##     evi_16 + evi_17 + evi_18 + evi_19 + evi_20 + evi_21 + evi_22 + 
+##     evi_23 
+##      T2  =  pluvio_yr + pluvio_1 + pluvio_2 + pluvio_3 + pluvio_4 + pluvio_5 + 
+##     pluvio_6 + pluvio_7 + pluvio_8 + pluvio_9 + pluvio_10 + pluvio_11 + 
+##     pluvio_12 
+##      A   =  geology</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">testthm &lt;-<span class="kw"><a href="../reference/scglrTheme.html">scglrTheme</a></span>(form,<span class="dt">data=</span>genus,<span class="dt">H=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>),<span class="dt">family=</span><span class="st">"poisson"</span>,<span class="dt">offset =</span> genus<span class="op">$</span>surface)</a></code></pre></div>
+<div id="specialized-screeplot-one-for-each-theme" class="section level2">
+<h2 class="hasAnchor">
+<a href="#specialized-screeplot-one-for-each-theme" class="anchor"></a>Specialized screeplot (one for each theme)</h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">screeplot</span>(testthm)</a></code></pre></div>
+<p><img src="SCGLR_files/figure-html/theme_screeplot-1.png" width="700"></p>
+</div>
+<div id="specialized-correlation-plot-one-for-each-theme" class="section level2">
+<h2 class="hasAnchor">
+<a href="#specialized-correlation-plot-one-for-each-theme" class="anchor"></a>Specialized correlation plot (one for each theme)</h2>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">plot</span>(testthm)</a></code></pre></div>
+<p><img src="SCGLR_files/figure-html/theme_corr_plots-1.png" width="700"></p>
+</div>
 </div>
   </div>
 
@@ -248,6 +302,13 @@
 <li><a href="#display-a-summary-of-results">Display a summary of results</a></li>
       <li><a href="#percent-of-variance-captured-by-components">Percent of variance captured by components</a></li>
       <li><a href="#correlation-plot-for-first-two-components">Correlation plot for first two components</a></li>
+      <li><a href="#comparing-combinations-of-components">Comparing combinations of components</a></li>
+      <li>
+<a href="#using-grouped-covariates-theme">Using grouped covariates (theme)</a><ul class="nav nav-pills nav-stacked">
+<li><a href="#specialized-screeplot-one-for-each-theme">Specialized screeplot (one for each theme)</a></li>
+      <li><a href="#specialized-correlation-plot-one-for-each-theme">Specialized correlation plot (one for each theme)</a></li>
+      </ul>
+</li>
       </ul>
 </div>
       </div>
