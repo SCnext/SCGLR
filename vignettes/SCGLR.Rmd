@@ -25,7 +25,7 @@ nx <- n[-grep("^gen",n)]   # X <- remaining names
 nx <-nx[!nx%in%c("geology","surface")]
 
 # build multivariate formula
-# we also add "lat*lon" as computed covariate
+# we also add "lat*lon" as computed covariate to catch spatial spatial patterns
 form <- multivariateFormula(ny,c(nx,"I(lat*lon)"),A=c("geology"))
 
 # define family
@@ -44,13 +44,46 @@ summary(genus.scglr)
 
 # Percent of variance captured by components
 
-```{r}
-barplot(genus.scglr)
+```{r screeplot}
+screeplot(genus.scglr)
 ```
 
 # Correlation plot for first two components
 
+```{r corr_plots,fig.show="hold",out.width="50%"}
+plot(genus.scglr, title="Correlation plot showing covariates")
+plot(genus.scglr,predictors=TRUE,covariates=FALSE, title="Correlation plot showing predictors")
+```
+
+# Comparing combinations of components
+
+```{r pairplot,fig.asp=2}
+pairs(genus.scglr,ncol=2)
+```
+
+# Using grouped covariates (theme)
 ```{r}
-plot(genus.scglr, predictors=TRUE, factor=TRUE)
+n <- names(genus)
+n <-n[!n%in%c("geology","surface","lon","lat","forest","altitude")]
+ny <- n[grep("^gen",n)]    # Y <- names that begins with "gen"
+nx1 <- n[grep("^evi",n)]   # theme 1 with EVI covariates
+nx2 <- n[-c(grep("^evi",n),grep("^gen",n))] # theme 2 with pluviometry covariates
+
+form <- multivariateFormula(ny,nx1,nx2,A=c("geology"))
+print(form)
+
+testthm <-scglrTheme(form,data=genus,H=c(2,3),family="poisson",offset = genus$surface)
+```
+
+## Specialized screeplot (one for each theme)
+
+```{r theme_screeplot}
+screeplot(testthm)
+```
+
+## Specialized correlation plot (one for each theme)
+
+```{r theme_corr_plots}
+plot(testthm)
 ```
 
