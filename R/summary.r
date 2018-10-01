@@ -3,7 +3,6 @@
 #' @importFrom utils combn
 #' @title Summarizing SCGLR fits
 #' @description Summary method for class "SCGLR".
-#' @method summary SCGLR
 #' @param object an object of class "SCGLR", usually a result of a call to \code{\link{scglr}}.
 #' @param \dots Not used.
 #' @return
@@ -57,7 +56,6 @@ summary.SCGLR <- function(object, ...) {
 #' @export
 #' @keywords internal
 #' @rdname summary.SCGLR
-#' @method print summary.SCGLR
 #' @param x an object of class "summary.SCGLR", usually a result of a call to summary.SCGLR.
 #' @param digits the number of significant digits to use when printing.
 print.summary.SCGLR <- function(x, digits=3, ...) {

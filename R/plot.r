@@ -7,7 +7,6 @@ if(getRversion()>="2.15.1") {
 #' @export
 #' @importFrom stats cor aggregate
 #' @importFrom grid gpar circleGrob grid.newpage pushViewport viewport grid.layout
-#' @method plot SCGLR
 #' @description SCGLR generic plot
 #' @param x an object from SCGLR class.
 #' @param \dots optional arguments (see \link{customize}).
@@ -384,7 +383,6 @@ plot.SCGLR <- function(x, ..., style=getOption("plot.SCGLR"), plane=c(1, 2)) {
 
 #' @title Barplot of percent of overall X variance captured by component
 #' @export
-#' @method barplot SCGLR
 #' @description Barplot of percent of overall X variance captured by component
 #' @param height object of class 'SCGLR', usually a result of running \code{\link{scglr}}.
 #' @param \dots optional arguments.
@@ -398,7 +396,6 @@ barplot.SCGLR <- function(height, ...) {
 
 #' @title Screeplot of percent of overall X variance captured by component
 #' @export
-#' @method screeplot SCGLR
 #' @description Screeplot of percent of overall X variance captured by component
 #' @param x object of class 'SCGLR', usually a result of running \code{\link{scglr}}.
 #' @param \dots optional arguments.
@@ -414,7 +411,6 @@ screeplot.SCGLR <- function(x, ...) {
 
 #' @title Pairwise scglr plot on components
 #' @export
-#' @method pairs SCGLR
 #' @description Pairwise scglr plot on components
 #' @param x object of class 'SCGLR', usually a result of running \code{\link{scglr}}.
 #' @param \dots optionally, further arguments forwarded to \code{\link{plot.SCGLR}}.
@@ -489,7 +485,6 @@ arrange <- function(..., nrow=NULL, ncol=NULL, as.table=FALSE) {
 
 #' @title Barplot of percent of overall X variance captured by component
 #' @export
-#' @method barplot SCGLRTHM
 #' @description Barplot of percent of overall X variance captured by component by theme
 #' @param height object of class 'SCGLRTHM', usually a result of running \code{\link{theme}}.
 #' @param \dots optional arguments.
@@ -502,7 +497,6 @@ barplot.SCGLRTHM <- function(height, ...) {
 
 #' @title Screeplot of percent of overall X variance captured by component
 #' @export
-#' @method screeplot SCGLRTHM
 #' @description Screeplot of percent of overall X variance captured by component by theme
 #' @param x object of class 'SCGLRTHM', usually a result of running \code{\link{theme}}.
 #' @param \dots optional arguments.
@@ -517,7 +511,6 @@ screeplot.SCGLRTHM <- function(x, ...) {
 
 #' SCGLRTHM generic plot
 #' @export
-#' @method plot SCGLRTHM
 #' @description SCGLR generic plot for themes
 #' @param x an object from SCGLRTHM class.
 #' @param \dots see SCGLR plot method
