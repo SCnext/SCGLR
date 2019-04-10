@@ -333,7 +333,7 @@ scglrTheme <- function(formula, data, H, family, size = NULL, weights = NULL,
   comp <- do.call("cbind",lapply(out$themes, function(x) x$comp))
   x <- data.frame(comp,data[,A_vars])
   colnames(x) <- c(colnames(comp),A_vars)
-  fit <- multivariateGlm.fit(Y=data[,Y_vars],comp=x,family=family, size = size, offset=offset)
+  fit <- multivariateGlm.fit(Y=data[,Y_vars,drop=FALSE],comp=x,family=family, size = size, offset=offset)
   gamma <- sapply(fit,function(x) coef(x))
 
   #rownames(gamma)[sc] <- sprintf("%s_sc%s", theme_labels[r], 1:Hr)
