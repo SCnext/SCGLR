@@ -146,8 +146,8 @@ scglrThemeBackward <- function(formula, data, H, family, size = NULL, weights = 
           A_fit <- A_expand[folds!=k,,drop=FALSE]
         else
           A_fit <- NULL
-        X_fit <- cbind(XU_fit,A_fit)
-        fit <- multivariateGlm.fit(Y=data[folds!=k,formula$Y_vars],comp=X_fit,family=family,offset=offset[folds!=k],size=size[folds!=k,,drop=FALSE])
+        X_fit <- cbind(XU_fit,A_fit)##Ajouter drop =FALSE dans data en dessous
+        fit <- multivariateGlm.fit(Y=data[folds!=k,formula$Y_vars,drop=FALSE],comp=X_fit,family=family,offset=offset[folds!=k],size=size[folds!=k,,drop=FALSE])
         gamma <- sapply(fit, coef)
 
         XU_new <- as.matrix(do.call(cbind,lapply(which(h>0),function(l) as.matrix(X_expand[[l]][folds==k,,drop=F])%*%thm[[k]]$u[[l]][,1:h[l],drop=FALSE])))
@@ -179,7 +179,8 @@ scglrThemeBackward <- function(formula, data, H, family, size = NULL, weights = 
           A_fit <- A_expand[folds!=k,,drop=FALSE]
         else
           A_fit <- NULL
-        fit <- multivariateGlm.fit(Y=data[folds!=k,formula$Y_vars],comp=A_fit,family=family,offset=offset[folds!=k],size=size[folds!=k,,drop=FALSE])
+        #idem ajouter des drop = FALSE dans data en dessous
+        fit <- multivariateGlm.fit(Y=data[folds!=k,formula$Y_vars,drop=FALSE],comp=A_fit,family=family,offset=offset[folds!=k],size=size[folds!=k,,drop=FALSE])
         gamma <- sapply(fit, coef)
         if(!is.null(A_expand))
           A_new <- A_expand[folds==k,,drop=FALSE]
