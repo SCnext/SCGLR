@@ -19,7 +19,8 @@ scglrCrossVal(formula, data, family, K = 1, folds = 10,
 
 \item{folds}{number of folds, default is 10.
 Although kfolds can be as large as the sample size (leave-one-out CV),
-it is not recommended for large datasets.}
+it is not recommended for large datasets.
+folds can also be provided as a vector (same length as data) of fold identifiers.}
 
 \item{type}{loss function to use for cross-validation.
 Currently six options are available depending on whether the responses are of the same distribution family.

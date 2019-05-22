@@ -12,6 +12,7 @@ if(getRversion()>="2.15.1") {
 #' @param folds number of folds, default is 10.
 #' Although kfolds can be as large as the sample size (leave-one-out CV),
 #' it is not recommended for large datasets.
+#' folds can also be provided as a vector (same length as data) of fold identifiers.
 #' @param type loss function to use for cross-validation.
 #' Currently six options are available depending on whether the responses are of the same distribution family.
 #' If the responses are all bernoulli distributed, then the prediction performance may be measured

@@ -21,10 +21,16 @@
 #' built by  \code{\link{methodSR}} for Structural Relevance.
 #' @param st logical (FALSE) theme build and fit order. TRUE means random, FALSE means sequential (T1, ..., Tr)
 #' @details
-#' Models for theme are specified symbolically. A model as the form \code{response ~ terms} where \code{response}
+#' Models for theme are specified symbolically. 
+#' 
+#' A model as the form \code{response ~ terms} where \code{response}
 #' is the numeric response vector and terms is a series of R themes composed of
-#' predictors. Themes are separated by  "|" (pipe) and are composed. ... Y1+Y2+...
-#' ~ X11+X12+...+X1_  | X21+X22+... | ...+X1_+...  | A1+A2+... See \code{\link{multivariateFormula}}.
+#' predictors. 
+#' 
+#' Themes are separated by  "|" (pipe) and are composed. ... Y1+Y2+...
+#' ~ X11+X12+...+X1_  | X21+X22+... | ...+X1_+...  | A1+A2+... 
+#' 
+#' See \code{\link{multivariateFormula}}.
 #' @return a list of SCGLRTHM class. Each element is a SCGLR object
 #' @examples \dontrun{
 #' library(SCGLR)

@@ -38,11 +38,8 @@ the tolerance convergence criterion for the Fisher scoring algorithm. Default is
 built by  \code{\link{methodSR}} for Structural Relevance.}
 
 \item{folds}{number of folds - default is 10. Although folds can be as large as the sample size (leave-one-out CV),
-it is not recommended for large datasets. Smallest value allowable is folds=2
-Models for theme are specified symbolically. A model as the form \code{response ~ terms} where \code{response}
-is the numeric response vector and terms is a series of R themes composed of
-predictors. Themes are separated by  "|" (pipe) and are composed.... Y1+Y2+...
-~ X11+X12+...+X1_  | X21+X22+... | ...+X1_+...  | A1+A2+... See \code{\link{multivariateFormula}}.}
+it is not recommended for large datasets. Smallest value allowable is folds=2.
+folds can also be provided as a vector (same length as data) of fold identifiers.}
 
 \item{type}{loss function to use for cross-validation.
 Currently six options are available depending on whether the responses are of the same distribution family.
@@ -57,6 +54,18 @@ a list containing the path followed along the selection process, the associated 
 }
 \description{
 Perform component selection by cross-validation backward approach
+}
+\details{
+Models for theme are specified symbolically.
+
+A model as the form \code{response ~ terms} where \code{response}
+is the numeric response vector and terms is a series of R themes composed of
+predictors. 
+
+Themes are separated by  "|" (pipe) and are composed.... Y1+Y2+...
+~ X11+X12+...+X1_  | X21+X22+... | ...+X1_+...  | A1+A2+... 
+
+See \code{\link{multivariateFormula}}.
 }
 \examples{
 \dontrun{

@@ -47,10 +47,16 @@ a list of SCGLRTHM class. Each element is a SCGLR object
 Calculates the components to predict all the dependent variables.
 }
 \details{
-Models for theme are specified symbolically. A model as the form \code{response ~ terms} where \code{response}
+Models for theme are specified symbolically. 
+
+A model as the form \code{response ~ terms} where \code{response}
 is the numeric response vector and terms is a series of R themes composed of
-predictors. Themes are separated by  "|" (pipe) and are composed. ... Y1+Y2+...
-~ X11+X12+...+X1_  | X21+X22+... | ...+X1_+...  | A1+A2+... See \code{\link{multivariateFormula}}.
+predictors. 
+
+Themes are separated by  "|" (pipe) and are composed. ... Y1+Y2+...
+~ X11+X12+...+X1_  | X21+X22+... | ...+X1_+...  | A1+A2+... 
+
+See \code{\link{multivariateFormula}}.
 }
 \examples{
 \dontrun{

@@ -7,11 +7,8 @@
 #' @param data data frame.
 #' @param H vector of R integer. Number of components to keep for each theme
 #' @param folds number of folds - default is 10. Although folds can be as large as the sample size (leave-one-out CV),
-#' it is not recommended for large datasets. Smallest value allowable is folds=2
-#' Models for theme are specified symbolically. A model as the form \code{response ~ terms} where \code{response}
-#' is the numeric response vector and terms is a series of R themes composed of
-#' predictors. Themes are separated by  "|" (pipe) and are composed.... Y1+Y2+...
-#' ~ X11+X12+...+X1_  | X21+X22+... | ...+X1_+...  | A1+A2+... See \code{\link{multivariateFormula}}.
+#' it is not recommended for large datasets. Smallest value allowable is folds=2.
+#' folds can also be provided as a vector (same length as data) of fold identifiers.
 #' @param family a vector of character of the same length as the number of dependent variables:
 #' "bernoulli", "binomial", "poisson" or "gaussian" is allowed.
 #' @param size describes the number of trials for the binomial dependent variables.
@@ -30,7 +27,17 @@
 #' through the area under the ROC curve: type = "auc"
 #' In any other case one can choose among the following five options ("likelihood","aic","aicc","bic","mspe").
 #' @param st logical (FALSE) theme build and fit order. TRUE means random, FALSE means sequential (T1, ..., Tr)
-
+#' @details 
+#' Models for theme are specified symbolically.
+#' 
+#' A model as the form \code{response ~ terms} where \code{response}
+#' is the numeric response vector and terms is a series of R themes composed of
+#' predictors. 
+#' 
+#' Themes are separated by  "|" (pipe) and are composed.... Y1+Y2+...
+#' ~ X11+X12+...+X1_  | X21+X22+... | ...+X1_+...  | A1+A2+... 
+#' 
+#' See \code{\link{multivariateFormula}}.
 #' @return  a list containing the path followed along the selection process, the associated mean square predictor error and the best configuration.
 #' @examples \dontrun{
 #' library(SCGLR)
