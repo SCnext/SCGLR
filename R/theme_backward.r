@@ -6,8 +6,8 @@
 #' of model specification are given under Details.
 #' @param data data frame.
 #' @param H vector of R integer. Number of components to keep for each theme
-#' @param kfolds number of folds - default is 10. Although nfolds can be as large as the sample size (leave-one-out CV),
-#' it is not recommended for large datasets. Smallest value allowable is nfolds=2
+#' @param kfolds number of folds - default is 10. Although kfolds can be as large as the sample size (leave-one-out CV),
+#' it is not recommended for large datasets. Smallest value allowable is kfolds=2
 #' Models for theme are specified symbolically. A model as the form \code{response ~ terms} where \code{response}
 #' is the numeric response vector and terms is a series of R themes composed of
 #' predictors. Themes are separated by  "|" (pipe) and are composed.... Y1+Y2+...

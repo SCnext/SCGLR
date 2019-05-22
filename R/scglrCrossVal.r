@@ -9,8 +9,8 @@ if(getRversion()>="2.15.1") {
 #' @param data the data frame to be modeled.
 #' @param family a vector of character of length q specifying the distributions of the responses. Bernoulli, binomial, poisson and gaussian are allowed.
 #' @param K number of components, default is one.
-#' @param nfolds number of folds, default is 5.
-#' Although nfolds can be as large as the sample size (leave-one-out CV),
+#' @param kfolds number of folds, default is 10.
+#' Although kfolds can be as large as the sample size (leave-one-out CV),
 #' it is not recommended for large datasets.
 #' @param type loss function to use for cross-validation.
 #' Currently six options are available depending on whether the responses are of the same distribution family.
@@ -61,7 +61,7 @@ if(getRversion()>="2.15.1") {
 #'
 #' #plot(mean.crit, type="l")
 #' }
-scglrCrossVal <-  function(formula,data,family,K=1,nfolds=5,type="mspe",size=NULL,offset=NULL,subset=NULL,
+scglrCrossVal <-  function(formula,data,family,K=1,kfolds=10,type="mspe",size=NULL,offset=NULL,subset=NULL,
                            na.action=na.omit,crit=list(), method=methodSR(),mc.cores=1) {
   if( (mc.cores>1) && ((.Platform$OS.type == "windows") || (!requireNamespace("parallel", quietly=TRUE)))){
     warning("Sorry as parallel package is not available, I will use only one core!")
