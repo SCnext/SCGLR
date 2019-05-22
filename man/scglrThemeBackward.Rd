@@ -6,7 +6,7 @@
 \usage{
 scglrThemeBackward(formula, data, H, family, size = NULL,
   weights = NULL, offset = NULL, na.action = na.omit,
-  crit = list(), method = methodSR(), kfolds = 10, type = "mspe",
+  crit = list(), method = methodSR(), folds = 10, type = "mspe",
   st = FALSE)
 }
 \arguments{
@@ -37,8 +37,8 @@ the tolerance convergence criterion for the Fisher scoring algorithm. Default is
 \item{method}{structural relevance criterion. Object of class "method.SCGLR"
 built by  \code{\link{methodSR}} for Structural Relevance.}
 
-\item{kfolds}{number of folds - default is 10. Although nfolds can be as large as the sample size (leave-one-out CV),
-it is not recommended for large datasets. Smallest value allowable is nfolds=2
+\item{folds}{number of folds - default is 10. Although folds can be as large as the sample size (leave-one-out CV),
+it is not recommended for large datasets. Smallest value allowable is folds=2
 Models for theme are specified symbolically. A model as the form \code{response ~ terms} where \code{response}
 is the numeric response vector and terms is a series of R themes composed of
 predictors. Themes are separated by  "|" (pipe) and are composed.... Y1+Y2+...
@@ -75,7 +75,7 @@ nx2 <- n[-c(grep("^evi",n),grep("^gen",n))]
 
 form <- multivariateFormula(ny,nx1,nx2,A=c("geology"))
 fam <- rep("poisson",length(ny))
-testcv <- scglrThemeBackward(form,data=genus,H=c(2,2),family=fam,offset = genus$surface,kfolds=2)
+testcv <- scglrThemeBackward(form,data=genus,H=c(2,2),family=fam,offset = genus$surface,folds=3)
 Cross-validation pathway
 testcv$H_path
 Plot criterion

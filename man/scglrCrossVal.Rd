@@ -4,10 +4,9 @@
 \alias{scglrCrossVal}
 \title{Function that fits and selects the number of component by cross-validation.}
 \usage{
-scglrCrossVal(formula, data, family, K = 1, nfolds = 5,
-  type = "mspe", size = NULL, offset = NULL, subset = NULL,
-  na.action = na.omit, crit = list(), method = methodSR(),
-  mc.cores = 1)
+scglrCrossVal(formula, data, family, K = 1, folds = 10,
+  type = "mspe", size = NULL, offset = NULL, na.action = na.omit,
+  crit = list(), method = methodSR(), mc.cores = 1)
 }
 \arguments{
 \item{formula}{an object of class "Formula" (or one that can be coerced to that class): a symbolic description of the model to be fitted.}
@@ -18,8 +17,8 @@ scglrCrossVal(formula, data, family, K = 1, nfolds = 5,
 
 \item{K}{number of components, default is one.}
 
-\item{nfolds}{number of folds, default is 5.
-Although nfolds can be as large as the sample size (leave-one-out CV),
+\item{folds}{number of folds, default is 10.
+Although kfolds can be as large as the sample size (leave-one-out CV),
 it is not recommended for large datasets.}
 
 \item{type}{loss function to use for cross-validation.
@@ -33,8 +32,6 @@ for qb binomial variables.}
 
 \item{offset}{used for the poisson dependent variables.
 A vector or a matrix of size: number of observations * number of Poisson dependent variables is expected.}
-
-\item{subset}{an optional vector specifying a subset of observations to be used in the fitting process.}
 
 \item{na.action}{a function which indicates what should happen when the data contain NAs. The default is set to the \code{na.omit}.}
 

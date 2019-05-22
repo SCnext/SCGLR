@@ -9,7 +9,7 @@ if(getRversion()>="2.15.1") {
 #' @param data the data frame to be modeled.
 #' @param family a vector of character of length q specifying the distributions of the responses. Bernoulli, binomial, poisson and gaussian are allowed.
 #' @param K number of components, default is one.
-#' @param kfolds number of folds, default is 10.
+#' @param folds number of folds, default is 10.
 #' Although kfolds can be as large as the sample size (leave-one-out CV),
 #' it is not recommended for large datasets.
 #' @param type loss function to use for cross-validation.
@@ -21,7 +21,6 @@ if(getRversion()>="2.15.1") {
 #' for qb binomial variables.
 #' @param offset used for the poisson dependent variables.
 #' A vector or a matrix of size: number of observations * number of Poisson dependent variables is expected.
-#' @param subset an optional vector specifying a subset of observations to be used in the fitting process.
 #' @param na.action a function which indicates what should happen when the data contain NAs. The default is set to the \code{na.omit}.
 #' @param crit a list of two elements : maxit and tol, describing respectively the maximum number of iterations and
 #' the tolerance convergence criterion for the Fisher scoring algorithm. Default is set to 50 and 10e-6 respectively.
@@ -61,8 +60,9 @@ if(getRversion()>="2.15.1") {
 #'
 #' #plot(mean.crit, type="l")
 #' }
-scglrCrossVal <-  function(formula,data,family,K=1,kfolds=10,type="mspe",size=NULL,offset=NULL,subset=NULL,
+scglrCrossVal <-  function(formula,data,family,K=1,folds=10,type="mspe",size=NULL,offset=NULL,
                            na.action=na.omit,crit=list(), method=methodSR(),mc.cores=1) {
+  
   if( (mc.cores>1) && ((.Platform$OS.type == "windows") || (!requireNamespace("parallel", quietly=TRUE)))){
     warning("Sorry as parallel package is not available, I will use only one core!")
     mc.cores <- 1
@@ -77,7 +77,7 @@ scglrCrossVal <-  function(formula,data,family,K=1,kfolds=10,type="mspe",size=NU
     stop("auc loss function only when all bernoulli!")
 
   mf <- match.call(expand.dots = FALSE)
-  m <- match(c("formula","data","size","offset","subset","na.action"),names(mf), 0)
+  m <- match(c("formula","data","size","offset","na.action"),names(mf), 0)
   mf <- mf[c(1, m)]
   mf$drop.unused.levels <- TRUE
 
@@ -155,9 +155,23 @@ scglrCrossVal <-  function(formula,data,family,K=1,kfolds=10,type="mspe",size=NU
   offset <- model.extract(mf,"offset")
   nobs <- nrow(y)
   ny <- ncol(y)
-  foldid = sample(rep(seq(nfolds), length = nobs))
-  cv <- array(0,c(ny,K,nfolds))
-  cvNull <- matrix(0,ny,nfolds)
+  
+  # fold provided as a vector of user groups
+  if(length(folds)>1) {
+    if(length(folds)!=nobs)
+      stop("length of folds must be the same as the number of observations!")
+    folds <- as.factor(folds)
+    kfold <- length(levels(folds))
+    foldid <- as.integer(folds)
+  } else {
+    kfolds <- folds
+    foldid = sample(rep(seq(kfolds), length = nobs))
+  }
+  
+  if(kfolds<2) stop("kfolds must be at least equal to two")
+  
+  cv <- array(0,c(ny,K,kfolds))
+  cvNull <- matrix(0,ny,kfolds)
 
   mainFolds <- function(nf) {
     estid <- which(foldid!=nf)
@@ -244,9 +258,9 @@ scglrCrossVal <-  function(formula,data,family,K=1,kfolds=10,type="mspe",size=NU
   }
 
   if(mc.cores>1) {
-    result <- parallel::mclapply(seq(nfolds),mainFolds,mc.silent=TRUE,mc.cores=mc.cores)
+    result <- parallel::mclapply(seq(kfolds),mainFolds,mc.silent=TRUE,mc.cores=mc.cores)
   } else {
-    result <- lapply(seq(nfolds),mainFolds)
+    result <- lapply(seq(kfolds),mainFolds)
   }
   cv <- sapply(result,function(x) x$cv,simplify=FALSE)
   cv <- simplify2array(cv)

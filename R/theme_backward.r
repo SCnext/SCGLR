@@ -6,8 +6,8 @@
 #' of model specification are given under Details.
 #' @param data data frame.
 #' @param H vector of R integer. Number of components to keep for each theme
-#' @param kfolds number of folds - default is 10. Although kfolds can be as large as the sample size (leave-one-out CV),
-#' it is not recommended for large datasets. Smallest value allowable is kfolds=2
+#' @param folds number of folds - default is 10. Although folds can be as large as the sample size (leave-one-out CV),
+#' it is not recommended for large datasets. Smallest value allowable is folds=2
 #' Models for theme are specified symbolically. A model as the form \code{response ~ terms} where \code{response}
 #' is the numeric response vector and terms is a series of R themes composed of
 #' predictors. Themes are separated by  "|" (pipe) and are composed.... Y1+Y2+...
@@ -48,7 +48,7 @@
 #'
 #'form <- multivariateFormula(ny,nx1,nx2,A=c("geology"))
 #'fam <- rep("poisson",length(ny))
-#'testcv <- scglrThemeBackward(form,data=genus,H=c(2,2),family=fam,offset = genus$surface,kfolds=2)
+#'testcv <- scglrThemeBackward(form,data=genus,H=c(2,2),family=fam,offset = genus$surface,folds=3)
 #'Cross-validation pathway
 #'testcv$H_path
 #'Plot criterion
@@ -57,8 +57,7 @@
 #'testcv$H_best
 #' }
 scglrThemeBackward <- function(formula, data, H, family, size = NULL, weights = NULL,
-                  offset = NULL, na.action = na.omit, crit = list(), method = methodSR(), kfolds=10,type="mspe",st=FALSE){
-
+                  offset = NULL, na.action = na.omit, crit = list(), method = methodSR(), folds=10,type="mspe",st=FALSE){
 
   if(!inherits(formula,"MultivariateFormula"))
     formula <- multivariateFormula(formula,data=data)
@@ -73,8 +72,6 @@ scglrThemeBackward <- function(formula, data, H, family, size = NULL, weights = 
     stop("Length of family must be equal to one or number of Y variables")
   if(length(family)==1)
     family <- rep(family, length(Y_vars))
-
-  if(kfolds<2) stop("kfolds must be at least equal to two")
 
   X_expand <- lapply(formula$X,function(X){
     f <- as.formula(paste0("~",paste0(trim(deparse(X)),collapse=" ")))
@@ -91,11 +88,25 @@ scglrThemeBackward <- function(formula, data, H, family, size = NULL, weights = 
   else
     A_expand <- NULL
 
-
-  folds <- sample(1:kfolds, nrow(data),replace = TRUE)
+  nobs <- nrow(data)
+  
+  # fold provided as a vector of user groups
+  if(length(folds)>1) {
+    if(length(folds)!=nobs)
+      stop("length of folds must be the same as the number of observations!")
+    folds <- as.factor(folds)
+    kfold <- length(levels(folds))
+    foldid <- as.integer(folds)
+  } else {
+    kfolds <- folds
+    foldid = sample(rep(seq(kfolds), length = nobs))
+  }
+  
+  if(kfolds<2) stop("kfolds must be at least equal to two")
+  
 #Full model evaluation
   message("full model")
-  thm <- lapply(1:kfolds,function(k) {
+  thm <- lapply(1:kfolds, function(k) {
     out <- scglrTheme(
       formula=formula,
       data=data,
@@ -104,7 +115,7 @@ scglrThemeBackward <- function(formula, data, H, family, size = NULL, weights = 
       size=size,
       weights=weights,
       offset=offset,
-      subset=(1:nrow(data))[folds!=k],
+      subset=(1:nrow(data))[foldid!=k],
       na.action = na.action,
       crit=crit,
       method=method,
@@ -118,15 +129,15 @@ scglrThemeBackward <- function(formula, data, H, family, size = NULL, weights = 
   })
 
   cv <- lapply(1:kfolds,function(k){
-    XU_new <- as.matrix(do.call(cbind,lapply(which(H>0),function(l) as.matrix(X_expand[[l]][folds==k,,drop=F])%*%thm[[k]]$u[[l]])))
+    XU_new <- as.matrix(do.call(cbind,lapply(which(H>0),function(l) as.matrix(X_expand[[l]][foldid==k,,drop=F])%*%thm[[k]]$u[[l]])))
     if(!is.null(A_expand))
-      A_new <- A_expand[folds==k,,drop=F]
+      A_new <- A_expand[foldid==k,,drop=F]
     else
       A_new <- NULL
     X_new <- cbind(1,XU_new,A_new)
-    pred <- multivariatePredictGlm(X_new,family=family,beta=thm[[k]]$gamma,offset = offset[folds==k])
+    pred <- multivariatePredictGlm(X_new,family=family,beta=thm[[k]]$gamma,offset = offset[foldid==k])
     if(!(type%in%c("mspe","auc"))) npar <- ncol(X_new) else npar=0
-    qual <- infoCriterion(ynew=as.matrix(data[folds==k,formula$Y_vars]),pred=pred,family=family,type=type,size=size[folds==k,,drop=FALSE],npar=npar)
+    qual <- infoCriterion(ynew=as.matrix(data[foldid==k,formula$Y_vars]),pred=pred,family=family,type=type,size=size[foldid==k,,drop=FALSE],npar=npar)
   })
   cv <- mean(log(Reduce("+",cv)/kfolds))
   message("[",paste(H,collapse=","),"] = ",cv)
@@ -140,28 +151,28 @@ scglrThemeBackward <- function(formula, data, H, family, size = NULL, weights = 
     H_new <- lapply(which(H_cur>0),function(i) {h <- H_cur; h[i]<-h[i]-1;h})
     cv_new <- lapply(H_new,function(h){
       cv <- lapply(1:kfolds, function(k){
-        XU_fit <- as.matrix(do.call(cbind,lapply(which(h>0),function(l) as.matrix(X_expand[[l]][folds!=k,,drop=F])%*%thm[[k]]$u[[l]][,1:h[l],drop=FALSE])))
+        XU_fit <- as.matrix(do.call(cbind,lapply(which(h>0),function(l) as.matrix(X_expand[[l]][foldid!=k,,drop=F])%*%thm[[k]]$u[[l]][,1:h[l],drop=FALSE])))
         colnames(XU_fit) <- paste0("c",1:ncol(XU_fit))
         if(!is.null(A_expand))
-          A_fit <- A_expand[folds!=k,,drop=FALSE]
+          A_fit <- A_expand[foldid!=k,,drop=FALSE]
         else
           A_fit <- NULL
         X_fit <- cbind(XU_fit,A_fit)##Ajouter drop =FALSE dans data en dessous
-        fit <- multivariateGlm.fit(Y=data[folds!=k,formula$Y_vars,drop=FALSE],comp=X_fit,family=family,offset=offset[folds!=k],size=size[folds!=k,,drop=FALSE])
+        fit <- multivariateGlm.fit(Y=data[foldid!=k,formula$Y_vars,drop=FALSE],comp=X_fit,family=family,offset=offset[foldid!=k],size=size[foldid!=k,,drop=FALSE])
         gamma <- sapply(fit, coef)
 
-        XU_new <- as.matrix(do.call(cbind,lapply(which(h>0),function(l) as.matrix(X_expand[[l]][folds==k,,drop=F])%*%thm[[k]]$u[[l]][,1:h[l],drop=FALSE])))
+        XU_new <- as.matrix(do.call(cbind,lapply(which(h>0),function(l) as.matrix(X_expand[[l]][foldid==k,,drop=F])%*%thm[[k]]$u[[l]][,1:h[l],drop=FALSE])))
         colnames(XU_new) <- paste0("c",1:ncol(XU_new))
         if(!is.null(A_expand))
-          A_new <- A_expand[folds==k,,drop=FALSE]
+          A_new <- A_expand[foldid==k,,drop=FALSE]
         else
           A_new <- NULL
         X_new <- cbind(1,XU_new,A_new)
 
-        pred <- multivariatePredictGlm(X_new,family=family,beta=gamma,offset = offset[folds==k])
+        pred <- multivariatePredictGlm(X_new,family=family,beta=gamma,offset = offset[foldid==k])
         if(!(type%in%c("mspe","auc"))) npar <- ncol(X_new) else npar=0
 
-        qual <- infoCriterion(ynew=as.matrix(data[folds==k,formula$Y_vars]),pred=pred,family=family,type=type,size=size[folds==k,,drop=FALSE],npar=npar)
+        qual <- infoCriterion(ynew=as.matrix(data[foldid==k,formula$Y_vars]),pred=pred,family=family,type=type,size=size[foldid==k,,drop=FALSE],npar=npar)
       })
       return(mean(log(Reduce("+",cv)/kfolds)))
     })
@@ -176,20 +187,20 @@ scglrThemeBackward <- function(formula, data, H, family, size = NULL, weights = 
   message("NULL model")
   cvNull <- lapply(1:kfolds,function(k){
         if(!is.null(A_expand))
-          A_fit <- A_expand[folds!=k,,drop=FALSE]
+          A_fit <- A_expand[foldid!=k,,drop=FALSE]
         else
           A_fit <- NULL
         #idem ajouter des drop = FALSE dans data en dessous
-        fit <- multivariateGlm.fit(Y=data[folds!=k,formula$Y_vars,drop=FALSE],comp=A_fit,family=family,offset=offset[folds!=k],size=size[folds!=k,,drop=FALSE])
+        fit <- multivariateGlm.fit(Y=data[foldid!=k,formula$Y_vars,drop=FALSE],comp=A_fit,family=family,offset=offset[foldid!=k],size=size[foldid!=k,,drop=FALSE])
         gamma <- sapply(fit, coef)
         if(!is.null(A_expand))
-          A_new <- A_expand[folds==k,,drop=FALSE]
+          A_new <- A_expand[foldid==k,,drop=FALSE]
         else
           A_new <- NULL
-        X_new <- cbind(rep(1,sum(folds==k)),A_new)
-        pred <- multivariatePredictGlm(X_new,family=family,beta=gamma,offset = offset[folds==k])
+        X_new <- cbind(rep(1,sum(foldid==k)),A_new)
+        pred <- multivariatePredictGlm(X_new,family=family,beta=gamma,offset = offset[foldid==k])
         if(!(type%in%c("mspe","auc"))) npar <- ncol(X_new) else npar=0
-        qual <- infoCriterion(ynew=as.matrix(data[folds==k,formula$Y_vars]),pred=pred,family=family,type=type,size=size[folds==k,,drop=FALSE],npar=npar)
+        qual <- infoCriterion(ynew=as.matrix(data[foldid==k,formula$Y_vars]),pred=pred,family=family,type=type,size=size[foldid==k,,drop=FALSE],npar=npar)
   })
   message("[",paste(rep(0,length(H)),collapse=","),"] = ",mean(log(Reduce("+",cvNull)/kfolds)))
   cv_path <- c(cv_path,mean(log(Reduce("+",cvNull)/kfolds)))
