@@ -21,9 +21,9 @@ reference:
     desc: >
       Various S3 methods for displaying information and results from scglr and scglrTheme objects.
     contents:
-      - ends_with(".SCGLR",internal=TRUE)
-      - ends_with(".SCGLRTHM",internal=TRUE)
-      - ends_with(".MultivariateFormula")
+      - ends_with("\\.SCGLR",internal=TRUE)
+      - ends_with("\\.SCGLRTHM",internal=TRUE)
+#      - ends_with("\\.MultivariateFormula")
       - '-`barplot.SCGLR`'
       - '-`barplot.SCGLRTHM`'
   - title: Miscellaneous
