@@ -36,7 +36,7 @@ structural relevance has been introduced (Bry and Verron
 “themes”, plus a group of additional covariates. Each theme is
 searched for orthogonal components representing its variables in the
 model, whereas the additional covariates appear directly in the model,
-without the mediation of a component (Bry et al. [2019](#ref-bry19)).
+without the mediation of a component (Bry et al. [2018](#ref-bry18)).
 
 ## Installation
 
@@ -84,20 +84,12 @@ Data.” *Briefings in Bioinformatics* 8 (1): 32–44.
 
 </div>
 
-<div id="ref-bry19">
-
-Bry, Xavier, Catherine Trottier, Frédéric Mortier, and Guillaume Cornu.
-2019. “Component-Based Regularisation of a Multivariate GLM with a
-Thematic Partitioning of the Explanatory Variables.” *Statistical
-Modelling* 19 (0): 00–00 (to appear). <https://doi.org/TO BE ADDED>.
-
-</div>
-
 <div id="ref-bry18">
 
 Bry, X., C. Trottier, F. Mortier, and G Cornu. 2018. “Component-Based
 Regularisation of a Multivariate Glm with a Thematic Partitioning of the
 Explanatory Variables.” *Statistical Modelling*, In press.
+<https://doi.org/10.1177%2F1471082X18810114>.
 
 </div>
 
@@ -144,6 +136,7 @@ in Ecology.” *Oikos* 118 (5): 681–90.
 Chauvet, J., C. Trottier, and X Bry. 2018a. “Component-Based
 Regularisation of Multivariate Generalised Linear Mixed Models.”
 *Journal of Computational and Graphical Statistics*, In press.
+<https://doi.org/10.1080/10618600.2019.1598870>.
 
 </div>
 

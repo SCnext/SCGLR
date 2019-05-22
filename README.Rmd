@@ -23,7 +23,7 @@ bibliography: assets/SCGLR.bib
 
 **SCGLR** is a model-based approach that extends PLS [@tenenhaus98], PCA on instrumental variables [@sabatier89], canonical correspondence analysis [@terbraak87], and other related empirical methods, by capturing the trade-off between goodness-of-fit and common structural relevance of explanatory components. The notion of structural relevance has been introduced [@bry15].
 
-**SCGLR** can deal with covariates partitioned in several groups called "themes", plus a group of additional covariates. Each theme is searched for orthogonal components representing its variables in the model, whereas the additional covariates appear directly in the model, without the mediation of a component [@bry19].
+**SCGLR** can deal with covariates partitioned in several groups called "themes", plus a group of additional covariates. Each theme is searched for orthogonal components representing its variables in the model, whereas the additional covariates appear directly in the model, without the mediation of a component [@bry18].
 
 
 ## Installation
