@@ -95,7 +95,7 @@ scglrThemeBackward <- function(formula, data, H, family, size = NULL, weights = 
     if(length(folds)!=nobs)
       stop("length of folds must be the same as the number of observations!")
     folds <- as.factor(folds)
-    kfold <- length(levels(folds))
+    kfolds <- length(levels(folds))
     foldid <- as.integer(folds)
   } else {
     kfolds <- folds

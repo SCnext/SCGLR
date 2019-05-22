@@ -161,7 +161,7 @@ scglrCrossVal <-  function(formula,data,family,K=1,folds=10,type="mspe",size=NUL
     if(length(folds)!=nobs)
       stop("length of folds must be the same as the number of observations!")
     folds <- as.factor(folds)
-    kfold <- length(levels(folds))
+    kfolds <- length(levels(folds))
     foldid <- as.integer(folds)
   } else {
     kfolds <- folds
