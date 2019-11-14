@@ -47,21 +47,24 @@
 #'
 #' # get variable names from dataset
 #' n <- names(genus)
-#' n <-n[!n%in%c("geology","surface","lon","lat","forest","altitude")]
+#' n <- n[!n \%in\% c("geology","surface","lon","lat","forest","altitude")]
 #' ny <- n[grep("^gen",n)]    # Y <- names that begins with "gen"
 #' nx1 <- n[grep("^evi",n)]   # X <- remaining names
 #' nx2 <- n[-c(grep("^evi",n),grep("^gen",n))]
 #'
 #'
-#'form <- multivariateFormula(ny,nx1,nx2,A=c("geology"))
-#'fam <- rep("poisson",length(ny))
-#'testcv <- scglrThemeBackward(form,data=genus,H=c(2,2),family=fam,offset = genus$surface,folds=3)
-#'Cross-validation pathway
-#'testcv$H_path
-#'Plot criterion
-#'plot(testcv$cv_path)
-#'Best combination
-#'testcv$H_best
+#' form <- multivariateFormula(ny,nx1,nx2,A=c("geology"))
+#' fam <- rep("poisson",length(ny))
+#' testcv <- scglrThemeBackward(form,data=genus,H=c(2,2),family=fam,offset = genus$surface,folds=3)
+#' 
+#' # Cross-validation pathway
+#' testcv$H_path
+#' 
+#' # Plot criterion
+#' plot(testcv$cv_path)
+#' 
+#' # Best combination
+#' testcv$H_best
 #' }
 scglrThemeBackward <- function(formula, data, H, family, size = NULL, weights = NULL,
                   offset = NULL, na.action = na.omit, crit = list(), method = methodSR(), folds=10,type="mspe",st=FALSE){
