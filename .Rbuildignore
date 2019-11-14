@@ -10,3 +10,4 @@
 ^local$
 ^vignettes$
 ^cran-comments\.md$
+^pkgdown$
