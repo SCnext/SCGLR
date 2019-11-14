@@ -45,7 +45,7 @@ without the mediation of a component (Bry et al. [2018](#ref-bry18)).
 install.packages("SCGLR")
 
 # Install development version from GitHub
-devtools::install_github("SCnext/SCGLR")
+remotes::install_github("SCnext/SCGLR")
 ```
 
 ## Main functions and works in progress
@@ -98,7 +98,7 @@ Explanatory Variables.” *Statistical Modelling*, In press.
 Bry, X., C. Trottier, F. Mortier, G. Cornu, and Verron T. 2016.
 “Supervised-Component-Based Generalised Linear Regression with
 Multiple Explanatory Blocks: THEME-Scglr.” In *The Multiple Facets of
-Partial Least Squares and Related Methods*, edited by H. Abdi, V.E.
+Partial Least Squares and Related Methods*, edited by H. Abdi, V. E.
 Vinzi, V. Russolillo, G. Saporta, and L Trinchera, 141–54. Switzerland:
 Springer Proceedings in Mathematics & Statistics.
 

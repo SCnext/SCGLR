@@ -33,7 +33,7 @@ bibliography: assets/SCGLR.bib
 install.packages("SCGLR")
 
 # Install development version from GitHub
-devtools::install_github("SCnext/SCGLR")
+remotes::install_github("SCnext/SCGLR")
 ```
 
 ## Main functions and works in progress
