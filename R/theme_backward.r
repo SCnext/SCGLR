@@ -69,7 +69,7 @@ scglrThemeBackward <- function(formula, data, H, family, size = NULL, weights = 
   if(!inherits(formula,"MultivariateFormula"))
     formula <- multivariateFormula(formula,data=data)
 
-  additional=formula$additional
+  additional <- formula$additional
 
   # check family
   Y_vars <- attr(formula,"Y_vars")
@@ -106,7 +106,7 @@ scglrThemeBackward <- function(formula, data, H, family, size = NULL, weights = 
     foldid <- as.integer(folds)
   } else {
     kfolds <- folds
-    foldid = sample(rep(seq(kfolds), length = nobs))
+    foldid <- sample(rep(seq(kfolds), length = nobs))
   }
   
   if(kfolds<2) stop("kfolds must be at least equal to two")
@@ -143,7 +143,7 @@ scglrThemeBackward <- function(formula, data, H, family, size = NULL, weights = 
       A_new <- NULL
     X_new <- cbind(1,XU_new,A_new)
     pred <- multivariatePredictGlm(X_new,family=family,beta=thm[[k]]$gamma,offset = offset[foldid==k])
-    if(!(type%in%c("mspe","auc"))) npar <- ncol(X_new) else npar=0
+    if(!(type%in%c("mspe","auc"))) npar <- ncol(X_new) else npar <- 0
     qual <- infoCriterion(ynew=as.matrix(data[foldid==k,formula$Y_vars]),pred=pred,family=family,type=type,size=size[foldid==k,,drop=FALSE],npar=npar)
   })
   cv <- mean(log(Reduce("+",cv)/kfolds))
@@ -177,7 +177,7 @@ scglrThemeBackward <- function(formula, data, H, family, size = NULL, weights = 
         X_new <- cbind(1,XU_new,A_new)
 
         pred <- multivariatePredictGlm(X_new,family=family,beta=gamma,offset = offset[foldid==k])
-        if(!(type%in%c("mspe","auc"))) npar <- ncol(X_new) else npar=0
+        if(!(type%in%c("mspe","auc"))) npar <- ncol(X_new) else npar <- 0
 
         qual <- infoCriterion(ynew=as.matrix(data[foldid==k,formula$Y_vars]),pred=pred,family=family,type=type,size=size[foldid==k,,drop=FALSE],npar=npar)
       })
@@ -206,13 +206,13 @@ scglrThemeBackward <- function(formula, data, H, family, size = NULL, weights = 
           A_new <- NULL
         X_new <- cbind(rep(1,sum(foldid==k)),A_new)
         pred <- multivariatePredictGlm(X_new,family=family,beta=gamma,offset = offset[foldid==k])
-        if(!(type%in%c("mspe","auc"))) npar <- ncol(X_new) else npar=0
+        if(!(type%in%c("mspe","auc"))) npar <- ncol(X_new) else npar <- 0
         qual <- infoCriterion(ynew=as.matrix(data[foldid==k,formula$Y_vars]),pred=pred,family=family,type=type,size=size[foldid==k,,drop=FALSE],npar=npar)
   })
   message("[",paste(rep(0,length(H)),collapse=","),"] = ",mean(log(Reduce("+",cvNull)/kfolds)))
   cv_path <- c(cv_path,mean(log(Reduce("+",cvNull)/kfolds)))
   H_path <- c(H_path,list(rep(0,length(H))))
-  H_path=do.call(rbind,H_path)
+  H_path <- do.call(rbind,H_path)
   colnames(H_path) <- paste0("thm",1:length(H))
   return(list(H_path=H_path,cv_path=cv_path,H_best=H_path[which.min(cv_path),]))
 }

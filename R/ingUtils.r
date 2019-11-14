@@ -150,8 +150,8 @@ hFunct<- function(Z,X,AX,W,u,method)
   #h = log(psi)+method$s*log(phi)
   #gradh=gradpsi/psi+method$s*gradphi/phi
   # calcul de h (s in [0..1])
-  h = (1-method$s)*log(psi)+method$s*log(phi)
-  gradh=(1-method$s)*gradpsi/psi+method$s*gradphi/phi
+  h <- (1-method$s)*log(psi)+method$s*log(phi)
+  gradh <- (1-method$s)*gradpsi/psi+method$s*gradphi/phi
   return(list(h=h, gradh=gradh,psi=psi,gradpsi=gradpsi,phi=phi,gradphi=gradphi))
 }
 

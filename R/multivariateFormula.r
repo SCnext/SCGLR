@@ -67,7 +67,7 @@ multivariateFormula <- function(Y, X=NULL, ..., A=NULL, additional=NULL, data=NU
     }
 
     if(is.null(additional))
-      additional=FALSE
+      additional <- FALSE
 
     # split formula and check parts
     formula <- Formula(Y) # to handle multiple |

@@ -3,9 +3,9 @@
 # @param w weight
 # @return scaled vector
 wtScale <-function(x,w) {
-  xc=x-sum(w*x)
-  v=sum(xc^2*w)
-  xcr=xc/sqrt(v)
+  xc <- x-sum(w*x)
+  v <- sum(xc^2*w)
+  xcr <- xc/sqrt(v)
   return(xcr)
 }
 
@@ -13,8 +13,8 @@ wtScale <-function(x,w) {
 # @param x vector to center
 # @param w weight
 # @return centered vector
-wtCenter=function(x,w) {
-  xc=x-sum(w*x)
+wtCenter <- function(x,w) {
+  xc <- x-sum(w*x)
   return(xc)
 }
 
@@ -62,9 +62,9 @@ condition <- function(subclass, message, call=sys.call(-1), ...) {
 }
 
 custom_stop <- function(subclass, ..., call=sys.call(-1)) {
-  message = .makeMessage(...)
+  message <- .makeMessage(...)
   if(message=="")
-    message=subclass
+    message <- subclass
   c <- condition(c(subclass, "error"), message=message, call=call)
   stop(c)
 }

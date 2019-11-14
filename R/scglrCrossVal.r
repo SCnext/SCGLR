@@ -166,7 +166,7 @@ scglrCrossVal <-  function(formula,data,family,K=1,folds=10,type="mspe",size=NUL
     foldid <- as.integer(folds)
   } else {
     kfolds <- folds
-    foldid = sample(rep(seq(kfolds), length = nobs))
+    foldid <- sample(rep(seq(kfolds), length = nobs))
   }
   
   if(kfolds<2) stop("kfolds must be at least equal to two")

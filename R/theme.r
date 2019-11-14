@@ -59,7 +59,7 @@ scglrTheme <- function(formula, data, H, family, size = NULL, weights = NULL,
   if(!inherits(formula,"MultivariateFormula"))
     formula <- multivariateFormula(formula,data=data)
 
-  additional=formula$additional
+  additional <- formula$additional
 
   # check data
   if(!inherits(data, "data.frame"))
@@ -144,7 +144,7 @@ scglrTheme <- function(formula, data, H, family, size = NULL, weights = NULL,
   theme_X[which(H==0)] <- NULL
   theme_labels <- theme_labels[which(H>0)]
   H <- H[which(H>0)]
-  theme_R = length(H)
+  theme_R <- length(H)
   for(r in 1:theme_R) {
     attr(theme_X[[r]],"r") <- r
     attr(theme_X[[r]],"Hr") <- H[r]
@@ -318,7 +318,7 @@ scglrTheme <- function(formula, data, H, family, size = NULL, weights = NULL,
 
     # check convergence
     if(all(c(tol1, tol2)<crit$tol) || (iter>crit$maxit))
-      break;
+      break
   } # end of main optimization loop
 
 
