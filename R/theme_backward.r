@@ -31,11 +31,10 @@
 #' Models for theme are specified symbolically.
 #' 
 #' A model as the form \code{response ~ terms} where \code{response}
-#' is the numeric response vector and terms is a series of R themes composed of
-#' predictors. 
+#' is the numeric response vector and terms is a series of R themes composed of predictors. 
 #' 
-#' Themes are separated by  "|" (pipe) and are composed.... Y1+Y2+...
-#' ~ X11+X12+...+X1_  | X21+X22+... | ...+X1_+...  | A1+A2+... 
+#' Themes are separated by  "|" (pipe) and are composed.\cr
+#' y1 + y2 + \dots ~ x11 + x12 + \dots + x1_ | x21 + x22 + \dots | \dots + x1_ + \dots | a1 + a2 + \dots
 #' 
 #' See \code{\link{multivariateFormula}}.
 #' @return  a list containing the path followed along the selection process, the associated mean square predictor error and the best configuration.
