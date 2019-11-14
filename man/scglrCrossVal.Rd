@@ -4,9 +4,20 @@
 \alias{scglrCrossVal}
 \title{Function that fits and selects the number of component by cross-validation.}
 \usage{
-scglrCrossVal(formula, data, family, K = 1, folds = 10,
-  type = "mspe", size = NULL, offset = NULL, na.action = na.omit,
-  crit = list(), method = methodSR(), mc.cores = 1)
+scglrCrossVal(
+  formula,
+  data,
+  family,
+  K = 1,
+  folds = 10,
+  type = "mspe",
+  size = NULL,
+  offset = NULL,
+  na.action = na.omit,
+  crit = list(),
+  method = methodSR(),
+  mc.cores = 1
+)
 }
 \arguments{
 \item{formula}{an object of class "Formula" (or one that can be coerced to that class): a symbolic description of the model to be fitted.}
@@ -64,7 +75,7 @@ nx <- n[-grep("^gen",n)]   # X <- remaining names
 
 # remove "geology" and "surface" from nx
 # as surface is offset and we want to use geology as additional covariate
-nx <-nx[!nx\%in\%c("geology","surface")]
+nx <-nx[!nx%in%c("geology","surface")]
 
 # build multivariate formula
 # we also add "lat*lon" as computed covariate

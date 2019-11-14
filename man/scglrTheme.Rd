@@ -4,9 +4,20 @@
 \alias{scglrTheme}
 \title{Function that fits the theme model}
 \usage{
-scglrTheme(formula, data, H, family, size = NULL, weights = NULL,
-  offset = NULL, subset = NULL, na.action = na.omit, crit = list(),
-  method = methodSR(), st = FALSE)
+scglrTheme(
+  formula,
+  data,
+  H,
+  family,
+  size = NULL,
+  weights = NULL,
+  offset = NULL,
+  subset = NULL,
+  na.action = na.omit,
+  crit = list(),
+  method = methodSR(),
+  st = FALSE
+)
 }
 \arguments{
 \item{formula}{an object of class "\code{\link[=multivariateFormula]{MultivariateFormula}}" (or one that can be coerced
@@ -67,7 +78,7 @@ data(genus)
 
 # get variable names from dataset
 n <- names(genus)
-n <-n[!n\%in\%c("geology","surface","lon","lat","forest","altitude")]
+n <-n[!n%in%c("geology","surface","lon","lat","forest","altitude")]
 ny <- n[grep("^gen",n)]    # Y <- names that begins with "gen"
 nx1 <- n[grep("^evi",n)]   # X <- remaining names
 nx2 <- n[-c(grep("^evi",n),grep("^gen",n))]

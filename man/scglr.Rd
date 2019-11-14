@@ -4,9 +4,19 @@
 \alias{scglr}
 \title{Function that fits the scglr model}
 \usage{
-scglr(formula, data, family, K = 1, size = NULL, weights = NULL,
-  offset = NULL, subset = NULL, na.action = na.omit, crit = list(),
-  method = methodSR())
+scglr(
+  formula,
+  data,
+  family,
+  K = 1,
+  size = NULL,
+  weights = NULL,
+  offset = NULL,
+  subset = NULL,
+  na.action = na.omit,
+  crit = list(),
+  method = methodSR()
+)
 }
 \arguments{
 \item{formula}{an object of class \code{MultivariateFormula} (or one that can be coerced to that class): a symbolic description of the model to be fitted.}
@@ -89,7 +99,7 @@ nx <- n[-grep("^gen",n)]   # X <- remaining names
 
 # remove "geology" and "surface" from nx
 # as surface is offset and we want to use geology as additional covariate
-nx <-nx[!nx\%in\%c("geology","surface")]
+nx <-nx[!nx%in%c("geology","surface")]
 
 # build multivariate formula
 # we also add "lat*lon" as computed covariate

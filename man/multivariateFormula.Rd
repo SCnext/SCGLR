@@ -4,8 +4,7 @@
 \alias{multivariateFormula}
 \title{Formula construction}
 \usage{
-multivariateFormula(Y, X = NULL, ..., A = NULL, additional = NULL,
-  data = NULL)
+multivariateFormula(Y, X = NULL, ..., A = NULL, additional = NULL, data = NULL)
 }
 \arguments{
 \item{Y}{a formula or a vector of character containing the names of the dependent variables.}

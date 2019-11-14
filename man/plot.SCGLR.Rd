@@ -4,8 +4,7 @@
 \alias{plot.SCGLR}
 \title{SCGLR generic plot}
 \usage{
-\method{plot}{SCGLR}(x, ..., style = getOption("plot.SCGLR"),
-  plane = c(1, 2))
+\method{plot}{SCGLR}(x, ..., style = getOption("plot.SCGLR"), plane = c(1, 2))
 }
 \arguments{
 \item{x}{an object from SCGLR class.}
@@ -36,7 +35,7 @@ nx <- n[-grep("^gen",n)]   # X <- remaining names
 
 # remove "geology" and "surface" from nx
 # as surface is offset and we want to use geology as additional covariate
-nx <-nx[!nx\%in\%c("geology","surface")]
+nx <-nx[!nx%in%c("geology","surface")]
 
 # build multivariate formula
 # we also add "lat*lon" as computed covariate

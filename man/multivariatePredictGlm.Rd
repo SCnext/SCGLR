@@ -36,7 +36,7 @@ nx <- n[-grep("^gen",n)]   # X <- remaining names
 
 # remove "geology" and "surface" from nx as surface is
 # offset and we want to use geology as additional covariate
-nx <-nx[!nx\%in\%c("geology","surface")]
+nx <-nx[!nx%in%c("geology","surface")]
 
 # build multivariate formula
 # we also add "lat*lon" as computed covariate
