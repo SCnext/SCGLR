@@ -1,6 +1,6 @@
 #'@title Regularization criterion types
 #'@export
-#'@param phi character string describing structura relevance used in the regularization process.
+#'@param phi character string describing structural relevance used in the regularization process.
 #' Allowed values are "vpi" for Variable Powered Inertia and "cv" for Component Variance. Default to "vpi".
 #'@param l is an integer argument (>1) tuning the importance of variable bundle locality.
 #'@param s is a numeric argument (in [0,1]) tuning the strength of structural relevance with respect to goodness of fit.
