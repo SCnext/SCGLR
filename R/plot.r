@@ -381,19 +381,6 @@ plot.SCGLR <- function(x, ..., style=getOption("plot.SCGLR"), plane=c(1, 2)) {
   p
 }
 
-#' @title Barplot of percent of overall X variance captured by component
-#' @export
-#' @description Barplot of percent of overall X variance captured by component
-#' @param height object of class 'SCGLR', usually a result of running \code{\link{scglr}}.
-#' @param \dots optional arguments.
-#' @return an object of class ggplot.
-#' @seealso For barplot application see examples in \code{\link{plot.SCGLR}}.
-#' @keywords internal
-barplot.SCGLR <- function(height, ...) {
-  .Deprecated("screeplot")
-  screeplot.SCGLR(height, ...)
-}
-
 #' @title Screeplot of percent of overall X variance captured by component
 #' @export
 #' @description Screeplot of percent of overall X variance captured by component
@@ -407,6 +394,19 @@ screeplot.SCGLR <- function(x, ...) {
     geom_col(aes(x=comp,y=inertia))+
     scale_x_discrete(labels=names(x$inertia),limits=1:length(inertia$comp))+
     labs(x="Components", y="Inertia", title="Inertia per component\n", ...)
+}
+
+#' @title Barplot of percent of overall X variance captured by component
+#' @export
+#' @description Barplot of percent of overall X variance captured by component
+#' @param height object of class 'SCGLR', usually a result of running \code{\link{scglr}}.
+#' @param \dots optional arguments.
+#' @return an object of class ggplot.
+#' @seealso For barplot application see examples in \code{\link{plot.SCGLR}}.
+#' @keywords internal
+barplot.SCGLR <- function(height, ...) {
+  .Deprecated("screeplot")
+  screeplot.SCGLR(height, ...)
 }
 
 #' @title Pairwise scglr plot on components
@@ -483,18 +483,6 @@ arrange <- function(..., nrow=NULL, ncol=NULL, as.table=FALSE) {
   invisible(NULL)
 }
 
-#' @title Barplot of percent of overall X variance captured by component
-#' @export
-#' @description Barplot of percent of overall X variance captured by component by theme
-#' @param height object of class 'SCGLRTHM', usually a result of running \code{\link{theme}}.
-#' @param \dots optional arguments.
-#' @return an object of class ggplot.
-#' @keywords internal
-barplot.SCGLRTHM <- function(height, ...) {
-  .Deprecated("screeplot.SCGLRTHM")
-  screeplot.SCGLRTHM(height, ...)
-}
-
 #' @title Screeplot of percent of overall X variance captured by component
 #' @export
 #' @description Screeplot of percent of overall X variance captured by component by theme
@@ -507,6 +495,18 @@ screeplot.SCGLRTHM <- function(x, ...) {
       labs(title=paste0("Theme ",t$label,": Inertia per component\n"))
   )
   do.call(arrange, plots)
+}
+
+#' @title Barplot of percent of overall X variance captured by component
+#' @export
+#' @description Barplot of percent of overall X variance captured by component by theme
+#' @param height object of class 'SCGLRTHM', usually a result of running \code{\link{theme}}.
+#' @param \dots optional arguments.
+#' @return an object of class ggplot.
+#' @keywords internal
+barplot.SCGLRTHM <- function(height, ...) {
+  .Deprecated("screeplot.SCGLRTHM")
+  screeplot.SCGLRTHM(height, ...)
 }
 
 #' SCGLRTHM generic plot
