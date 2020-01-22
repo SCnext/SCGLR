@@ -14,7 +14,7 @@ nx <-nx[!nx%in%c("geology","surface")]
 
 # build multivariate formula
 # we also add "lat*lon" as computed covariate
-form <- multivariateFormula(ny,c(nx,"I(lat*lon)"),c("geology"))
+form <- multivariateFormula(ny,c(nx,"I(lat*lon)"), A=c("geology"))
 
 # define family 
 fam <- rep("poisson",length(ny))
