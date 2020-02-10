@@ -1,6 +1,7 @@
 # version 3.0.99 (dev)
 - fix bug happening when providing a single Y variable to sglrTheme (issue #1)
 - allow to provide folds for cross validation defined by user (issue #2)
+- individual beta and gamma for themes were not properly computed (issue #5) 
 
 # version 3.0
 This major version introduces a new feature allowing to group covariates in so called **themes**.
