@@ -367,15 +367,18 @@ scglrTheme <- function(formula, data, H, family, size = NULL, weights = NULL,
   if(additional) {
     comp <- cbind(comp, model.matrix(theme_A, data)[,-1])
   }
-  lin.pred.global <- multivariatePredictGlm(comp, family=family, beta=gamma, offset=offset)
-
-  # update individual theme gamma and beta
+  # lin.pred.global <- multivariatePredictGlm(comp, family=family, beta=gamma, offset=offset)
+  lin.pred.global <- comp%*%gamma
+  # Linear predictors by theme
   for(t in seq_along(out$themes)) {
-    par <- out$themes[[t]]$gamma[1:(H[t]+1),]
-    out$themes[[t]]$lin.pred <- multivariatePredictGlm(cbind(1,as.matrix(out$themes[[t]]$compr)), family=family, beta=par, offset=offset)
+    # par <- out$themes[[t]]$gamma[1:(H[t]+1),]
+    par <- out$themes[[t]]$gamma[2:(H[t]+1),]#without intercept
+    # out$themes[[t]]$lin.pred <- multivariatePredictGlm(cbind(1,as.matrix(out$themes[[t]]$comp)), family=family, beta=par, offset=offset)
+    out$themes[[t]]$lin.pred <- as.matrix(out$themes[[t]]$comp)%*%par
     out$themes[[t]]$gamma <- gamma
     out$themes[[t]]$beta <- beta
   }
+  
   # add them to result
   out$gamma <- gamma
   out$beta <- beta
