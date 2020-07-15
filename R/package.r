@@ -15,7 +15,6 @@
 # #' @author Mortier F., Trottier C., Cornu G., Bry X.
 #' @importFrom Matrix bdiag
 #' @import Formula
-#' @import expm
 #' @importFrom graphics barplot
 #' @importFrom stats screeplot
 #' @import ggplot2
