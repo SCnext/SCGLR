@@ -7,7 +7,7 @@
 ## Introduction
 
 **SCGLR** is an open source implementation of the Supervised Component
-Generalized Linear Regression (Bry et al. [2013](#ref-bry13),
+Generalized Linear Regression ([Bry et al. 2013](#ref-bry13),
 [2016](#ref-bry16), [2018](#ref-bry18)), which identifies, among a large
 set of potentially multicolinear predictors, the strong dimensions most
 predictive of a set of responses.
@@ -16,27 +16,31 @@ predictive of a set of responses.
 the uni- and multivariate generalized linear framework. PLSR is
 particularly well suited for analyzing a large array of explanatory
 variables and many studies have demonstrated its predictive performance
-in various biological fields such as genetics (Boulesteix and Strimmer
-[2007](#ref-boulesteix07)) or ecology (Carrascal, Galván, and Gordo
-[2009](#ref-carrascal09)). While PLSR is well adapted for continuous
+in various biological fields such as genetics ([Boulesteix and Strimmer
+2007](#ref-boulesteix07)) or ecology ([Carrascal, Galván, and Gordo
+2009](#ref-carrascal09)). While PLSR is well adapted for continuous
 variables, maximizing the covariance between linear combination of
 dependent variables, and linear combinations of covariates, **SCGLR** is
 suited for non-Gaussian outcomes and non-continuous covariates.
 
-**SCGLR** is a model-based approach that extends PLS (Tenenhaus
-[1998](#ref-tenenhaus98)), PCA on instrumental variables (Sabatier,
-Lebreton, and Chessel [1989](#ref-sabatier89)), canonical correspondence
-analysis (Ter Braak [1987](#ref-terbraak87)), and other related
+**SCGLR** is a model-based approach that extends PLS ([Tenenhaus
+1998](#ref-tenenhaus98)), PCA on instrumental variables ([Sabatier,
+Lebreton, and Chessel 1989](#ref-sabatier89)), canonical correspondence
+analysis ([Ter Braak 1987](#ref-terbraak87)), and other related
 empirical methods, by capturing the trade-off between goodness-of-fit
 and common structural relevance of explanatory components. The notion of
-structural relevance has been introduced (Bry and Verron
-[2015](#ref-bry15)).
+structural relevance has been introduced ([Bry and Verron
+2015](#ref-bry15)).
 
 **SCGLR** can deal with covariates partitioned in several groups called
-“themes”, plus a group of additional covariates. Each theme is
-searched for orthogonal components representing its variables in the
-model, whereas the additional covariates appear directly in the model,
-without the mediation of a component (Bry et al. [2018](#ref-bry18)).
+“themes,” plus a group of additional covariates. Each theme is searched
+for orthogonal components representing its variables in the model,
+whereas the additional covariates appear directly in the model, without
+the mediation of a component ([Bry et al. 2018](#ref-bry18)).
+
+**SCGLR** works also for mixed models using an extension of the Schall’s
+algorithm to combine Supervised-Component regression with GLMM
+estimation in the multivariate context.
 
 ## Installation
 
@@ -52,9 +56,9 @@ remotes::install_github("SCnext/SCGLR")
 
 **SCGLR** is designed to deal with outcomes from multiple distributions:
 Gaussian, Bernoulli, binomial and Poisson separately or simultaneously
-(Bry et al. [2013](#ref-bry13)). Moreover **SCGLR** is also able to deal
-with multiple conceptually homogeneous explanatory variable groups (Bry
-et al. [2018](#ref-bry18)).
+([Bry et al. 2013](#ref-bry13)). Moreover **SCGLR** is also able to deal
+with multiple conceptually homogeneous explanatory variable groups ([Bry
+et al. 2018](#ref-bry18)).
 
 **SCGLR** is a set of **R** functions illustrated on a floristic data
 set, *genus*. `scglr` and `scglrTheme` are respectively dedicated to
@@ -66,16 +70,15 @@ results.
 
 Different works are in progress both dealing for instance with the
 inclusion of random effects extending **SCGLR** to the generalized
-linear mixed model framework (Chauvet, Trottier, and Bry
-[2018](#ref-chauvet18)[a](#ref-chauvet18),
-[2018](#ref-chauvet18b)[b](#ref-chauvet18b)), or the Cox regression
+linear mixed model framework ([Chauvet, Trottier, and Bry
+2018a](#ref-chauvet18), [2018b](#ref-chauvet18b)), or the Cox regression
 model.
 
 ## References
 
-<div id="refs" class="references">
+<div id="refs" class="references csl-bib-body hanging-indent">
 
-<div id="ref-boulesteix07">
+<div id="ref-boulesteix07" class="csl-entry">
 
 Boulesteix, Anne-Laure, and Korbinian Strimmer. 2007. “Partial Least
 Squares: A Versatile Tool for the Analysis of High-Dimensional Genomic
@@ -84,27 +87,27 @@ Data.” *Briefings in Bioinformatics* 8 (1): 32–44.
 
 </div>
 
-<div id="ref-bry18">
+<div id="ref-bry18" class="csl-entry">
 
 Bry, X., C. Trottier, F. Mortier, and G Cornu. 2018. “Component-Based
-Regularisation of a Multivariate Glm with a Thematic Partitioning of the
+Regularisation of a Multivariate GLM with a Thematic Partitioning of the
 Explanatory Variables.” *Statistical Modelling*, In press.
-<https://doi.org/10.1177%2F1471082X18810114>.
+<https://doi.org/10.1177>.
 
 </div>
 
-<div id="ref-bry16">
+<div id="ref-bry16" class="csl-entry">
 
 Bry, X., C. Trottier, F. Mortier, G. Cornu, and Verron T. 2016.
-“Supervised-Component-Based Generalised Linear Regression with
-Multiple Explanatory Blocks: THEME-Scglr.” In *The Multiple Facets of
-Partial Least Squares and Related Methods*, edited by H. Abdi, V. E.
-Vinzi, V. Russolillo, G. Saporta, and L Trinchera, 141–54. Switzerland:
-Springer Proceedings in Mathematics & Statistics.
+“Supervised-Component-Based Generalised Linear Regression with Multiple
+Explanatory Blocks: THEME-SCGLR.” In *The Multiple Facets of Partial
+Least Squares and Related Methods*, edited by H. Abdi, V. E. Vinzi, V.
+Russolillo, G. Saporta, and L Trinchera, 141–54. Switzerland: Springer
+Proceedings in Mathematics & Statistics.
 
 </div>
 
-<div id="ref-bry13">
+<div id="ref-bry13" class="csl-entry">
 
 Bry, X., C. Trottier, T. Verron, and F. Mortier. 2013. “Supervised
 Component Generalized Linear Regression Using a Pls-Extension of the
@@ -114,7 +117,7 @@ Fisher Scoring Algorithm.” *Journal of Multivariate Analysis* 119:
 
 </div>
 
-<div id="ref-bry15">
+<div id="ref-bry15" class="csl-entry">
 
 Bry, X., and T Verron. 2015. “THEME: THEmatic Model Exploration Through
 Multiple Co-Structure Maximization.” *Journal of Chemometrics* 29 (12):
@@ -122,7 +125,7 @@ Multiple Co-Structure Maximization.” *Journal of Chemometrics* 29 (12):
 
 </div>
 
-<div id="ref-carrascal09">
+<div id="ref-carrascal09" class="csl-entry">
 
 Carrascal, Luis M., Ismael Galván, and Oscar Gordo. 2009. “Partial Least
 Squares Regression as an Alternative to Current Regression Methods Used
@@ -131,7 +134,7 @@ in Ecology.” *Oikos* 118 (5): 681–90.
 
 </div>
 
-<div id="ref-chauvet18">
+<div id="ref-chauvet18" class="csl-entry">
 
 Chauvet, J., C. Trottier, and X Bry. 2018a. “Component-Based
 Regularisation of Multivariate Generalised Linear Mixed Models.”
@@ -140,7 +143,7 @@ Regularisation of Multivariate Generalised Linear Mixed Models.”
 
 </div>
 
-<div id="ref-chauvet18b">
+<div id="ref-chauvet18b" class="csl-entry">
 
 ———. 2018b. “Regularisation of Generalised Linear Mixed Models with
 Autoregressive Random Effect.” *Journal of Computational and Graphical
@@ -148,7 +151,7 @@ Statistics*, In prep.
 
 </div>
 
-<div id="ref-sabatier89">
+<div id="ref-sabatier89" class="csl-entry">
 
 Sabatier, R., J. D. Lebreton, and D. Chessel. 1989. “Principal Component
 Analysis with Instrumental Variables as a Tool for Modelling Composition
@@ -156,15 +159,15 @@ Data.” *Multiway Data Analysis*, 341–52.
 
 </div>
 
-<div id="ref-tenenhaus98">
+<div id="ref-tenenhaus98" class="csl-entry">
 
-Tenenhaus, M. 1998. *La Régression PLS: Théorie et Pratique*. Paris:
+Tenenhaus, M. 1998. *La régression PLS: Théorie Et Pratique*. Paris:
 Editions Technip.
 <https://books.google.fr/books?hl=fr&lr=&id=OesjK2KZhsAC&oi=fnd&pg=PA1&dq=Tenenhaus+PLS&ots=EvUst85CEP&sig=EpksVNlZFUVoYLX7JX952PIGaHU>.
 
 </div>
 
-<div id="ref-terbraak87">
+<div id="ref-terbraak87" class="csl-entry">
 
 Ter Braak, Cajo JF. 1987. “The Analysis of Vegetation-Environment
 Relationships by Canonical Correspondence Analysis.” In *Theory and
