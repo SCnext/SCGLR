@@ -1,9 +1,11 @@
 development:
   mode: unreleased
+  
 home:
   links:
     - text: SCnext, the future of supervised component regression
       href: https://github.com/SCnext
+      
 reference:
   - title: Building formula
     desc: ~
@@ -13,6 +15,7 @@ reference:
     contents:
       - '`scglr`'
       - '`scglrTheme`'
+      - '`kCompRand`'
   - title: Cross validation
     contents:
       - '`scglrCrossVal`'
@@ -35,3 +38,5 @@ reference:
   - title: Sample dataset
     contents:
       - '`genus`'
+      - '`genus2`'
+      - '`dataGen`'
