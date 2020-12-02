@@ -23,7 +23,7 @@ Depends:
 Imports:
     Matrix,Formula,graphics,ggplot2,grid,pROC (>= 1.9),ade4,plsdepot
 Suggests:
-    parallel,gridExtra
+    parallel
 LazyData: yes
 RoxygenNote: 7.1.1
 Encoding: UTF-8
