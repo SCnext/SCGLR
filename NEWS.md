@@ -4,6 +4,8 @@
 - individual beta and gamma for themes were not properly computed (issue #5) 
 - improve evaluation of linear predictors in `theme` function (issue #8)
 - remove dependency on `expm` package (issue #10)
+- error message for lack of convergence were improved and crossval no longer
+  stops when a fold didn't converge (issue #12)
 
 # version 3.0
 This major version introduces a new feature allowing to group covariates in so called **themes**.

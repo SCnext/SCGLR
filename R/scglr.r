@@ -157,10 +157,10 @@ scglr <-  function(formula,data,family,K=1,size=NULL,weights=NULL,offset=NULL,su
 
   if("binomial"%in%family){
     if(is.null(size)){
-      stop("Number of trials is unknown for bimomial variables!")
+      stop("Number of trials is unknown for binomial variables! You must provide size parameter.")
     }else{
       if(ncol(size)!=sum("binomial"==family)){
-        stop("Number of trials is different from number of bimomial variables!")
+        stop("Number of trials is different from number of binomial variables!")
       }else{
         y[,family%in%"binomial"] <- y[,family%in%"binomial"]/size
       }
