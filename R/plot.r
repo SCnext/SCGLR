@@ -451,11 +451,7 @@ pairs.SCGLR <- function(x, ..., nrow=NULL, ncol=NULL, components=NULL) {
   if(is.null(nc) & is.null(nr)) {
     nr <- as.integer(sqrt(length(plots)))
   }
-#  if(require("gridExtra",quietly = TRUE)) {
-#    do.call("arrangeGrob", c(plots, nrow=nr, ncol=nc,main="toto"))
-#  } else {
-    do.call("arrange", c(plots, nrow=nr, ncol=nc))
-#  }
+  do.call("arrange", c(plots, nrow=nr, ncol=nc))
 }
 
 ## equivalent du par pour les ggplot2

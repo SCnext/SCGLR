@@ -4,7 +4,8 @@
 \name{genus}
 \alias{genus}
 \title{Sample dataset of abundance of genera in tropical moist forest}
-\format{\tabular{ll}{
+\format{
+\tabular{ll}{
    \code{gen1 to gen27} \tab abundance of the 27 common genera.\cr
    \code{altitude} \tab above-sea level in meters.\cr
    \code{pluvio_yr} \tab mean annual rainfall.\cr
@@ -14,7 +15,8 @@
    \code{evi_1 to evi_23} \tab 16-days enhanced vegetation indexes.\cr
    \code{lon and lat} \tab position of the plot centers.\cr
    \code{surface} \tab sampled area.\cr
-}}
+}
+}
 \description{
 Genus gives the abundance of 27 common tree genera in the tropical moist forest 
 of the Congo-Basin and 40 geo-referenced environmental variables on one thousand 8 by 8 km plots

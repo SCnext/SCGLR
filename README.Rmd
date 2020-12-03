@@ -25,6 +25,8 @@ bibliography: assets/SCGLR.bib
 
 **SCGLR** can deal with covariates partitioned in several groups called "themes", plus a group of additional covariates. Each theme is searched for orthogonal components representing its variables in the model, whereas the additional covariates appear directly in the model, without the mediation of a component [@bry18].
 
+**SCGLR** works also for mixed models using an extension of the Schall's algorithm to combine Supervised-Component regression with GLMM estimation in the multivariate context.
+
 
 ## Installation
 
