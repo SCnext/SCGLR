@@ -113,10 +113,11 @@ scglrThemeBackward <- function(formula, data, H, family, size = NULL, weights = 
   
   if(kfolds<2) stop("kfolds must be at least equal to two")
   
-#Full model evaluation
+  #Full model evaluation
   message("full model")
   thm <- lapply(1:kfolds, function(k) {
-    out <- scglrTheme(
+    out <- try( 
+      scglrTheme(
       formula=formula,
       data=data,
       H=H,
@@ -129,7 +130,10 @@ scglrThemeBackward <- function(formula, data, H, family, size = NULL, weights = 
       crit=crit,
       method=method,
       st=st
-    )
+    ), silent = TRUE)
+    if(inherits(out, "try-error")) {
+      stop("In fold ", k, attr(out, "condition")$message)
+    }
   result <- list(
     u=lapply(out$themes,function(t) as.matrix(t$u)),
     gamma=out$gamma

@@ -34,7 +34,7 @@ kComponents <- function(X,Y,AX,K,family,size=NULL,offset=NULL,crit,method)
   out <- oneComponent(X,Y,AX,F=F,family=family,size=size,
                       offset=offset,crit=crit,method=method)
   if(is.logical(out))
-    custom_stop("convergence_failed")
+    custom_stop("convergence_failed","k=1")
 
   u <- out$u
   f <- X%*%u
@@ -50,7 +50,7 @@ kComponents <- function(X,Y,AX,K,family,size=NULL,offset=NULL,crit,method)
       out <- oneComponent(X,Y,FAX,F,family=family,size=size,
                           offset=offset,crit=crit,method=method)
       if(is.logical(out))
-        custom_stop("convergence_failed")
+        custom_stop("convergence_failed","k=",k)
 
       f <- X%*%out$u
       Fr <- cbind(Fr,f/sqrt(c(crossprod(f,f))/n))
