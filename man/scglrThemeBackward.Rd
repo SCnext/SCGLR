@@ -86,7 +86,7 @@ data(genus)
 
 # get variable names from dataset
 n <- names(genus)
-n <- n[!n \\%in\\% c("geology","surface","lon","lat","forest","altitude")]
+n <- n[!n \%in\% c("geology","surface","lon","lat","forest","altitude")]
 ny <- n[grep("^gen",n)]    # Y <- names that begins with "gen"
 nx1 <- n[grep("^evi",n)]   # X <- remaining names
 nx2 <- n[-c(grep("^evi",n),grep("^gen",n))]
