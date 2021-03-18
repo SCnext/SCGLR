@@ -11,7 +11,8 @@ if(getRversion()>="2.15.1") {
 #' @param x an object from SCGLR class.
 #' @param \dots optional arguments (see \link{customize}).
 #' @param style named list of values used to customize the plot (see \link{customize})
-#' @param plane a size-2 vector (or comma separated string) indicating which components are plotted (eg: c(1,2) or "1,2").
+#' @param plane a size-2 vector (or string with separator) indicating which components 
+#' are plotted (eg: c(1,2) or "1,2" or "1/2").
 #' @return an object of class \code{\link{ggplot}}.
 #' @examples \dontrun{
 #' library(SCGLR)
@@ -115,7 +116,7 @@ plot.SCGLR <- function(x, ..., style=getOption("plot.SCGLR"), plane=c(1, 2)) {
 
   # process plane
   if(is.character(plane)) {
-    plane <- as.integer(trim(unlist(strsplit(plane,","))))
+    plane <- as.integer(trim(unlist(strsplit(plane,"[,/ ]"))))
   }
 
   # sanity checking
@@ -165,7 +166,8 @@ plot.SCGLR <- function(x, ..., style=getOption("plot.SCGLR"), plane=c(1, 2)) {
 
   # plot title
   if(has_cust("title", FALSE)) {
-    p <- p + ggtitle(cust("title"))
+    if(is.character(cust("title")))
+      p <- p + ggtitle(cust("title"))
   } else {
     if(observations) {
       if(covariates||predictors) {
