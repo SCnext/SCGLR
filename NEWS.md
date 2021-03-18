@@ -1,12 +1,15 @@
 # version 3.0.9000 (dev)
-- fix bug happening when providing a single Y variable to sglrTheme (issue #1)
+- fix bug happening when providing a single Y variable to `sglrTheme` (issue #1)
 - allow to provide folds for cross validation defined by user (issue #2)
 - individual beta and gamma for themes were not properly computed (issue #5) 
 - improve evaluation of linear predictors in `theme` function (issue #8)
 - remove dependency on `expm` package (issue #10)
-- preliminary integration of code from SCnext/mixedSCGLR written by Jocelyn Chauvet (issue #11)
-- error message for lack of convergence were improved and crossval no longer
-  stops when a fold didn't converge (issue #12)
+- error message for lack of convergence were improved and `scglrCrossVal` no longer
+  stops when a fold does not converge (issue #12)
+  
+## New features
+- preliminary integration of code from `SCnext/mixedSCGLR` written by Jocelyn Chauvet (issue #11)
+
 
 # version 3.0
 This major version introduces a new feature allowing to group covariates in so called **themes**.
@@ -14,6 +17,8 @@ This major version introduces a new feature allowing to group covariates in so c
 - added `scglrTheme` and `scglrThemeBackward` to handle theme oriented selection
 - reworked `multivariateFormula` to handle themes
 - added new plots targeting themes
+
+## Deprecations
 - deprecated `barplot` in favor of `screeplot` (same parameters)
 
 # version 2.1
