@@ -10,7 +10,7 @@ if(getRversion()>="2.15.1") {
 #' @param family a vector of character of length q specifying the distributions of the responses. Bernoulli, binomial, poisson and gaussian are allowed.
 #' @param K number of components, default is one.
 #' @param folds number of folds, default is 10.
-#' Although kfolds can be as large as the sample size (leave-one-out CV),
+#' Although folds can be as large as the sample size (leave-one-out CV),
 #' it is not recommended for large datasets.
 #' folds can also be provided as a vector (same length as data) of fold identifiers.
 #' @param type loss function to use for cross-validation.
@@ -62,7 +62,12 @@ if(getRversion()>="2.15.1") {
 #' #plot(mean.crit, type="l")
 #' }
 scglrCrossVal <-  function(formula,data,family,K=1,folds=10,type="mspe",size=NULL,offset=NULL,
-                           na.action=na.omit,crit=list(), method=methodSR(),mc.cores=1) {
+                           na.action=na.omit,crit=list(), method=methodSR(),mc.cores=1, nfolds) {
+  
+  if(!missing(nfolds)) {
+    .Deprecated("fold", msg="'nfolds' parameter as been renamed to 'folds'. I'll use provided value but update your code!")
+    folds <- nfolds
+  }
   
   if( (mc.cores>1) && ((.Platform$OS.type == "windows") || (!requireNamespace("parallel", quietly=TRUE)))){
     warning("Sorry as parallel package is not available, I will use only one core!")
