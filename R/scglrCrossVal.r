@@ -25,9 +25,11 @@ if(getRversion()>="2.15.1") {
 #' @param na.action a function which indicates what should happen when the data contain NAs. The default is set to the \code{na.omit}.
 #' @param crit a list of two elements : maxit and tol, describing respectively the maximum number of iterations and
 #' the tolerance convergence criterion for the Fisher scoring algorithm. Default is set to 50 and 10e-6 respectively.
-#' @param mc.cores max number of cores to use when using parallelization (Not available in windows yet and strongly discouraged if in interactive mode).
+#' @param mc.cores deprecated
 #' @param method Regularization criterion type. Object of class "method.SCGLR"
 #' built by \code{\link{methodSR}} for Structural Relevance.
+#' @param progress if TRUE display a progress bar (default to TRUE if in interactive mode, needs \code{progressr} package)
+#' @param nfolds deprecated. Use \code{fold} parameter instead.
 #' @return  a matrix containing the criterion values for each response (rows) and each number of components (columns).
 #' @references Bry X., Trottier C., Verron T. and Mortier F. (2013) Supervised Component Generalized Linear Regression using a PLS-extension of the Fisher scoring algorithm. \emph{Journal of Multivariate Analysis}, 119, 47-60.
 #' @examples \dontrun{
@@ -57,26 +59,22 @@ if(getRversion()>="2.15.1") {
 #'  offset=genus$surface)
 #'
 #' # find best K
-#' mean.crit <- colMeans(log(cv))
+#' mean.crit <- colMeans(log(genus.cv))
 #'
 #' #plot(mean.crit, type="l")
 #' }
 scglrCrossVal <-  function(formula,data,family,K=1,folds=10,type="mspe",size=NULL,offset=NULL,
-                           na.action=na.omit,crit=list(), method=methodSR(),mc.cores=1, nfolds) {
+                           na.action=na.omit,crit=list(), method=methodSR(), progress=interactive(), nfolds, mc.cores) {
   
   if(!missing(nfolds)) {
     .Deprecated("fold", msg="'nfolds' parameter as been renamed to 'folds'. I'll use provided value but update your code!")
     folds <- nfolds
   }
   
-  if( (mc.cores>1) && ((.Platform$OS.type == "windows") || (!requireNamespace("parallel", quietly=TRUE)))){
-    warning("Sorry as parallel package is not available, I will use only one core!")
-    mc.cores <- 1
+  if(!missing(mc.cores)) {
+    .Deprecated("plan",msg="mc.cores is now deprecated. Use plan function from future package instead. Value ignored.")
   }
-  if((mc.cores>1) && interactive()) {
-    warning("Using parallel package in interactive mode is strongly discouraged!")
-  }
-
+  
   checkLossFunction(type)
 
   if((type=="auc") && (prod(family=="bernoulli")==0))
@@ -220,6 +218,7 @@ scglrCrossVal <-  function(formula,data,family,K=1,folds=10,type="mspe",size=NUL
     if(inherits(try_result,"try-error")) {
       # return error as a warning
       warning(attr(try_result,"condition")$message,", in fold ",nf, call. = FALSE)
+      prog()
       return(list(cv=array(NA,c(ny,K)),cvNull=cvNull))
     }
 
@@ -258,15 +257,21 @@ scglrCrossVal <-  function(formula,data,family,K=1,folds=10,type="mspe",size=NUL
       }
 
     }
+    prog()
     return(list(cv=cv,cvNull=cvNull))
   }
 
-  if(mc.cores>1) {
-    result <- parallel::mclapply(seq(kfolds),mainFolds,mc.silent=TRUE,mc.cores=mc.cores)
+  if(isNamespaceLoaded("future.apply")) fiter <- future.apply::future_lapply else fiter <- lapply
+  if(progress&&require("progressr")) {
+    progressr::with_progress({
+      prog <- progressr::progressor(kfolds)
+      result <- fiter(seq(kfolds), mainFolds)
+    })
   } else {
-    result <- lapply(seq(kfolds),mainFolds)
+    prog <- function() {}
+    result <- fiter(seq(kfolds), mainFolds)
   }
-  
+
   cv <- sapply(result,function(x) x$cv,simplify=FALSE)
   cv <- simplify2array(cv)
   cv <- apply(cv,c(1,2),mean, na.rm=TRUE)
