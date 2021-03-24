@@ -115,31 +115,37 @@ scglrThemeBackward <- function(formula, data, H, family, size = NULL, weights = 
   
   #Full model evaluation
   message("full model")
-  thm <- lapply(1:kfolds, function(k) {
+  full_fold <- function(k) {
     out <- try( 
       scglrTheme(
-      formula=formula,
-      data=data,
-      H=H,
-      family=family,
-      size=size,
-      weights=weights,
-      offset=offset,
-      subset=(1:nrow(data))[foldid!=k],
-      na.action = na.action,
-      crit=crit,
-      method=method,
-      st=st
-    ), silent = TRUE)
+        formula=formula,
+        data=data,
+        H=H,
+        family=family,
+        size=size,
+        weights=weights,
+        offset=offset,
+        subset=(1:nrow(data))[foldid!=k],
+        na.action = na.action,
+        crit=crit,
+        method=method,
+        st=st
+      ), silent = TRUE)
+    
+    ..progressor..()
+    
     if(inherits(out, "try-error")) {
       stop("In fold ", k, attr(out, "condition")$message)
     }
-  result <- list(
-    u=lapply(out$themes,function(t) as.matrix(t$u)),
-    gamma=out$gamma
-  )
-  return (result)
-  })
+    result <- list(
+      u=lapply(out$themes,function(t) as.matrix(t$u)),
+      gamma=out$gamma
+    )
+    return (result)
+  }
+  
+  ..progressor.. <- getProgressor(kfolds)
+  thm <- getParallel("lapply", seq(kfolds), full_fold)
 
   cv <- lapply(1:kfolds,function(k){
     XU_new <- as.matrix(do.call(cbind,lapply(which(H>0),function(l) as.matrix(X_expand[[l]][foldid==k,,drop=F])%*%thm[[k]]$u[[l]])))
