@@ -1,0 +1,74 @@
+---
+title: "How to use parallelization"
+author: "G. Cornu - Forêts et Sociétés - Cirad"
+date: "24/03/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Parallelization was already available using `parallel` package (through `mclApply` function) 
+but was not very easy to configure. 
+
+Now **SCGLR** is using the more modern `future` package and
+it's companion package `future.apply` for apply-like functions (both are needed but 
+the later will be handled internally).
+
+See https://github.com/HenrikBengtsson/future for more information.
+
+It will be easier to switch from simple parallelization to more complex architecture.
+
+Parallelization is available for `scglrCrossVal` and `scglrThemeBackward` functions
+(more may be added later).
+
+## Activate parallelization
+
+```{r eval=FALSE}
+library(future)
+library(future.apply) # line not needed but package must be installed
+
+# launch a local cluster backed by R sessions
+plan(multisession)
+
+...
+
+```
+
+## Full code built on `scglrCrossVal` example
+
+Nothing changes except the insertion of the code above.
+
+```{r eval=FALSE}
+library(SCGLR)
+library(future)
+library(future.apply) # line not needed but package must be installed
+
+# launch a local cluster backed by R sessions
+plan(multisession)
+
+# load sample data
+data(genus)
+
+# get variable names from dataset
+n <- names(genus)
+ny <- n[grep("^gen",n)]    # Y <- names that begins with "gen"
+nx <- n[-grep("^gen",n)]   # X <- remaining names
+
+# remove "geology" and "surface" from nx
+# as surface is offset and we want to use geology as additional covariate
+nx <-nx[!nx%in%c("geology","surface")]
+
+# build multivariate formula
+# we also add "lat*lon" as computed covariate
+form <- multivariateFormula(ny,c(nx,"I(lat*lon)"),A=c("geology"))
+
+# define family
+fam <- rep("poisson",length(ny))
+
+# cross validation
+genus.cv <- scglrCrossVal(formula=form, data=genus, family=fam, K=5,
+  offset=genus$surface)
+```
+
