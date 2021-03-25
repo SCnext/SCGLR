@@ -25,7 +25,7 @@ hasParallel <- function() {
 # return a progressor depending of whether progressr package is loaded or not
 getProgressor <- function(...) {
   if(isNamespaceLoaded("progressr")) {
-    progressr::progressor(..., envir=parent.frame(2))
+    progressr::progressor(..., envir=parent.frame(1))
   } else {
     function(...) {}
   }
