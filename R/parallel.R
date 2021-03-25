@@ -38,6 +38,7 @@ getProgressor <- function(...) {
 # eg:  res <- getParallel("lapply", 1:10, function(x) {x+1})
 getParallel <- function(fun, ...) {
   #fun <- as.character(substitute(fun))
+  dots <- list(...)
   
   # resolve function
   base_fun <- get(fun, envir = asNamespace("base"))
@@ -50,13 +51,14 @@ getParallel <- function(fun, ...) {
       warning("Parallel version of ", fun, " was not found! Fallback to base")
       fun <- base_fun
     }
+    dots <- c(dots, future.seed=TRUE)
   } else { 
     fun <- base_fun
   }
   
   # apply it if requested otherwise return it
   if(...length()) {
-    do.call(fun, list(...))
+    do.call(fun, dots)
   } else {
     invisible(fun)
   }
