@@ -13,7 +13,8 @@
 
 \item{style}{named list of values used to customize the plot (see \link{customize})}
 
-\item{plane}{a size-2 vector (or comma separated string) indicating which components are plotted (eg: c(1,2) or "1,2").}
+\item{plane}{a size-2 vector (or string with separator) indicating which components 
+are plotted (eg: c(1,2) or "1,2" or "1/2").}
 }
 \value{
 an object of class \code{\link{ggplot}}.

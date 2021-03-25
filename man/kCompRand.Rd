@@ -50,6 +50,7 @@ an object of the SCGLR class.
 Calculates the components to predict all the response variables.
 }
 \examples{
+\dontrun{
 library(SCGLR)
 # load sample data
 data(dataGen)
@@ -64,4 +65,5 @@ withRandom.opt=kCompRand(Y=dataGen$Y, family=rep("poisson", ncol(dataGen$Y)),
                                         maxiter=1000, epsilon=10^-6, bailout=1000))
 plot(withRandom.opt, pred=TRUE, plane=c(1,2), title="Component plane (1,2)",
      threshold=0.7, covariates.alpha=0.4, predictors.labels.size=6)
+}
 }

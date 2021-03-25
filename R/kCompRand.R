@@ -333,7 +333,7 @@ oneCompRand <- function(Y, family, size=NULL,
 #' @param method Regularization criterion type: object of class "method.SCGLR"
 #' built by function \code{\link{methodSR}}.
 #' @return an object of the SCGLR class.
-#' @examples
+#' @examples \dontrun{
 #' library(SCGLR)
 #' # load sample data
 #' data(dataGen)
@@ -348,6 +348,7 @@ oneCompRand <- function(Y, family, size=NULL,
 #'                                         maxiter=1000, epsilon=10^-6, bailout=1000))
 #' plot(withRandom.opt, pred=TRUE, plane=c(1,2), title="Component plane (1,2)",
 #'      threshold=0.7, covariates.alpha=0.4, predictors.labels.size=6)
+#'}
 kCompRand <- function(Y, family, size=NULL,
                       X, AX=NULL, random, loffset=NULL, k,
                       init.sigma = rep(1, ncol(Y)), init.comp = "pca",
