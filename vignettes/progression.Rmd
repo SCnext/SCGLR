@@ -19,7 +19,8 @@ Progression has been added to `scglrCrossVal` and `scglrThemeBackward` functions
 
 Just surround function call with `with_progress` function.
 
-see https://github.com/HenrikBengtsson/progressr#customizing-how-progress-is-reported to customize progress format.
+see https://github.com/HenrikBengtsson/progressr#customizing-how-progress-is-reported 
+to customize progress format.
 
 ```{r eval=FALSE}
 library(progressr)
@@ -27,5 +28,16 @@ library(progressr)
 # surround function call with with_progress
 cv <- with_progress( scglrCrossVal(...) )
 
+```
+
+If you are using `R>=4.0.0` it's even simpler. You just have to activate it globally 
+(no need to use `with_progress` function) and call `SCGLR` functions as usual.
+
+```{r eval=FALSE}
+progressr::handlers(global=TRUE)
+
+...
+cv <- scglrCrossVal(...)
+...
 ```
 
