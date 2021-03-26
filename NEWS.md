@@ -6,9 +6,11 @@
 - remove dependency on `expm` package (issue #10)
 - error message for lack of convergence were improved and `scglrCrossVal` no longer
   stops when a fold does not converge (issue #12)
-  
+
 ## New features
 - preliminary integration of code from `SCnext/mixedSCGLR` written by Jocelyn Chauvet (issue #11)
+- moved parallelization to `future` framework. Need `future.apply` package (issue #16)
+- added progress to `scglrCrossVal` and `scglrThemeBackward` functions using `progressr` package (issue #17)
 
 ## Deprecations
 - parameter `nfolds` of `scglrCrossVal` as been renamed to `folds` and now accepts also vectors.

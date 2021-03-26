@@ -1,0 +1,43 @@
+---
+title: "How display progression"
+author: "G. Cornu - Forêts et Sociétés - Cirad"
+date: "24/03/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Progression display is now available using `progressr` package 
+(see https://github.com/HenrikBengtsson/progressr for more information).
+
+Progression has been added to `scglrCrossVal` and `scglrThemeBackward` functions
+(more can be added later).
+
+## Activate progression
+
+Just surround function call with `with_progress` function.
+
+see https://github.com/HenrikBengtsson/progressr#customizing-how-progress-is-reported 
+to customize progress format.
+
+```{r eval=FALSE}
+library(progressr)
+
+# surround function call with with_progress
+cv <- with_progress( scglrCrossVal(...) )
+
+```
+
+If you are using `R>=4.0.0` it's even simpler. You just have to activate it globally 
+(no need to use `with_progress` function) and call `SCGLR` functions as usual.
+
+```{r eval=FALSE}
+progressr::handlers(global=TRUE)
+
+...
+cv <- scglrCrossVal(...)
+...
+```
+

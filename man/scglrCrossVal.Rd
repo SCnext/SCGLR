@@ -16,7 +16,8 @@ scglrCrossVal(
   na.action = na.omit,
   crit = list(),
   method = methodSR(),
-  mc.cores = 1
+  nfolds,
+  mc.cores
 )
 }
 \arguments{
@@ -29,7 +30,7 @@ scglrCrossVal(
 \item{K}{number of components, default is one.}
 
 \item{folds}{number of folds, default is 10.
-Although kfolds can be as large as the sample size (leave-one-out CV),
+Although folds can be as large as the sample size (leave-one-out CV),
 it is not recommended for large datasets.
 folds can also be provided as a vector (same length as data) of fold identifiers.}
 
@@ -53,7 +54,9 @@ the tolerance convergence criterion for the Fisher scoring algorithm. Default is
 \item{method}{Regularization criterion type. Object of class "method.SCGLR"
 built by \code{\link{methodSR}} for Structural Relevance.}
 
-\item{mc.cores}{max number of cores to use when using parallelization (Not available in windows yet and strongly discouraged if in interactive mode).}
+\item{nfolds}{deprecated. Use \code{fold} parameter instead.}
+
+\item{mc.cores}{deprecated}
 }
 \value{
 a matrix containing the criterion values for each response (rows) and each number of components (columns).
@@ -89,7 +92,7 @@ genus.cv <- scglrCrossVal(formula=form, data=genus, family=fam, K=12,
  offset=genus$surface)
 
 # find best K
-mean.crit <- colMeans(log(cv))
+mean.crit <- colMeans(log(genus.cv))
 
 #plot(mean.crit, type="l")
 }
