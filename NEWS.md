@@ -16,6 +16,7 @@
 - parameter `nfolds` of `scglrCrossVal` as been renamed to `folds` and now accepts also vectors.
 For now a warning is issued and provided value is used but update your code as it will be removed
 in a next version.
+- parameter `mc.cores` of `scglrCrossVal` is now deprecated as of the move to `future` framework for parallelization.
 
 # version 3.0
 This major version introduces a new feature allowing to group covariates in so called **themes**.
