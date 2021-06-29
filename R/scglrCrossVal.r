@@ -279,10 +279,21 @@ scglrCrossVal <-  function(formula,data,family,K=1,folds=10,type="mspe",size=NUL
   colnames(cv) <- c("null model",paste("nc",1:K,sep=""))
   rownames(cv) <- colnames(y)
   
-  #class(cv) <- "SCGLRCV"
+  class(cv) <- "SCGLRCV"
   return(cv)
 }
 
-summary.SCGLRCV <- function(object, ...) {}
-print.SCGLRCV <- function(x, ...) {invisible(x)}
-plot.SCGLRCV <- function(x, ...) {}
+summary.SCGLRCV <- function(object, ...) {
+  NextMethod(...)
+}
+print.SCGLRCV <- function(x, ...) {
+  NextMethod(...)
+}
+plot.SCGLRCV <- function(x, ...) {
+  tmp <- colMeans(log(x))
+  ggplot()+
+    labs(x="K",y=NULL)+
+    scale_x_discrete(labels=names(tmp))+
+    geom_line(aes(factor(seq_along(tmp)),tmp,group=1))
+}
+

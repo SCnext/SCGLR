@@ -6,6 +6,7 @@
 - remove dependency on `expm` package (issue #10)
 - error message for lack of convergence were improved and `scglrCrossVal` no longer
   stops when a fold does not converge (issue #12)
+- add a plot for `scglrCrossVal`
 
 ## New features
 - preliminary integration of code from `SCnext/mixedSCGLR` written by Jocelyn Chauvet (issue #11)
