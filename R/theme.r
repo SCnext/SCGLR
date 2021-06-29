@@ -227,7 +227,7 @@ scglrTheme <- function(formula, data, H, family, size = NULL, weights = NULL,
   # get all beta vars
   TA_beta_vars <- unlist(lapply(theme_T, function(t) attr(t, "beta_vars")))
   if(additional) {
-    A_beta_vars <- sprintf("A_%s", colnames(model.matrix(theme_A, data[1,]))[-1])
+    A_beta_vars <- sprintf("A_%s", colnames(model.matrix(theme_A, data))[-1])
     TA_beta_vars <- c(TA_beta_vars, A_beta_vars)
   } else {
     A_beta_vars <- NULL
