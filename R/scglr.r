@@ -123,13 +123,21 @@ scglr <-  function(formula,data,family,K=1,size=NULL,weights=NULL,offset=NULL,su
   }else{
     AX <- NULL
   }
-  fTypes <- sapply(x,is.factor)
-  if(sum(fTypes)>0){
-    xFactors <- x[,fTypes,drop=FALSE]
-    colnames(xFactors) <- colnames(x[,fTypes,drop=FALSE])
-  }else{
+  
+  xx <- mf[, attr(form, "XA_vars"), drop=FALSE]
+  xFactors <- xx[, sapply(xx, is.factor), drop=FALSE]
+  if(!ncol(xFactors)) {
     xFactors <- NULL
   }
+  
+  # fTypes <- sapply(x,is.factor)
+  # if(sum(fTypes)>0){
+  #   xFactors <- x[,fTypes,drop=FALSE]
+  #   colnames(xFactors) <- colnames(x[,fTypes,drop=FALSE])
+  # }else{
+  #   xFactors <- NULL
+  # }
+  
   xTypes <- sapply(x,is.numeric)
   if(sum(xTypes)>0){
     xNumeric <- wtScale(x[,xTypes],1/nrow(x))
