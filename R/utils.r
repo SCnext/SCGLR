@@ -30,6 +30,10 @@ checkLossFunction <- function(type) {
 # returns string w/o leading or trailing whitespace
 trim <- function (x) gsub("^\\s+|\\s+$", "", x)
 
+split <- function(x) {
+  trim(unlist(strsplit(x,"[,/ ]")))  
+}
+
 # # returns a call in which all of the arguments which were supplied or have presets are specified by their full names and supplied or default values.
 # # @param definition a function. See \code{\link[base]{match.call}}.
 # # @param call an unevaluated call to the function specified by definition. See \code{\link[base]{match.call}}.

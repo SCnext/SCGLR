@@ -116,7 +116,7 @@ plot.SCGLR <- function(x, ..., style=getOption("plot.SCGLR"), plane=c(1, 2)) {
 
   # process plane
   if(is.character(plane)) {
-    plane <- as.integer(trim(unlist(strsplit(plane,"[,/ ]"))))
+    plane <- as.integer(split(plane))
   }
 
   # sanity checking
@@ -247,7 +247,7 @@ plot.SCGLR <- function(x, ..., style=getOption("plot.SCGLR"), plane=c(1, 2)) {
 
     # filter according to user's will
     if(is.character(predictors)) {
-      co <- co[co$label %in% predictors,]
+      co <- co[co$label %in% split(predictors),]
     }
 
     # filter according to given threshold
@@ -315,7 +315,7 @@ plot.SCGLR <- function(x, ..., style=getOption("plot.SCGLR"), plane=c(1, 2)) {
 
     # filter according to users's will
     if(is.character(covariates)) {
-      co <- co[co$label %in% covariates,]
+      co <- co[co$label %in% split(covariates),]
     }
 
     # filter according to given threshold
