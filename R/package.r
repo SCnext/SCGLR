@@ -16,7 +16,7 @@
 #' @importFrom Matrix bdiag
 #' @import Formula
 #' @importFrom graphics barplot
-#' @importFrom stats screeplot
+#' @importFrom stats screeplot na.omit coef
 #' @import ggplot2
 #' @importFrom rlang .data
 NULL

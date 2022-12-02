@@ -1,6 +1,3 @@
-if(getRversion()>="2.15.1") {
-  utils::globalVariables(c("na.omit","coef"))
-}
 #' @title Function that fits the scglr model
 #' @description Calculates the components to predict all the dependent variables.
 #' @export scglr

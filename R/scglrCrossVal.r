@@ -1,6 +1,3 @@
-if(getRversion()>="2.15.1") {
-  utils::globalVariables(c("na.omit","coef"))
-}
 #' Function that fits and selects the number of component by cross-validation.
 #' @export
 #' @importFrom stats model.matrix model.extract coef cor
