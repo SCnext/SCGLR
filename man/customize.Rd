@@ -24,7 +24,7 @@ Options can be set globally using \code{options("plot.SCGLR")}. It will then pro
    \code{observations.alpha}       \tab numeric (1). Point transparency.\cr
    \code{observations.factor}      \tab logical (FALSE). Paint observations according to factor (specify factor).\cr
 
-   \bold{\code{predictors}}        \tab logical or array of characters (FALSE). Should we draw predictors and optionally which one (TRUE means all).\cr
+   \bold{\code{predictors}}        \tab logical or array of characters or comma separated string (FALSE). Should we draw predictors and optionally which one (TRUE means all).\cr
    \code{predictors.color}         \tab string ("red"). Base color used to draw predictors.\cr
    \code{predictors.alpha}         \tab numeric (1). Overall transparency for predictors (0 is transparent, 1 is opaque). \cr
    \code{predictors.arrows}        \tab logical (TRUE). Should we draw arrows for predictors.\cr
@@ -36,7 +36,7 @@ Options can be set globally using \code{options("plot.SCGLR")}. It will then pro
    \code{predictors.labels.size}   \tab numeric (labels.size). Specific size for predictor labels.\cr
    \code{predictors.labels.auto}   \tab logical (labels.auto). Should predictor labels be aligned with arrows.\cr
 
-   \bold{\code{covariates}}        \tab logical or array of characters (TRUE). Should we draw covariates and optionally which one (TRUE means all).\cr
+   \bold{\code{covariates}}        \tab logical or array of characters or comma separated string (TRUE). Should we draw covariates and optionally which one (TRUE means all).\cr
    \code{covariates.color}         \tab string ("black"). Base color used to draw covariates. \cr
    \code{covariates.alpha}         \tab numeric (1). Overall transparency for covariates (0 is transparent, 1 is opaque). \cr
    \code{covariates.arrows}        \tab logical (TRUE). Should we draw arrows for covariates.\cr
@@ -61,6 +61,8 @@ Options can be set globally using \code{options("plot.SCGLR")}. It will then pro
 \dontrun{
 # setting parameters
 plot(genus.scglr)
+plot(genus.scglr, covariates=c("evi_1","pluvio_11"))
+plot(genus.scglr, covariates="evi_1,pluvio_11")
 plot(genus.scglr, predictors=TRUE)
 plot(genus.scglr, predictors=TRUE, pred.arrows=FALSE)
 

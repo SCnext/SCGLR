@@ -1,4 +1,5 @@
 #' @export
+#' @method summary SCGLR
 #' @importFrom stats cor
 #' @importFrom utils combn
 #' @title Summarizing SCGLR fits
@@ -54,6 +55,7 @@ summary.SCGLR <- function(object, ...) {
 }
 
 #' @export
+#' @method print summary.SCGLR
 #' @keywords internal
 #' @rdname summary.SCGLR
 #' @param x an object of class "summary.SCGLR", usually a result of a call to summary.SCGLR.
