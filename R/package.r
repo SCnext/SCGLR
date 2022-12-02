@@ -18,6 +18,7 @@
 #' @importFrom graphics barplot
 #' @importFrom stats screeplot
 #' @import ggplot2
+#' @importFrom rlang .data
 NULL
 
 .onLoad <- function(libname,pkgname) {

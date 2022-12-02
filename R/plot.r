@@ -1,8 +1,3 @@
-if(getRversion()>="2.15.1") {
-# remove warnings due to ggplot2 syntax strangeness
-  utils::globalVariables(c("comp","y","label","angle","hjust"))
-}
-
 #' SCGLR generic plot
 #' @export
 #' @method plot SCGLR
@@ -154,7 +149,8 @@ plot.SCGLR <- function(x, ..., style=getOption("plot.SCGLR"), plane=c(1, 2)) {
   observations <- has_cust("observations",FALSE)
 
   # build base plot
-  p <- qplot((-1:1)*cust("expand",1.0), (-1:1)*cust("expand",1.0), geom="blank")+
+  p <- ggplot()+
+    geom_blank(aes((-1:1)*cust("expand",1.0), (-1:1)*cust("expand",1.0)))+
     coord_fixed()+
     # thicker x unit arrow
     xlab(paste(axis_names[1],"(",round(100*inertia[1],2),"%)")) +
@@ -202,14 +198,14 @@ plot.SCGLR <- function(x, ..., style=getOption("plot.SCGLR"), plane=c(1, 2)) {
     if(!is.null(factor)&&(cust("observations.factor",FALSE))) {
       obs <- cbind(obs,data$xFactors[factor])
       p <- p + geom_point(
-        aes_string(x="x",y="y",color=factor),
+        aes(x=.data$x,y=.data$y,color=.data[[factor]]),
         data=obs,
         size=cust("observations.size",1),
         alpha=cust("observations.alpha",1)
       )
     } else {
       p <- p + geom_point(
-        aes(x=x, y=y),
+        aes(x=.data$x, y=.data$y),
         data=obs,
         size=cust("observations.size",1),
         color=cust("observations.color","black"),
@@ -261,7 +257,7 @@ plot.SCGLR <- function(x, ..., style=getOption("plot.SCGLR"), plane=c(1, 2)) {
       # draw arrows ?
       if(cust("predictors.arrows",TRUE)) {
         p <- p + geom_segment(
-          aes(x=0,y=0,xend=x,yend=y),
+          aes(x=0,y=0,xend=.data$x,yend=.data$y),
           data=co,
           color=co$arrows.color,
           alpha=co$arrows.alpha,
@@ -276,7 +272,13 @@ plot.SCGLR <- function(x, ..., style=getOption("plot.SCGLR"), plane=c(1, 2)) {
       # draw labels ?
       if(cust("predictors.labels",TRUE)) {
         p <- p + geom_text(
-          aes(x=x*(1+labels.offset/norm),y=y*(1+labels.offset/norm),label=label,angle=angle,hjust=hjust),
+          aes(
+            x=.data$x*(1+labels.offset/norm),
+            y=.data$y*(1+labels.offset/norm),
+            label=.data$label,
+            angle=.data$angle,
+            hjust=.data$hjust
+          ),
           data=co,
           color=co$labels.color,
           alpha=co$labels.alpha,
@@ -329,7 +331,7 @@ plot.SCGLR <- function(x, ..., style=getOption("plot.SCGLR"), plane=c(1, 2)) {
       # draw arrows ?
       if(cust("covariates.arrows",TRUE)) {
         p <- p + geom_segment(
-          aes(x=0,y=0,xend=x,yend=y),
+          aes(x=0,y=0,xend=.data$x,yend=.data$y),
           data=co,
           color=co$arrows.color,
           alpha=co$arrows.alpha,
@@ -344,7 +346,13 @@ plot.SCGLR <- function(x, ..., style=getOption("plot.SCGLR"), plane=c(1, 2)) {
       # draw labels ?
       if(cust("covariates.labels",TRUE)) {
         p <- p + geom_text(
-          aes(x=x*(1+labels.offset/norm),y=y*(1+labels.offset/norm),label=label,angle=angle,hjust=hjust),
+          aes(
+            x=.data$x*(1+labels.offset/norm),
+            y=.data$y*(1+labels.offset/norm),
+            label=.data$label,
+            angle=.data$angle,
+            hjust=.data$hjust
+          ),
           data=co,
           color=co$labels.color,
           size=co$labels.size,
@@ -362,7 +370,7 @@ plot.SCGLR <- function(x, ..., style=getOption("plot.SCGLR"), plane=c(1, 2)) {
     # draw points ?
     if(cust("factor.points",TRUE)) {
       p <- p + geom_point(
-        aes_string(x="x",y="y",color=factor),
+        aes(x=.data$x,y=.data$y,color=.data[[factor]]),
         data=bary,
         size=cust("factor.points.size",4),
         shape=cust("factor.points.shape",13)
@@ -372,7 +380,7 @@ plot.SCGLR <- function(x, ..., style=getOption("plot.SCGLR"), plane=c(1, 2)) {
     # draw labels ?
     if(cust("factor.labels",TRUE)) {
       p <- p + geom_text(
-        aes_string(x="x",y="y",label=factor),
+        aes(x=.data$x,y=.data$y,label=.data[[factor]]),
         data=bary,
         color=cust("factor.labels.color","black"),
         size=cust("factor.labels.size",4*labels.size)
@@ -395,7 +403,7 @@ plot.SCGLR <- function(x, ..., style=getOption("plot.SCGLR"), plane=c(1, 2)) {
 screeplot.SCGLR <- function(x, ...) {
   inertia <- data.frame(inertia=x$inertia,comp=1:length(x$inertia))
   ggplot(inertia)+
-    geom_col(aes(x=comp,y=inertia))+
+    geom_col(aes(x=.data$comp,y=.data$inertia))+
     scale_x_discrete(labels=names(x$inertia),limits=1:length(inertia$comp))+
     labs(x="Components", y="Inertia", title="Inertia per component\n", ...)
 }
