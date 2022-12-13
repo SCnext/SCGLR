@@ -318,7 +318,6 @@ oneCompRand <- function(Y, family, size=NULL,
 #' @title Function that fits the mixed-SCGLR model
 #' @description Calculates the components to predict all the response variables.
 #' @export kCompRand
-#' @importFrom plsdepot plsreg2
 #' @importFrom stats model.matrix cor var
 #' @param Y the matrix of random responses
 #' @param family a vector of character of the same length as the number of response variables: "bernoulli", "binomial", "poisson" or "gaussian" is allowed.
@@ -329,7 +328,7 @@ oneCompRand <- function(Y, family, size=NULL,
 #' @param loffset a matrix of size (number of observations * number of Poisson response variables) giving the log of the offset associated with each observation
 #' @param k number of components, default is one
 #' @param init.sigma a vector giving the initial values of the variance components, default is rep(1, ncol(Y))
-#' @param init.comp a character describing how the components (loadings-vectors) are inisialised in the PING algorithm: "pca" or "pls" is allowed
+#' @param init.comp a character describing how the components (loadings-vectors) are inisialised in the PING algorithm: "pca" or "pls" is allowed. The package plsdepot is needed for "pls".
 #' @param method Regularization criterion type: object of class "method.SCGLR"
 #' built by function \code{\link{methodSR}}.
 #' @return an object of the SCGLR class.
@@ -374,7 +373,11 @@ kCompRand <- function(Y, family, size=NULL,
     }
   }
   
-  
+  if(init.comp=="pls") {
+    if(!quietRequire("plsdepot")) {
+      stop("plsdepot package is required to allow pls for component initialization!\n  install.packages(\"plsdepot\")")
+    }
+  }
   
   # First component
   no <- nrow(X)

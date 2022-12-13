@@ -38,7 +38,7 @@ kCompRand(
 
 \item{init.sigma}{a vector giving the initial values of the variance components, default is rep(1, ncol(Y))}
 
-\item{init.comp}{a character describing how the components (loadings-vectors) are inisialised in the PING algorithm: "pca" or "pls" is allowed}
+\item{init.comp}{a character describing how the components (loadings-vectors) are inisialised in the PING algorithm: "pca" or "pls" is allowed. The package plsdepot is needed for "pls".}
 
 \item{method}{Regularization criterion type: object of class "method.SCGLR"
 built by function \code{\link{methodSR}}.}

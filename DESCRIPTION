@@ -21,9 +21,9 @@ BugReports: https://github.com/SCnext/SCGLR/issues
 Depends:
     R (>= 3.0.0)
 Imports:
-    Matrix,Formula,graphics,ggplot2 (>= 3.0.0),grid,pROC (>= 1.9),plsdepot,ade4,rlang
+    Matrix,Formula,graphics,ggplot2 (>= 3.0.0),grid,pROC (>= 1.9),ade4,rlang
 Suggests:
-    future,future.apply,progressr
+    future,future.apply,progressr,plsdepot
 LazyData: yes
-RoxygenNote: 7.2.2
+RoxygenNote: 7.2.3
 Encoding: UTF-8
