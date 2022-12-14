@@ -7,7 +7,8 @@
 - error message for lack of convergence were improved and `scglrCrossVal` no longer
   stops when a fold does not converge (issue #12)
 - add a plot for `scglrCrossVal`
-- fix contrasts error in `scglrTheme` (issue #20) 
+- fix contrasts error in `scglrTheme` (issue #20)
+- fix some URL in docs
 
 ## New features
 - preliminary integration of code from `SCnext/mixedSCGLR` written by Jocelyn Chauvet (issue #11)

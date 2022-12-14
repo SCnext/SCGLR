@@ -5,7 +5,7 @@ Description:
     An extension of the Fisher Scoring Algorithm to combine PLS regression with GLM 
     estimation in the multivariate context. Covariates can also be grouped in themes.
 Version: 3.0.9000
-Date: 2018-09-24
+Date: 2022-12-14
 Authors@R: c(
     person("Guillaume","Cornu",,"gcornu@cirad.fr", role=c("aut","cre"), comment=c(ORCID="0000-0002-7523-5176")),
     person("Frederic","Mortier",,"fmortier@cirad.fr",role="aut", comment=c(ORCID="0000-0001-5473-709X")),
@@ -16,7 +16,7 @@ Authors@R: c(
     person("Claude","Garcia",,"claude.garcia@cirad.fr",role="dtc",comment=c(ORCID="0000-0002-7351-0226",CoForTips="http://www.cofortips.org/"))  
   )
 License: CeCILL-2 | GPL-2
-URL: https://scnext.github.io/SCGLR, https://github.com/SCnext/SCGLR, https://cran.r-project.org/package=SCGLR
+URL: https://scnext.github.io/SCGLR/, https://github.com/scnext/SCGLR, https://cran.r-project.org/package=SCGLR
 BugReports: https://github.com/SCnext/SCGLR/issues
 Depends:
     R (>= 3.0.0)

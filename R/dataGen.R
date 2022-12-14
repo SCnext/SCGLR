@@ -11,8 +11,8 @@
 #'  used to describe the physical factors as well as vegetation characteristics.
 #'  On each plot, 34 physical factors were used pertaining the description of topography, geology, rainfall... 
 #'  Vegetation is characterized through 16-days enhanced vegetation index (EVI) data.
-#' @references S. Gourlet-Fleury et al. (2009--2014) CoForChange project: \url{http://www.coforchange.eu/}
-#' @references C. Garcia et al. (2013--2015) CoForTips project: \url{http://www.cofortips.org/}
+#' @references S. Gourlet-Fleury et al. (2009--2014) CoForChange project: \url{https://coforchange.cirad.fr/}
+#' @references C. Garcia et al. (2013--2015) CoForTips project: \url{https://www.cofortips.org/}
 #' @format
 #' \tabular{ll}{
 #'    \code{Y} \tab matrix giving the abundance of 8 common genera (matrix size = 2615*8).\cr

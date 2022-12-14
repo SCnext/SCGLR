@@ -30,9 +30,9 @@ of the Congo-Basin and 40 geo-referenced environmental variables on one thousand
 The use of this dataset for publication must make reference to the CoForChange project.
 }
 \references{
-S. Gourlet-Fleury et al. (2009--2014) CoForChange project: \url{http://www.coforchange.eu/}
+S. Gourlet-Fleury et al. (2009--2014) CoForChange project: \url{https://coforchange.cirad.fr/}
 
-C. Garcia et al. (2013--2015) CoForTips project: \url{http://www.cofortips.org/}
+C. Garcia et al. (2013--2015) CoForTips project: \url{https://www.cofortips.org/}
 }
 \author{
 CoForChange project
