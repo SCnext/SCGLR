@@ -1,5 +1,7 @@
 development:
   mode: unreleased
+
+url: https://scnext.github.io/SCGLR/
   
 home:
   links:

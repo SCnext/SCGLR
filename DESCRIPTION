@@ -12,8 +12,8 @@ Authors@R: c(
     person("Catherine","Trottier",,"catherine.trottier@univ-montp3.fr",role="aut"),
     person("Xavier","Bry",,"xavier.bry@univ-montp2.fr",role="aut"),
     person("Jocelyn","Chauvet",,,role="aut", comment=c(ORCID="0000-0002-4466-6483")),
-    person("Sylvie","Gourlet-Fleury",,"sylvie.gourlet-fleury@cirad.fr",role="dtc",comment=c(ORCID="0000-0002-1136-4307",CoForChange="http://www.coforchange.eu/")),
-    person("Claude","Garcia",,"claude.garcia@cirad.fr",role="dtc",comment=c(ORCID="0000-0002-7351-0226",CoForTips="http://www.cofortips.org/"))  
+    person("Sylvie","Gourlet-Fleury",,"sylvie.gourlet-fleury@cirad.fr",role="dtc",comment=c(ORCID="0000-0002-1136-4307",CoForChange="<http://coforchange.cirad.fr/>")),
+    person("Claude","Garcia",,"claude.garcia@cirad.fr",role="dtc",comment=c(ORCID="0000-0002-7351-0226",CoForTips="<https://www.cofortips.org/>"))  
   )
 License: CeCILL-2 | GPL-2
 URL: https://scnext.github.io/SCGLR/, https://github.com/scnext/SCGLR, https://cran.r-project.org/package=SCGLR
