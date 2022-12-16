@@ -17,7 +17,7 @@
 are plotted (eg: c(1,2) or "1,2" or "1/2").}
 }
 \value{
-an object of class \code{\link{ggplot}}.
+an object of class \code{ggplot}.
 }
 \description{
 SCGLR generic plot

@@ -7,12 +7,12 @@
 \method{screeplot}{SCGLRTHM}(x, ...)
 }
 \arguments{
-\item{x}{object of class 'SCGLRTHM', usually a result of running \code{\link{theme}}.}
+\item{x}{object of class 'SCGLRTHM', usually a result of running \code{\link{scglrTheme}}.}
 
 \item{\dots}{optional arguments.}
 }
 \value{
-an object of class ggplot.
+an object of class \code{ggplot}.
 }
 \description{
 Screeplot of percent of overall X variance captured by component by theme

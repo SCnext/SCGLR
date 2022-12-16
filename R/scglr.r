@@ -19,8 +19,7 @@
 #' @param method structural relevance criterion. Object of class "method.SCGLR"
 #' built by  \code{\link{methodSR}} for Structural Relevance.
 #' @return an object of the SCGLR class.
-#' @return The function \code{\link{summary}} (i.e., \code{\link{summary.SCGLR}}) can be used to obtain or print a summary of the results.
-#' @return The generic accessor functions \code{\link{coef}} can be used to extract various useful features of the value returned by \code{scglr}.
+#' @return The function \code{summary} (i.e., \code{summary.SCGLR}) can be used to obtain or print a summary of the results.
 #' @return An object of class "\code{SCGLR}" is a list containing following components:
 #' @return \item{u}{matrix of size (number of regressors * number of components), contains the component-loadings,
 #' i.e. the coefficients of the regressors in the linear combination giving each component.}
@@ -70,12 +69,12 @@ scglr <-  function(formula,data,family,K=1,size=NULL,weights=NULL,offset=NULL,su
   if(!is.null(weights)) {
     warning("Individual weights are not available for now. It will be ignored.")
   }
-
+  
   if(!inherits(formula,"MultivariateFormula"))
     formula <- multivariateFormula(formula,data=data)
-
+  
   if(length(formula$X)>1) stop("SCGLR deals with only one theme of covariates")
-
+  
   #todo family "toto" -> rep("toto",ny)
   cl <- match.call()
   mf <- match.call(expand.dots = FALSE)
@@ -84,7 +83,7 @@ scglr <-  function(formula,data,family,K=1,size=NULL,weights=NULL,offset=NULL,su
   mf$drop.unused.levels <- TRUE
   form <- as.Formula(formula)
   mf$formula <- form
-
+  
   if(!is.null(size))  size <- as.matrix(size)
   if(!is.null(offset)) {
     if(is.vector(offset)) {
@@ -96,19 +95,19 @@ scglr <-  function(formula,data,family,K=1,size=NULL,weights=NULL,offset=NULL,su
   #   if(is.null(weights)){
   #     weights <- 1/nrow(data)
   #   }
-
+  
   mf$size <- size
   mf$offset <- offset
   mf$subset <- subset##faut il ajouter cela
   #mf$weights <- weights
-
+  
   mf[[1]] <- as.name("model.frame")
-
+  
   mf <- eval(mf, parent.frame())
   crit <- do.call("critConvergence", crit)
   y <- as.matrix(model.part(form,data=mf,lhs=1))
   x <- model.part(form, data=mf, rhs = 1)
-
+  
   if(length(form)[2]==2){
     AX <- model.part(form, data=mf, lhs=0, rhs = 2)
     namesAx <- names(AX)
@@ -150,16 +149,16 @@ scglr <-  function(formula,data,family,K=1,size=NULL,weights=NULL,offset=NULL,su
   xcr <- scale(x,center=TRUE,scale=FALSE)
   xcr <- xcr%*%invsqrtm
   colnames(xcr) <- nms
-
+  
   ### Controls of  dimension between Y and Size, weights and offsets
   ## number of columns in Y
   ncy <- ncol(y)
   if(length(family)!=ncy){
     stop("Number of dependent variables and family attributs are different!")
   }
-
-
-
+  
+  
+  
   if("binomial"%in%family){
     if(is.null(size)){
       stop("Number of trials is unknown for binomial variables! You must provide size parameter.")
@@ -171,7 +170,7 @@ scglr <-  function(formula,data,family,K=1,size=NULL,weights=NULL,offset=NULL,su
       }
     }
   }
-
+  
   if(!is.null(model.extract(mf,"offset"))){
     if(ncol(offset)!=sum("poisson"==family)){
       stop("Number of offset and poisson variables are different!")
@@ -180,9 +179,9 @@ scglr <-  function(formula,data,family,K=1,size=NULL,weights=NULL,offset=NULL,su
   ###compute the K components of scglr
   size <- model.extract(mf,"size")
   offset <- model.extract(mf,"offset")
-
+  
   kComponent.fit <- kComponents(X=xcr,Y=y,AX=AX,K=K,family=family,size=size,
-                                offset=offset,crit=crit,method=method)
+    offset=offset,crit=crit,method=method)
   # browser()
   #   if(is.null(AX)){
   #     gamma.fit <- multivariateGlm.fit(Y=y,comp=kComponent.fit$F,family=family,
@@ -192,7 +191,7 @@ scglr <-  function(formula,data,family,K=1,size=NULL,weights=NULL,offset=NULL,su
   #                                       offset=offset,size=size)
   #   }
   gamma.coefs <- kComponent.fit$gamma#sapply(gamma.fit,coef)
-#kComponent.fit$F ou kComponent.fit$Fr
+  #kComponent.fit$F ou kComponent.fit$Fr
   pred <- multivariatePredictGlm(Xnew=cbind(1,kComponent.fit$F,AX),family=family,beta=gamma.coefs,offset=offset)
   logl <- -0.5*infoCriterion(ynew=y,pred=pred,family=family,type="likelihood",size=NULL,npar=0)
   ##Quel est le modele NULL ?
@@ -200,7 +199,7 @@ scglr <-  function(formula,data,family,K=1,size=NULL,weights=NULL,offset=NULL,su
     modNull <- multivariateGlm.fit(y,comp=NULL,family=family,size=size,offset=offset)
   }else{
     modNull <- multivariateGlm.fit(y,comp=AX,family=family,size=size,offset=offset)
-
+    
   }
   logl.satur <- -0.5*infoCriterion(ynew=y,pred=y,family=family,type="likelihood",size=NULL,npar=0)
   #modifier pour le cas Gaussien logl.satur non valide
@@ -211,7 +210,7 @@ scglr <-  function(formula,data,family,K=1,size=NULL,weights=NULL,offset=NULL,su
   names(deviance.null) <- names(deviance.resid) <- colnames(y)
   #   beta.coefs <- f2x(Xcr=xcr,centerx=centerx,invsqrtm=invsqrtm,gamma=gamma.coefs[1:(K+1),],
   #                     u=kComponent.fit$u,comp=kComponent.fit$F)
-
+  
   beta0 <- gamma.coefs[1,] - t(centerx)%*%invsqrtm%*%kComponent.fit$u%*%gamma.coefs[2:(K+1),]
   beta <- invsqrtm%*%kComponent.fit$u%*%gamma.coefs[2:(K+1),]
   beta.coefs <- rbind(beta0,beta)

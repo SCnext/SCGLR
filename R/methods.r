@@ -7,7 +7,8 @@
 #'@param maxiter integer for maximum number of iterations of \code{SR} function
 #'@param epsilon positive convergence threshold
 #'@param bailout integer argument
-methodSR <- function(phi="vpi",l=1,s=1/2,maxiter=1000,epsilon=1e-6,bailout=10) {
+methodSR <- function(phi="vpi", l=1, s=1/2, maxiter=1000, epsilon=1e-6, bailout=10) {
+  
   # check arguments
   if(!(phi %in% c("vpi","cv")))
     stop("phi should be \"vpi\" or \"cv\"")
@@ -21,17 +22,18 @@ methodSR <- function(phi="vpi",l=1,s=1/2,maxiter=1000,epsilon=1e-6,bailout=10) {
     stop("epsilon must be a positive numeric")
   if(!is.numeric(bailout) || bailout<1)
     stop("bailout must be an integer greater than 1")
-
-  structure(list(
-    method="sr",
-    phi=phi,
-    l=l,
-    s=s,
-    maxiter=maxiter,
-    epsilon=epsilon,
-    bailout=bailout#1000
-  ),
-  class="method.SCGLR",
-  description="Method iterative normed gradient (ING) for Structural Relevance"
+  
+  structure(
+    list(
+      method = "sr",
+      phi = phi,
+      l = l,
+      s = s,
+      maxiter = maxiter,
+      epsilon = epsilon,
+      bailout = bailout
+    ),
+    class = "method.SCGLR",
+    description = "Method iterative normed gradient (ING) for Structural Relevance"
   )
 }

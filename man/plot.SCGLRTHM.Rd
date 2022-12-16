@@ -7,12 +7,12 @@
 \method{plot}{SCGLRTHM}(x, ...)
 }
 \arguments{
-\item{x}{an object from SCGLRTHM class.}
+\item{x}{object of class 'SCGLRTHM', usually a result of running \code{\link{scglrTheme}}.}
 
 \item{\dots}{see SCGLR plot method}
 }
 \value{
-an object of class \code{\link{ggplot}}.
+an object of class \code{ggplot}.
 }
 \description{
 SCGLR generic plot for themes

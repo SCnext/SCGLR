@@ -1,7 +1,7 @@
 #' @title Theme Backward selection
 #' @description Perform component selection by cross-validation backward approach
 #' @export
-#' @param formula an object of class "\code{\link{Formula}}" (or one that can be coerced
+#' @param formula an object of class "\code{Formula}" (or one that can be coerced
 #' to that class): a symbolic description of the model to be fitted. The details
 #' of model specification are given under Details.
 #' @param data data frame.
@@ -66,13 +66,13 @@
 #' testcv$H_best
 #' }
 scglrThemeBackward <- function(formula, data, H, family, size = NULL, weights = NULL,
-                  offset = NULL, na.action = na.omit, crit = list(), method = methodSR(), folds=10,type="mspe",st=FALSE){
-
+  offset = NULL, na.action = na.omit, crit = list(), method = methodSR(), folds=10,type="mspe",st=FALSE){
+  
   if(!inherits(formula,"MultivariateFormula"))
     formula <- multivariateFormula(formula,data=data)
-
+  
   additional <- formula$additional
-
+  
   # check family
   Y_vars <- attr(formula,"Y_vars")
   if(!is.character(family)||any(!(family %in% c("gaussian","poisson","bernoulli","binomial"))))
@@ -81,12 +81,12 @@ scglrThemeBackward <- function(formula, data, H, family, size = NULL, weights = 
     stop("Length of family must be equal to one or number of Y variables")
   if(length(family)==1)
     family <- rep(family, length(Y_vars))
-
+  
   X_expand <- lapply(formula$X,function(X){
     f <- as.formula(paste0("~",paste0(trim(deparse(X)),collapse=" ")))
     return(model.matrix(f,data)[,-1])
   })
-
+  
   invsqrtm <- lapply(formula$X, function(X){
     nms <- all.vars(as.formula(paste0("~",paste0(trim(deparse(X)),collapse=" "))))
     metric(data[,nms])
@@ -96,7 +96,7 @@ scglrThemeBackward <- function(formula, data, H, family, size = NULL, weights = 
     A_expand <- model.matrix(as.formula(paste0("~",paste0(trim(deparse(formula$A)),collapse=" "))),data)[,-1,drop=F]
   else
     A_expand <- NULL
-
+  
   nobs <- nrow(data)
   
   # fold provided as a vector of user groups
@@ -146,7 +146,7 @@ scglrThemeBackward <- function(formula, data, H, family, size = NULL, weights = 
   
   ..progressor.. <- getProgressor(kfolds)
   thm <- getParallel("lapply", seq(kfolds), full_fold)
-
+  
   cv <- lapply(1:kfolds,function(k){
     XU_new <- as.matrix(do.call(cbind,lapply(which(H>0),function(l) as.matrix(X_expand[[l]][foldid==k,,drop=F])%*%thm[[k]]$u[[l]])))
     if(!is.null(A_expand))
@@ -160,7 +160,7 @@ scglrThemeBackward <- function(formula, data, H, family, size = NULL, weights = 
   })
   cv <- mean(log(Reduce("+",cv)/kfolds))
   message("[",paste(H,collapse=","),"] = ",cv)
-
+  
   #backward evaluation
   message("backward")
   H_cur <- H
@@ -179,7 +179,7 @@ scglrThemeBackward <- function(formula, data, H, family, size = NULL, weights = 
         X_fit <- cbind(XU_fit,A_fit)##Ajouter drop =FALSE dans data en dessous
         fit <- multivariateGlm.fit(Y=data[foldid!=k,formula$Y_vars,drop=FALSE],comp=X_fit,family=family,offset=offset[foldid!=k],size=size[foldid!=k,,drop=FALSE])
         gamma <- sapply(fit, coef)
-
+        
         XU_new <- as.matrix(do.call(cbind,lapply(which(h>0),function(l) as.matrix(X_expand[[l]][foldid==k,,drop=F])%*%thm[[k]]$u[[l]][,1:h[l],drop=FALSE])))
         colnames(XU_new) <- paste0("c",1:ncol(XU_new))
         if(!is.null(A_expand))
@@ -187,39 +187,39 @@ scglrThemeBackward <- function(formula, data, H, family, size = NULL, weights = 
         else
           A_new <- NULL
         X_new <- cbind(1,XU_new,A_new)
-
+        
         pred <- multivariatePredictGlm(X_new,family=family,beta=gamma,offset = offset[foldid==k])
         if(!(type%in%c("mspe","auc"))) npar <- ncol(X_new) else npar <- 0
-
+        
         qual <- infoCriterion(ynew=as.matrix(data[foldid==k,formula$Y_vars]),pred=pred,family=family,type=type,size=size[foldid==k,,drop=FALSE],npar=npar)
       })
       return(mean(log(Reduce("+",cv)/kfolds)))
     })
     cv_new <- unlist(cv_new)
     H_cur <- H_new[[which.min(cv_new)]]
-
+    
     cv_path <- c(cv_path,min(cv_new))
     H_path <- c(H_path,list(H_cur))
     message("[",paste(H_cur,collapse=","),"] = ",min(cv_new))
   }
-
+  
   message("NULL model")
   cvNull <- lapply(1:kfolds,function(k){
-        if(!is.null(A_expand))
-          A_fit <- A_expand[foldid!=k,,drop=FALSE]
-        else
-          A_fit <- NULL
-        #idem ajouter des drop = FALSE dans data en dessous
-        fit <- multivariateGlm.fit(Y=data[foldid!=k,formula$Y_vars,drop=FALSE],comp=A_fit,family=family,offset=offset[foldid!=k],size=size[foldid!=k,,drop=FALSE])
-        gamma <- sapply(fit, coef)
-        if(!is.null(A_expand))
-          A_new <- A_expand[foldid==k,,drop=FALSE]
-        else
-          A_new <- NULL
-        X_new <- cbind(rep(1,sum(foldid==k)),A_new)
-        pred <- multivariatePredictGlm(X_new,family=family,beta=gamma,offset = offset[foldid==k])
-        if(!(type%in%c("mspe","auc"))) npar <- ncol(X_new) else npar <- 0
-        qual <- infoCriterion(ynew=as.matrix(data[foldid==k,formula$Y_vars]),pred=pred,family=family,type=type,size=size[foldid==k,,drop=FALSE],npar=npar)
+    if(!is.null(A_expand))
+      A_fit <- A_expand[foldid!=k,,drop=FALSE]
+    else
+      A_fit <- NULL
+    #idem ajouter des drop = FALSE dans data en dessous
+    fit <- multivariateGlm.fit(Y=data[foldid!=k,formula$Y_vars,drop=FALSE],comp=A_fit,family=family,offset=offset[foldid!=k],size=size[foldid!=k,,drop=FALSE])
+    gamma <- sapply(fit, coef)
+    if(!is.null(A_expand))
+      A_new <- A_expand[foldid==k,,drop=FALSE]
+    else
+      A_new <- NULL
+    X_new <- cbind(rep(1,sum(foldid==k)),A_new)
+    pred <- multivariatePredictGlm(X_new,family=family,beta=gamma,offset = offset[foldid==k])
+    if(!(type%in%c("mspe","auc"))) npar <- ncol(X_new) else npar <- 0
+    qual <- infoCriterion(ynew=as.matrix(data[foldid==k,formula$Y_vars]),pred=pred,family=family,type=type,size=size[foldid==k,,drop=FALSE],npar=npar)
   })
   message("[",paste(rep(0,length(H)),collapse=","),"] = ",mean(log(Reduce("+",cvNull)/kfolds)))
   cv_path <- c(cv_path,mean(log(Reduce("+",cvNull)/kfolds)))

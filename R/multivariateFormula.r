@@ -32,18 +32,19 @@
 #' form3
 #' }
 multivariateFormula <- function(Y, X=NULL, ..., A=NULL, additional=NULL, data=NULL) {
-   if(inherits(Y,"formula")) {
-    if(any(!is.null(X),!is.null(A))) {
+  
+  if(inherits(Y, "formula")) {
+    if(any(!is.null(X), !is.null(A))) {
       X <- NULL
       A <- NULL
       warning("As Y is a formula, I'm ignoring X and A")
     }
-
+    
     # try to detect sugar operator || for additionals
     sugar_found <- FALSE
     walker <- function(expr) {
       if(is.name(expr)) {
-        if(identical(expr,quote(`||`))) {
+        if(identical(expr, quote(`||`))) {
           if(sugar_found)
             stop("Only one || is allowed to mark additional covariate group!")
           sugar_found <<- TRUE
@@ -59,22 +60,22 @@ multivariateFormula <- function(Y, X=NULL, ..., A=NULL, additional=NULL, data=NU
       expr
     }
     Y <- walker(Y)
-
+    
     if(sugar_found) {
-      if(is.logical(additional)&&!additional)
+      if(is.logical(additional) && !additional)
         warning("|| found so ignoring additional parameter")
       additional <- TRUE
     }
-
+    
     if(is.null(additional))
       additional <- FALSE
-
+    
     # split formula and check parts
     formula <- Formula(Y) # to handle multiple |
     l <- length(formula)
     if(l[1] != 1)
       stop("Left hand side part of formula (Y) must have ONE part!")
-
+    
     # check part counts
     if(l[2] < 1+additional)
       if(additional) {
@@ -82,72 +83,72 @@ multivariateFormula <- function(Y, X=NULL, ..., A=NULL, additional=NULL, data=NU
       } else {
         stop("Right hand side part of formula must have at least ONE part!")
       }
-
-    Y <- stats::terms(formula,lhs=1,rhs=0)[[2]]
-    X <- lapply(1:l[2], function(i) stats::terms(formula,lhs=0,rhs=i)[[2]])
-
+    
+    Y <- stats::terms(formula, lhs=1, rhs=0)[[2]]
+    X <- lapply(1:l[2], function(i) stats::terms(formula, lhs=0, rhs=i)[[2]])
+    
   } else {
-
-    if(!is.vector(Y)||!is.character(Y))
+    
+    if(!is.vector(Y) || !is.character(Y))
       stop("Y must be provided as vectors of response names")
-    Y <- as.Formula(paste0("~",paste(Y,collapse="+")))[[2]]
-
+    Y <- as.Formula(paste0("~", paste(Y, collapse="+")))[[2]]
+    
     # parts are given as vector of names
     if(!is.list(X))
       X <- list(X)
     X <- c(X, list(...))
-
+    
     # it must be a list of character vectors
-    if(any(sapply(X,function(x) !is.vector(x)||!is.character(x))))
+    if(any(sapply(X, function(x) !is.vector(x) || !is.character(x))))
       stop("X and ... must be provided as vectors of covariate names")
-
-    X <- lapply(X, function(x) as.Formula(paste0("~",paste(x,collapse="+")))[[2]])
-
+    
+    X <- lapply(X, function(x) as.Formula(paste0("~", paste(x, collapse="+")))[[2]])
+    
     if(!is.null(A)) {
-      A <- as.Formula(paste0("~",paste(A,collapse="+")))[[2]]
+      A <- as.Formula(paste0("~", paste(A, collapse="+")))[[2]]
       additional <- TRUE
     }
   }
-
+  
   # handle additional covariates removing them from X
-  if(is.null(A)&&is.logical(additional)&&additional) {
+  if(is.null(A) && is.logical(additional) && additional) {
     A <- unlist(X[[length(X)]])
     X <- X[-length(X)]
   }
-
+  
   # give name to covariate groups
-  names(X) <- paste0("T",1:length(X))
-
+  names(X) <- paste0("T", 1:length(X))
+  
   # extract var names
   Y_vars <- all.vars(Y)
   X_vars <- unique(unlist(lapply(X, all.vars)))
   A_vars <- all.vars(A)
-  XA_vars <- unique(c(X_vars,A_vars))
-  YXA_vars <- unique(c(Y_vars,X_vars,A_vars))
-
+  XA_vars <- unique(c(X_vars, A_vars))
+  YXA_vars <- unique(c(Y_vars, X_vars, A_vars))
+  
   ## check consistency with data if provided
   # check if all variables can be found within data
   if(!is.null(data)) {
     data_vars <- names(data)
-    missing_vars <- setdiff(YXA_vars,data_vars)
+    missing_vars <- setdiff(YXA_vars, data_vars)
     if(length(missing_vars))
       stop("Some variable(s) where not found in data! '", paste(missing_vars, collapse="', '"),"'")
   }
-
+  
   # check that Y and X+A variable do not overlap
-  error_vars <- intersect(Y_vars,XA_vars)
+  error_vars <- intersect(Y_vars, XA_vars)
   if(length(error_vars))
     stop("LHS and RHS variables must be different! '", paste(error_vars, collapse="', '"),"'")
-
+  
   # check that Xs and A vars do not overlap with each other
-  error_vars <- intersect(X_vars,A_vars)
+  error_vars <- intersect(X_vars, A_vars)
   if(length(error_vars))
     stop("X and A variables must be different! '", paste(error_vars, collapse="', '"),"'")
-
+  
   # formula builder from parts
   # first build formula . ~ 1 | 2 ...... | n
   # then replace numbered placeholders with corresponding parts and front dot with response expr
-  cov <- c(X,A)
+  cov <- c(X, A)
   walker2 <- function(expr) {
     if(is.atomic(expr)) {
       expr <- cov[[expr]]
@@ -160,24 +161,24 @@ multivariateFormula <- function(Y, X=NULL, ..., A=NULL, additional=NULL, data=NU
     }
     expr
   }
-  formula <- as.formula(paste0(".~",paste0(1:length(cov),collapse="|")))
+  formula <- as.formula(paste0(".~", paste0(1:length(cov), collapse="|")))
   formula <- walker2(formula)
   formula[[2]] <- Y
   formula <- Formula(formula)
-
+  
   # document formula with collected metadata
   structure(
     formula,
-    class=c("MultivariateFormula","Formula","formula"),
-    Y=Y,
-    X=X,
-    A=A,
-    additional=!is.null(A),
-    Y_vars=Y_vars,
-    X_vars=X_vars,
-    A_vars=A_vars,
-    XA_vars=XA_vars,
-    YXA_vars=YXA_vars
+    class = c("MultivariateFormula", "Formula", "formula"),
+    Y = Y,
+    X = X,
+    A = A,
+    additional = !is.null(A),
+    Y_vars = Y_vars,
+    X_vars = X_vars,
+    A_vars = A_vars,
+    XA_vars = XA_vars,
+    YXA_vars = YXA_vars
   )
 }
 
@@ -191,8 +192,8 @@ multivariateFormula <- function(Y, X=NULL, ..., A=NULL, additional=NULL, data=NU
 #' @examples
 #' frm <- multivariateFormula(y~x+z)
 #' print(frm$Y)
-'$.MultivariateFormula' <- function(f,a) {
-  attr(f,a,exact = TRUE)
+'$.MultivariateFormula' <- function(f, a) {
+  attr(f, a, exact = TRUE)
 }
 
 #' @title print a multivariate formula
@@ -204,26 +205,26 @@ multivariateFormula <- function(Y, X=NULL, ..., A=NULL, additional=NULL, data=NU
 #' @param x a formula
 #' @param ... unused
 print.MultivariateFormula <- function(x, ...) {
-
+  
   deparse <- function(x) {
-    paste0(base::deparse(x,60),collapse="\n")
+    paste0(base::deparse(x, 60), collapse="\n")
   }
   
-  cat("Multivariate formula \n   ",deparse(x),"\n")
-
+  cat("Multivariate formula \n   ", deparse(x), "\n")
+  
   # response part
-  cat("  Response: \n     Y   = ",deparse(x$Y),"\n")
-
+  cat("  Response: \n     Y   = ", deparse(x$Y), "\n")
+  
   # covariates
   cat("  Covariates:\n")
   for(i in seq_along(x$X)) {
-    cat("    ",paste0("T",i)," = ",deparse(x$X[[i]]),"\n")
+    cat("    ", paste0("T", i), " = ", deparse(x$X[[i]]), "\n")
   }
-
+  
   # additional
   if(!is.null(x$A))
-    cat("    ","A","  = ",deparse(x$A),"\n")
-
+    cat("    ", "A", "  = ", deparse(x$A), "\n")
+  
   cat("\n")
   invisible(x)
 }

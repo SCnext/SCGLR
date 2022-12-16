@@ -17,6 +17,9 @@
 
 \item{components}{vector of integers selecting components to plot (default is all components).}
 }
+\value{
+an object of class \code{ggplot}.
+}
 \description{
 Pairwise scglr plot on components
 }

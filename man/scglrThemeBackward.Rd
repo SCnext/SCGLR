@@ -21,7 +21,7 @@ scglrThemeBackward(
 )
 }
 \arguments{
-\item{formula}{an object of class "\code{\link{Formula}}" (or one that can be coerced
+\item{formula}{an object of class "\code{Formula}" (or one that can be coerced
 to that class): a symbolic description of the model to be fitted. The details
 of model specification are given under Details.}
 

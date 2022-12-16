@@ -7,12 +7,12 @@
 \method{barplot}{SCGLRTHM}(height, ...)
 }
 \arguments{
-\item{height}{object of class 'SCGLRTHM', usually a result of running \code{\link{theme}}.}
+\item{height}{object of class 'SCGLRTHM', usually a result of running \code{\link{scglrTheme}}.}
 
 \item{\dots}{optional arguments.}
 }
 \value{
-an object of class ggplot.
+an object of class \code{ggplot}.
 }
 \description{
 Barplot of percent of overall X variance captured by component by theme

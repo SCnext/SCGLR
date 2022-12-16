@@ -12,7 +12,7 @@
 \item{\dots}{optional arguments.}
 }
 \value{
-an object of class ggplot.
+an object of class \code{ggplot}.
 }
 \description{
 Barplot of percent of overall X variance captured by component

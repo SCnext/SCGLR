@@ -49,9 +49,7 @@ built by  \code{\link{methodSR}} for Structural Relevance.}
 \value{
 an object of the SCGLR class.
 
-The function \code{\link{summary}} (i.e., \code{\link{summary.SCGLR}}) can be used to obtain or print a summary of the results.
-
-The generic accessor functions \code{\link{coef}} can be used to extract various useful features of the value returned by \code{scglr}.
+The function \code{summary} (i.e., \code{summary.SCGLR}) can be used to obtain or print a summary of the results.
 
 An object of class "\code{SCGLR}" is a list containing following components:
 
