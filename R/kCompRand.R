@@ -19,10 +19,10 @@
 #          relative to each unit
 # method:  structural relevance criterion
 oneCompRand <- function(Y, family, size=NULL,
-                        X, AX=NULL, u=NULL, fMat=NULL, random, loffset=NULL,
-                        init.sigma = rep(1, ncol(Y)), resACP,
-                        method=methodSR("vpi", l=4, s=1/2,
-                                        maxiter=1000, epsilon=10^-6, bailout=1000)){
+  X, AX=NULL, u=NULL, fMat=NULL, random, loffset=NULL,
+  init.sigma = rep(1, ncol(Y)), resACP,
+  method=methodSR("vpi", l=4, s=1/2,
+    maxiter=1000, epsilon=10^-6, bailout=1000)){
   
   # control
   muinf <- 1e-5
@@ -119,7 +119,7 @@ oneCompRand <- function(Y, family, size=NULL,
   for(k in 1:q){
     sigma[k] = (crossprod(coeffs.courants[(ncol(T2)+1):(ncol(T2)+N),k]))/
       (N - 1/sigma[k] * sum(diag(solve(crossprod(designXi, W[,k]*designXi) +
-                                         1/as.vector(sigma[k]) * diag(N)))))
+          1/as.vector(sigma[k]) * diag(N)))))
   }
   
   # 4. Update
@@ -190,7 +190,7 @@ oneCompRand <- function(Y, family, size=NULL,
   # ------------------------------------------------------------
   compt <- 0
   while( ((deltaU > 10^(-6)) || (deltaSigma > 10^(-6)) || (deltaEta> 10^(-6)))
-         && (compt<100)
+    && (compt<100)
   ){
     
     # 1. PING
@@ -220,7 +220,7 @@ oneCompRand <- function(Y, family, size=NULL,
       ########################
       sigma[k] = (crossprod(coeffs.courants[(ncol(T2)+1):(ncol(T2)+N),k]))/
         (N - 1/sigma[k] * sum(diag(solve(crossprod(designXi, W[,k]*designXi) +
-                                           1/as.vector(sigma[k]) * diag(N)))))
+            1/as.vector(sigma[k]) * diag(N)))))
     }
     
     # 4. Update
@@ -322,13 +322,13 @@ oneCompRand <- function(Y, family, size=NULL,
 #' @param Y the matrix of random responses
 #' @param family a vector of character of the same length as the number of response variables: "bernoulli", "binomial", "poisson" or "gaussian" is allowed.
 #' @param size describes the number of trials for the binomial dependent variables: a (number of observations * number of binomial response variables) matrix is expected.
-#' @param X the matrix of the standardised explanatory variables
+#' @param X the matrix of the standardized explanatory variables
 #' @param AX the matrix of the additional explanatory variables
 #' @param random the vector giving the group of each unit (factor)
 #' @param loffset a matrix of size (number of observations * number of Poisson response variables) giving the log of the offset associated with each observation
 #' @param k number of components, default is one
 #' @param init.sigma a vector giving the initial values of the variance components, default is rep(1, ncol(Y))
-#' @param init.comp a character describing how the components (loadings-vectors) are inisialised in the PING algorithm: "pca" or "pls" is allowed. The package plsdepot is needed for "pls".
+#' @param init.comp a character describing how the components (loadings-vectors) are initialized in the PING algorithm: "pca" or "pls" is allowed.
 #' @param method Regularization criterion type: object of class "method.SCGLR"
 #' built by function \code{\link{methodSR}}.
 #' @return an object of the SCGLR class.
@@ -349,10 +349,13 @@ oneCompRand <- function(Y, family, size=NULL,
 #'      threshold=0.7, covariates.alpha=0.4, predictors.labels.size=6)
 #'}
 kCompRand <- function(Y, family, size=NULL,
-                      X, AX=NULL, random, loffset=NULL, k,
-                      init.sigma = rep(1, ncol(Y)), init.comp = "pca",
-                      method=methodSR("vpi", l=4, s=1/2,
-                                      maxiter=1000, epsilon=10^-6, bailout=1000)){
+  X, AX=NULL, random, loffset=NULL, k,
+  init.sigma = rep(1, ncol(Y)), init.comp = c("pca", "pls"),
+  method=methodSR("vpi", l=4, s=1/2,
+    maxiter=1000, epsilon=10^-6, bailout=1000)){
+  
+  # sanity checking
+  init.comp <- match.arg(init.comp)
   
   # Control
   if(is.null(colnames(Y))){
@@ -373,10 +376,19 @@ kCompRand <- function(Y, family, size=NULL,
     }
   }
   
-  if(init.comp=="pls") {
-    if(!quietRequire("plsdepot")) {
-      stop("plsdepot package is required to allow pls for component initialization!\n  install.packages(\"plsdepot\")")
-    }
+  # pca initialization helper function
+  pca_init <- function(X) {
+    eigen(crossprod(X)/nrow(X), symmetric = TRUE)$vector[, 1]
+  }
+  
+  # pls initialization helper function
+  pls_init <- function(X, Y) {
+    # plsr need a formula so build a special data for this
+    dat <- data.frame(
+      Y = I(as.matrix(Y)),
+      X = I(as.matrix(X))
+    )
+    pls::plsr(Y ~ X, data=dat, ncomp=2, method="oscorespls", scale=TRUE)$scores[, 1]
   }
   
   # First component
@@ -385,22 +397,30 @@ kCompRand <- function(Y, family, size=NULL,
   # Init resACP
   resACP = NULL
   if(po>no){
-    utilPCA = eigen(crossprod(x = X)/no,symmetric = TRUE)
+    utilPCA = pca_init(X)
     pourcent.variance = utilPCA$values/sum(utilPCA$values)
     nbcomp = max( which(c(pourcent.variance > (1/po))==TRUE ))
     Xpc = X%*%utilPCA$vectors[,1:nbcomp]
     #Stock
     resACP = list(utilPCA=utilPCA, pourcent.variance=pourcent.variance, nbcomp=nbcomp, Xpc=Xpc)
-    if(init.comp=="pca"){u <- eigen(crossprod(x = Xpc)/no,symmetric = TRUE)$vector[,1]}
-    if(init.comp=="pls"){u <- as.vector(plsdepot::plsreg2(Xpc, Y, comps = 2, crosval = FALSE)$raw.wgs[,1])}
+    if(init.comp=="pca"){
+      u <- pca_init(Xpc)
+    }
+    if(init.comp=="pls"){
+      u <- pls_init(Xpc, Y)
+    }
   }else{
-  if(init.comp=="pca"){u <- eigen(crossprod(x = X)/no,symmetric = TRUE)$vector[,1]}
-  if(init.comp=="pls"){u <- as.vector(plsdepot::plsreg2(X, Y, comps = 2, crosval = FALSE)$raw.wgs[,1])}
+    if(init.comp=="pca"){
+      u <- pca_init(X)
+    }
+    if(init.comp=="pls"){
+      u <- pls_init(X, Y)
+    }
   }
   # resACP in oneCompRand
   tmp <- oneCompRand(Y=Y, family=family, size=size,
-                     X=X,AX=AX,u=u,random=random,loffset=loffset,
-                     init.sigma = init.sigma, resACP=resACP, method=method)
+    X=X,AX=AX,u=u,random=random,loffset=loffset,
+    init.sigma = init.sigma, resACP=resACP, method=method)
   uMat <- matrix(tmp$u,ncol=1)
   fMat <- matrix(tmp$f,ncol=1)
   
@@ -411,23 +431,23 @@ kCompRand <- function(Y, family, size=NULL,
       if(po>no){
         tmpX <- Xpc-fMat%*%(solve(crossprod(fMat),crossprod(fMat,Xpc)))
         if(init.comp=="pca"){
-          u <- eigen(crossprod(x = tmpX)/no,symmetric = TRUE)$vector[,1]
+          u <- pca_init(tmpX)
           out_h <- mixed.hFunct(Z=tmp$Z,X=X,AX=AX,W=tmp$W,u=tmp$u,method=method,resACP=resACP)
         }
         if(init.comp=="pls"){
-          u.initial <- as.vector(plsdepot::plsreg2(tmpX, Y, comps = 2, crosval = FALSE)$raw.wgs[,1])
+          u.initial <- pls_init(tmpX, Y)
           out_h <- mixed.hFunct(Z=tmp$Z,X=X,AX=AX,W=tmp$W,u=u.initial,method=method, resACP=resACP)
         }
       }else{
         tmpX <- X-fMat%*%(solve(crossprod(fMat),crossprod(fMat,X)))
-      if(init.comp=="pca"){
-        u <- eigen(crossprod(x = tmpX)/no,symmetric = TRUE)$vector[,1]
-        out_h <- mixed.hFunct(Z=tmp$Z,X=X,AX=AX,W=tmp$W,u=tmp$u,method=method, resACP=resACP)
-      }
-      if(init.comp=="pls"){
-        u.initial <- as.vector(plsdepot::plsreg2(tmpX, Y, comps = 2, crosval = FALSE)$raw.wgs[,1])
-        out_h <- mixed.hFunct(Z=tmp$Z,X=X,AX=AX,W=tmp$W,u=u.initial,method=method, resACP=resACP)
-      }
+        if(init.comp=="pca"){
+          u <- pca_init(tmpX)
+          out_h <- mixed.hFunct(Z=tmp$Z,X=X,AX=AX,W=tmp$W,u=tmp$u,method=method, resACP=resACP)
+        }
+        if(init.comp=="pls"){
+          u.initial <- pls_init(tmpX, Y)
+          out_h <- mixed.hFunct(Z=tmp$Z,X=X,AX=AX,W=tmp$W,u=u.initial,method=method, resACP=resACP)
+        }
       }
       
       if(po>no){
@@ -441,8 +461,8 @@ kCompRand <- function(Y, family, size=NULL,
       }
       # resACP in oneCompRand
       tmp <- oneCompRand(Y=Y,family=family,size=size,
-                         X=X,AX=AX,u=u,fMat=fMat,random=random,loffset=loffset,
-                         init.sigma=init.sigma, method=method, resACP=resACP)
+        X=X,AX=AX,u=u,fMat=fMat,random=random,loffset=loffset,
+        init.sigma=init.sigma, method=method, resACP=resACP)
       fMat <- cbind(fMat,tmp$f)
       uMat <- cbind(uMat,tmp$u)
     }

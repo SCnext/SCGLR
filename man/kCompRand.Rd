@@ -14,7 +14,7 @@ kCompRand(
   loffset = NULL,
   k,
   init.sigma = rep(1, ncol(Y)),
-  init.comp = "pca",
+  init.comp = c("pca", "pls"),
   method = methodSR("vpi", l = 4, s = 1/2, maxiter = 1000, epsilon = 10^-6, bailout =
     1000)
 )
@@ -26,7 +26,7 @@ kCompRand(
 
 \item{size}{describes the number of trials for the binomial dependent variables: a (number of observations * number of binomial response variables) matrix is expected.}
 
-\item{X}{the matrix of the standardised explanatory variables}
+\item{X}{the matrix of the standardized explanatory variables}
 
 \item{AX}{the matrix of the additional explanatory variables}
 
@@ -38,7 +38,7 @@ kCompRand(
 
 \item{init.sigma}{a vector giving the initial values of the variance components, default is rep(1, ncol(Y))}
 
-\item{init.comp}{a character describing how the components (loadings-vectors) are inisialised in the PING algorithm: "pca" or "pls" is allowed. The package plsdepot is needed for "pls".}
+\item{init.comp}{a character describing how the components (loadings-vectors) are initialized in the PING algorithm: "pca" or "pls" is allowed.}
 
 \item{method}{Regularization criterion type: object of class "method.SCGLR"
 built by function \code{\link{methodSR}}.}
