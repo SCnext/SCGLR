@@ -401,10 +401,9 @@ plot.SCGLR <- function(x, ..., style=getOption("plot.SCGLR"), plane=c(1, 2)) {
 #' @return an object of class \code{ggplot}.
 #' @seealso For screeplot application see examples in \code{\link{plot.SCGLR}}.
 screeplot.SCGLR <- function(x, ...) {
-  inertia <- data.frame(inertia=x$inertia,comp=1:length(x$inertia))
+  inertia <- data.frame(inertia=x$inertia,comp=names(x$inertia))
   ggplot(inertia)+
     geom_col(aes(x=.data$comp,y=.data$inertia))+
-    scale_x_discrete(labels=names(x$inertia),limits=1:length(inertia$comp))+
     labs(x="Components", y="Inertia", title="Inertia per component\n", ...)
 }
 
