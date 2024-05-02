@@ -74,6 +74,16 @@ linear mixed model framework ([Chauvet, Trottier, and Bry
 2018a](#ref-chauvet18), [2018b](#ref-chauvet18b)), or the Cox regression
 model.
 
+## Fundings
+
+The GAMBAS project funded by the Agence Nationale pour la Recherche
+(ANR-18-CE02-0025). <https://gambas.cirad.fr/>
+
+<figure>
+<img src="assets/logo_gambas.jpg" alt="GAMBAS logo" />
+<figcaption aria-hidden="true">GAMBAS logo</figcaption>
+</figure>
+
 ## References
 
 <div id="refs" class="references csl-bib-body hanging-indent"
