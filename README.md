@@ -1,6 +1,6 @@
 <!-- File generated from README.Rmd. Changes must be done from there -->
 
-# SCGLR
+# SCGLR <img src="man/figures/SCGLR_small.jpg" align="right">
 
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/SCGLR)](https://cran.r-project.org/package=SCGLR)
 
@@ -79,10 +79,7 @@ model.
 The GAMBAS project funded by the Agence Nationale pour la Recherche
 (ANR-18-CE02-0025). <https://gambas.cirad.fr/>
 
-<figure>
-<img src="assets/logo_gambas.jpg" alt="GAMBAS logo" />
-<figcaption aria-hidden="true">GAMBAS logo</figcaption>
-</figure>
+<img src="man/figures/logo_gambas.jpg">
 
 ## References
 

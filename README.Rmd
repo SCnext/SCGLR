@@ -10,7 +10,7 @@ bibliography: assets/SCGLR.bib
 ---
 <!-- File generated from README.Rmd. Changes must be done from there -->
 
-# SCGLR
+# SCGLR <img src="man/figures/SCGLR_small.jpg" align="right">
 
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/SCGLR)](https://cran.r-project.org/package=SCGLR)
 
@@ -48,7 +48,7 @@ Different works are in progress both dealing for instance with the inclusion of 
 ## Fundings
 The GAMBAS project funded by the Agence Nationale pour la Recherche (ANR-18-CE02-0025). <https://gambas.cirad.fr/>
 
-![GAMBAS logo](assets/logo_gambas.jpg)
+<img src="man/figures/logo_gambas.jpg">
 
 ## References
 
