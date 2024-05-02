@@ -2,7 +2,7 @@
 
 # SCGLR
 
-[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/SCGLR)](https://cran.r-project.org/package=SCGLR)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/SCGLR)](https://cran.r-project.org/package=SCGLR)
 
 ## Introduction
 
@@ -33,7 +33,7 @@ structural relevance has been introduced ([Bry and Verron
 2015](#ref-bry15)).
 
 **SCGLR** can deal with covariates partitioned in several groups called
-“themes,” plus a group of additional covariates. Each theme is searched
+“themes”, plus a group of additional covariates. Each theme is searched
 for orthogonal components representing its variables in the model,
 whereas the additional covariates appear directly in the model, without
 the mediation of a component ([Bry et al. 2018](#ref-bry18)).
@@ -76,14 +76,15 @@ model.
 
 ## References
 
-<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="refs" class="references csl-bib-body hanging-indent"
+entry-spacing="0">
 
 <div id="ref-boulesteix07" class="csl-entry">
 
 Boulesteix, Anne-Laure, and Korbinian Strimmer. 2007. “Partial Least
 Squares: A Versatile Tool for the Analysis of High-Dimensional Genomic
 Data.” *Briefings in Bioinformatics* 8 (1): 32–44.
-<http://bib.oxfordjournals.org/content/8/1/32.short>.
+<https://academic.oup.com/bib/article-abstract/8/1/32/265330>.
 
 </div>
 
@@ -91,8 +92,8 @@ Data.” *Briefings in Bioinformatics* 8 (1): 32–44.
 
 Bry, X., C. Trottier, F. Mortier, and G Cornu. 2018. “Component-Based
 Regularisation of a Multivariate GLM with a Thematic Partitioning of the
-Explanatory Variables.” *Statistical Modelling*, In press.
-<https://doi.org/10.1177>.
+Explanatory Variables.” *Statistical Modelling*, 96–119.
+<https://doi.org/10.1177/1471082X18810114>.
 
 </div>
 
@@ -113,7 +114,7 @@ Bry, X., C. Trottier, T. Verron, and F. Mortier. 2013. “Supervised
 Component Generalized Linear Regression Using a Pls-Extension of the
 Fisher Scoring Algorithm.” *Journal of Multivariate Analysis* 119:
 47–60.
-<http://www.sciencedirect.com/science/article/pii/S0047259X13000407>.
+<https://www.sciencedirect.com/science/article/pii/S0047259X13000407>.
 
 </div>
 
@@ -121,7 +122,7 @@ Fisher Scoring Algorithm.” *Journal of Multivariate Analysis* 119:
 
 Bry, X., and T Verron. 2015. “THEME: THEmatic Model Exploration Through
 Multiple Co-Structure Maximization.” *Journal of Chemometrics* 29 (12):
-637–47. <http://onlinelibrary.wiley.com/doi/10.1002/cem.2759/full>.
+637–47. <https://onlinelibrary.wiley.com/doi/10.1002/cem.2759/full>.
 
 </div>
 
@@ -130,7 +131,7 @@ Multiple Co-Structure Maximization.” *Journal of Chemometrics* 29 (12):
 Carrascal, Luis M., Ismael Galván, and Oscar Gordo. 2009. “Partial Least
 Squares Regression as an Alternative to Current Regression Methods Used
 in Ecology.” *Oikos* 118 (5): 681–90.
-<http://onlinelibrary.wiley.com/doi/10.1111/j.1600-0706.2008.16881.x/full>.
+<https://onlinelibrary.wiley.com/doi/10.1111/j.1600-0706.2008.16881.x/full>.
 
 </div>
 
@@ -138,7 +139,7 @@ in Ecology.” *Oikos* 118 (5): 681–90.
 
 Chauvet, J., C. Trottier, and X Bry. 2018a. “Component-Based
 Regularisation of Multivariate Generalised Linear Mixed Models.”
-*Journal of Computational and Graphical Statistics*, In press.
+*Journal of Computational and Graphical Statistics*, 909–20.
 <https://doi.org/10.1080/10618600.2019.1598870>.
 
 </div>
@@ -161,7 +162,7 @@ Data.” *Multiway Data Analysis*, 341–52.
 
 <div id="ref-tenenhaus98" class="csl-entry">
 
-Tenenhaus, M. 1998. *La régression PLS: Théorie Et Pratique*. Paris:
+Tenenhaus, M. 1998. *La Régression PLS: Théorie Et Pratique*. Paris:
 Editions Technip.
 <https://books.google.fr/books?hl=fr&lr=&id=OesjK2KZhsAC&oi=fnd&pg=PA1&dq=Tenenhaus+PLS&ots=EvUst85CEP&sig=EpksVNlZFUVoYLX7JX952PIGaHU>.
 
