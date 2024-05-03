@@ -2,6 +2,9 @@ development:
   mode: unreleased
 
 url: https://scnext.github.io/SCGLR/
+
+template:
+  bootstrap: 5  
   
 home:
   links:
