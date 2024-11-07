@@ -1,0 +1,12 @@
+pandoc: 3.1.11
+pkgdown: 2.1.1
+pkgdown_sha: ~
+articles:
+  mixedSCGLR: mixedSCGLR.html
+  parallelization: parallelization.html
+  progression: progression.html
+  SCGLR: SCGLR.html
+last_built: 2024-11-07T13:27Z
+urls:
+  reference: https://scnext.github.io/SCGLR/reference
+  article: https://scnext.github.io/SCGLR/articles
