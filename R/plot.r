@@ -48,7 +48,7 @@
 #' }
 plot.SCGLR <- function(x, ..., style=getOption("plot.SCGLR"), plane=c(1, 2)) {
   data <- x
-  if (class(data) != "SCGLR")
+  if (!inherits(data, "SCGLR"))
     stop("This plot function need an SCGLR result")
   
   if (dim(data$compr)[2] < 2)
