@@ -72,7 +72,7 @@ scglrTheme <- function(formula, data, H, family, size = NULL, weights = NULL,
 
   # extract left-hand side (Y)
   # Y is a formula of the form ~...
-  if(length(formula)[1] != 1)
+  if(length_Formula(formula)[1] != 1)
     stop("Left hand side part of formula (Y) must have ONE part!")
   theme_Y <- stats::terms(formula, lhs=1, rhs=0)
   Y_vars <- all.vars(theme_Y)
@@ -114,7 +114,7 @@ scglrTheme <- function(formula, data, H, family, size = NULL, weights = NULL,
   # check and process themes #######################################################################
 
   # check part counts
-  if(length(formula)[2] < 1+additional)
+  if(length_Formula(formula)[2] < 1+additional)
     if(additional) {
       stop("Right hand side part of formula with additional variables must have at least TWO parts!")
     } else {
@@ -122,7 +122,7 @@ scglrTheme <- function(formula, data, H, family, size = NULL, weights = NULL,
     }
 
   # theme count
-  theme_R <- length(formula)[2] - additional
+  theme_R <- length_Formula(formula)[2] - additional
 
   # check H (number of components to keep per theme)
   H <- as.integer(H)
@@ -154,7 +154,7 @@ scglrTheme <- function(formula, data, H, family, size = NULL, weights = NULL,
   # extract additional variables (A)
   # A is a formula of the form ~...
   if(additional) {
-    theme_A <- stats::terms(formula, lhs=0, rhs=length(formula)[[2]])
+    theme_A <- stats::terms(formula, lhs=0, rhs=length_Formula(formula)[[2]])
   } else {
     theme_A <- NULL
   }

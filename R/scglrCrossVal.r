@@ -280,12 +280,17 @@ scglrCrossVal <-  function(formula,data,family,K=1,folds=10,type="mspe",size=NUL
   return(cv)
 }
 
+#' @export
 summary.SCGLRCV <- function(object, ...) {
   NextMethod(...)
 }
+
+#' @export
 print.SCGLRCV <- function(x, ...) {
   NextMethod(...)
 }
+
+#' @export
 plot.SCGLRCV <- function(x, ...) {
   tmp <- colMeans(log(x))
   ggplot()+

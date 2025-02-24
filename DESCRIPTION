@@ -5,7 +5,7 @@ Description:
     An extension of the Fisher Scoring Algorithm to combine PLS regression with GLM 
     estimation in the multivariate context. Covariates can also be grouped in themes.
 Version: 3.0.9000
-Date: 2022-12-14
+Date: 2024-02-24
 Authors@R: c(
     person("Guillaume","Cornu",,"gcornu@cirad.fr", role=c("aut","cre"), comment=c(ORCID="0000-0002-7523-5176")),
     person("Frederic","Mortier",,"fmortier@cirad.fr",role="aut", comment=c(ORCID="0000-0001-5473-709X")),
@@ -25,5 +25,5 @@ Imports:
 Suggests:
     future,future.apply,progressr
 LazyData: yes
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
 Encoding: UTF-8
