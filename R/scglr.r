@@ -108,7 +108,7 @@ scglr <-  function(formula,data,family,K=1,size=NULL,weights=NULL,offset=NULL,su
   y <- as.matrix(model.part(form,data=mf,lhs=1))
   x <- model.part(form, data=mf, rhs = 1)
   
-  if(Formula:::length.Formula(form)[2]==2){
+  if(length_Formula(form)[2]==2){
     AX <- model.part(form, data=mf, lhs=0, rhs = 2)
     namesAx <- names(AX)
     AX <- model.matrix(form,data=mf,rhs=2)[,-1]

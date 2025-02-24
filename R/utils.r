@@ -72,3 +72,7 @@ custom_stop <- function(subclass, ..., call=sys.call(-1)) {
   c <- condition(c(subclass, "error"), message=message, call=call)
   stop(c)
 }
+
+length_Formula <- function(x) {
+  c(length(attr(x, "lhs")), length(attr(x, "rhs")))
+}
