@@ -3,6 +3,7 @@
 S3method("$",MultivariateFormula)
 S3method(barplot,SCGLR)
 S3method(barplot,SCGLRTHM)
+S3method(length,MultivariateFormula)
 S3method(pairs,SCGLR)
 S3method(plot,SCGLR)
 S3method(plot,SCGLRTHM)

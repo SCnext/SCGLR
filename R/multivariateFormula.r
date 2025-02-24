@@ -229,6 +229,11 @@ print.MultivariateFormula <- function(x, ...) {
   invisible(x)
 }
 
+#' @export
+length.MultivariateFormula <- function(x) {
+  3
+}
+
 # print(multivariateFormula("y","1"))
 # print(multivariateFormula(y1+y2~x1+x2|x3+x4|x5+x6*x7||a1+a2))
 # print(multivariateFormula(c("y1","y2"),list(c("x1","x2"),c("x3","x4")),c("x5","x6*x7"),additional = TRUE))
