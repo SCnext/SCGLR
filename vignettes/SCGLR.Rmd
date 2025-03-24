@@ -44,20 +44,20 @@ summary(genus.scglr)
 
 # Percent of variance captured by components
 
-```{r screeplot}
+```{r screeplot, fig.alt="Inertia per components"}
 screeplot(genus.scglr)
 ```
 
 # Correlation plot for first two components
 
-```{r corr_plots,fig.show="hold",out.width="50%"}
+```{r corr_plots,fig.show="hold",out.width="50%", fig.alt=c("Correlation plot showing covariates", "Correlation plot showing predictors")}
 plot(genus.scglr, title="Correlation plot showing covariates")
 plot(genus.scglr,predictors=TRUE,covariates=FALSE, title="Correlation plot showing predictors")
 ```
 
 # Comparing combinations of components
 
-```{r pairplot,fig.asp=2}
+```{r pairplot,fig.asp=2, fig.alt="Explore components pairwise"}
 pairs(genus.scglr,ncol=2)
 ```
 
@@ -77,13 +77,13 @@ testthm <-scglrTheme(form,data=genus,H=c(2,3),family="poisson",offset = genus$su
 
 ## Specialized screeplot (one for each theme)
 
-```{r theme_screeplot}
+```{r theme_screeplot, fig.alt="Inertia per components for each theme"}
 screeplot(testthm)
 ```
 
 ## Specialized correlation plot (one for each theme)
 
-```{r theme_corr_plots}
+```{r theme_corr_plots, fig.alt="Correlation plots for each theme"}
 plot(testthm)
 ```
 
