@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">SCGLR</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">3.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">3.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,11 +36,24 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Changelog</h1>
-      <small>Source: <a href="https://github.com/SCnext/SCGLR/blob/master/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/SCnext/SCGLR/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.0.9000" id="version-309000-dev">version 3.0.9000 (dev)<a class="anchor" aria-label="anchor" href="#version-309000-dev"></a></h2>
+<h2 class="pkg-version" data-toc-text="3.1" id="version-31">version 3.1<a class="anchor" aria-label="anchor" href="#version-31"></a></h2>
+<div class="section level3">
+<h3 id="new-features-3-1">New features<a class="anchor" aria-label="anchor" href="#new-features-3-1"></a></h3>
+<ul><li>preliminary integration of code from <code>SCnext/mixedSCGLR</code> written by Jocelyn Chauvet (issue <a href="https://github.com/SCnext/SCGLR/issues/11" class="external-link">#11</a>)</li>
+<li>moved parallelization to <code>future</code> framework. Need <code>future.apply</code> package (issue <a href="https://github.com/SCnext/SCGLR/issues/16" class="external-link">#16</a>)</li>
+<li>added progress to <code>scglrCrossVal</code> and <code>scglrThemeBackward</code> functions using <code>progressr</code> package (issue <a href="https://github.com/SCnext/SCGLR/issues/17" class="external-link">#17</a>)</li>
+</ul></div>
+<div class="section level3">
+<h3 id="deprecations-3-1">Deprecations<a class="anchor" aria-label="anchor" href="#deprecations-3-1"></a></h3>
+<ul><li>parameter <code>nfolds</code> of <code>scglrCrossVal</code> as been renamed to <code>folds</code> and now accepts also vectors. For now a warning is issued and provided value is used but update your code as it will likely be removed in a future version.</li>
+<li>parameter <code>mc.cores</code> of <code>scglrCrossVal</code> is now deprecated as of the move to <code>future</code> framework for parallelization.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-and-improvements-3-1">bug fixes and improvements<a class="anchor" aria-label="anchor" href="#bug-fixes-and-improvements-3-1"></a></h3>
 <ul><li>fix bug happening when providing a single Y variable to <code>sglrTheme</code> (issue <a href="https://github.com/SCnext/SCGLR/issues/1" class="external-link">#1</a>)</li>
 <li>allow to provide folds for cross validation defined by user (issue <a href="https://github.com/SCnext/SCGLR/issues/2" class="external-link">#2</a>)</li>
 <li>individual beta and gamma for themes were not properly computed (issue <a href="https://github.com/SCnext/SCGLR/issues/5" class="external-link">#5</a>)</li>
@@ -53,16 +66,6 @@
 <li>fix some URL in docs</li>
 <li>move from <code>plsdepot::plsreg2</code> to <code><a href="https://rdrr.io/pkg/pls/man/mvr.html" class="external-link">pls::plsr</a></code> to initialize mixed model components (issue <a href="https://github.com/SCnext/SCGLR/issues/22" class="external-link">#22</a>)</li>
 <li>fix rstudio bug displaying error message when printing a MultivariateFormula (in fact a Formula) (issue <a href="https://github.com/SCnext/SCGLR/issues/23" class="external-link">#23</a>).</li>
-</ul><div class="section level3">
-<h3 id="new-features-3-0-9000">New features<a class="anchor" aria-label="anchor" href="#new-features-3-0-9000"></a></h3>
-<ul><li>preliminary integration of code from <code>SCnext/mixedSCGLR</code> written by Jocelyn Chauvet (issue <a href="https://github.com/SCnext/SCGLR/issues/11" class="external-link">#11</a>)</li>
-<li>moved parallelization to <code>future</code> framework. Need <code>future.apply</code> package (issue <a href="https://github.com/SCnext/SCGLR/issues/16" class="external-link">#16</a>)</li>
-<li>added progress to <code>scglrCrossVal</code> and <code>scglrThemeBackward</code> functions using <code>progressr</code> package (issue <a href="https://github.com/SCnext/SCGLR/issues/17" class="external-link">#17</a>)</li>
-</ul></div>
-<div class="section level3">
-<h3 id="deprecations-3-0-9000">Deprecations<a class="anchor" aria-label="anchor" href="#deprecations-3-0-9000"></a></h3>
-<ul><li>parameter <code>nfolds</code> of <code>scglrCrossVal</code> as been renamed to <code>folds</code> and now accepts also vectors. For now a warning is issued and provided value is used but update your code as it will be removed in a next version.</li>
-<li>parameter <code>mc.cores</code> of <code>scglrCrossVal</code> is now deprecated as of the move to <code>future</code> framework for parallelization.</li>
 </ul></div>
 </div>
     <div class="section level2">
