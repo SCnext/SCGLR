@@ -1,12 +1,15 @@
-This is an update of the package introducing new functionnalities.
+This is an update of the package introducing new functionalities 
+and providing bug fixes.
 
 ## Test environments
-* local Windows install, R 3.4.3
-* win-builder (devel and release)
+* rhub windows-latest
+* rhub ubuntu-next
 
 ## R CMD check results
 
-0 errors | 0 warnings | 0 notes
+0 errors | 0 warnings | 1 notes
+
+--> unable to verify current time
 
 ## Reverse dependencies
 
