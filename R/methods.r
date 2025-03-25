@@ -7,6 +7,7 @@
 #'@param maxiter integer for maximum number of iterations of \code{SR} function
 #'@param epsilon positive convergence threshold
 #'@param bailout integer argument
+#'@returns an object of class \code{method.SCGLR}
 methodSR <- function(phi="vpi", l=1, s=1/2, maxiter=1000, epsilon=1e-6, bailout=10) {
   
   # check arguments
