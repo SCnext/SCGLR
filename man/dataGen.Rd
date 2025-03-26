@@ -26,7 +26,7 @@ of the Congo-Basin and 58 geo-referenced variables on 2615 8-by-8 km plots
 The use of this dataset for publication must make reference to the CoForChange project.
 }
 \references{
-S. Gourlet-Fleury et al. (2009--2014) CoForChange project: \url{http://coforchange.cirad.fr/}
+S. Gourlet-Fleury et al. (2009--2014) CoForChange project: \url{https://coforchange.cirad.fr/}
 
 C. Garcia et al. (2013--2015) CoForTips project: \url{https://www.cofortips.org/}
 }
