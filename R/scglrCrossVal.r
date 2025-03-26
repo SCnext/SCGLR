@@ -194,7 +194,7 @@ scglrCrossVal <-  function(formula,data,family,K=1,folds=10,type="mspe",size=NUL
       xnew <- cbind(1,AX[valid,,drop=FALSE])
       beta.coefs <- sapply(gamma.fit, coef)
     }
-    
+
     predict <- multivariatePredictGlm(Xnew=xnew,family,
       beta.coefs,offset[valid,,drop=FALSE])
     
@@ -202,7 +202,7 @@ scglrCrossVal <-  function(formula,data,family,K=1,folds=10,type="mspe",size=NUL
       cvNull[1:ny] <- auc(roc(y[valid,,drop=FALSE],predict, quiet=TRUE))
     } else if(type%in%c("likelihood","aic","bic","aicc","mspe")){
       cvNull[1:ny] <- infoCriterion(ynew=y[valid,,drop=FALSE],predict,family,
-        type=type,size=size[valid,,drop=FALSE],npar=nrow(gamma.coefs))
+        type=type,size=size[valid,,drop=FALSE],npar=nrow(beta.coefs))
     }
     
     try_result <- try({
