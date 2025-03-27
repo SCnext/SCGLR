@@ -4,7 +4,7 @@ Title: Supervised Component Generalized Linear Regression
 Description: 
     An extension of the Fisher Scoring Algorithm to combine PLS regression with GLM 
     estimation in the multivariate context. Covariates can also be grouped in themes.
-Version: 3.1.0
+Version: 3.1.9000
 Date: 2025-03-24
 Authors@R:
     c(person(
