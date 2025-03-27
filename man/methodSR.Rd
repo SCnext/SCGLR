@@ -27,6 +27,9 @@ Allowed values are "vpi" for Variable Powered Inertia and "cv" for Component Var
 
 \item{bailout}{integer argument}
 }
+\value{
+an object of class \code{method.SCGLR}
+}
 \description{
 Regularization criterion types
 }

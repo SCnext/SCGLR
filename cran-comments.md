@@ -1,8 +1,15 @@
-This is an update of the package introducing new functionnalities.
+- Ill formed urls not caught by below test were fixed.
+- Fixed author differing from Author@R (documentation states that comment field 
+of person() is free but in fact not! Only two names are allowed ORCID and ROR 
+other string must not have names)
+
+This is an update of the package introducing new functionalities 
+and providing bug fixes.
 
 ## Test environments
-* local Windows install, R 3.4.3
-* win-builder (devel and release)
+* win-builder
+* rhub windows-latest
+* rhub ubuntu-next
 
 ## R CMD check results
 

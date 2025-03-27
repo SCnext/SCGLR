@@ -10,7 +10,7 @@ bibliography: assets/SCGLR.bib
 ---
 <!-- File generated from README.Rmd. Changes must be done from there -->
 
-# SCGLR <img src="man/figures/SCGLR_small.jpg" align="right">
+# SCGLR <img src="man/figures/SCGLR_small.jpg" align="right" alt="SCGLR logo">
 
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/SCGLR)](https://cran.r-project.org/package=SCGLR)
 

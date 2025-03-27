@@ -1,6 +1,6 @@
 <!-- File generated from README.Rmd. Changes must be done from there -->
 
-# SCGLR <img src="man/figures/SCGLR_small.jpg" align="right">
+# SCGLR <img src="man/figures/SCGLR_small.jpg" align="right" alt="SCGLR logo">
 
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/SCGLR)](https://cran.r-project.org/package=SCGLR)
 
@@ -91,7 +91,7 @@ entry-spacing="0">
 Boulesteix, Anne-Laure, and Korbinian Strimmer. 2007. “Partial Least
 Squares: A Versatile Tool for the Analysis of High-Dimensional Genomic
 Data.” *Briefings in Bioinformatics* 8 (1): 32–44.
-<https://academic.oup.com/bib/article-abstract/8/1/32/265330>.
+<https://doi.org/10.1093/bib/bbl016>.
 
 </div>
 
@@ -120,8 +120,7 @@ Proceedings in Mathematics & Statistics.
 Bry, X., C. Trottier, T. Verron, and F. Mortier. 2013. “Supervised
 Component Generalized Linear Regression Using a Pls-Extension of the
 Fisher Scoring Algorithm.” *Journal of Multivariate Analysis* 119:
-47–60.
-<https://www.sciencedirect.com/science/article/pii/S0047259X13000407>.
+47–60. <https://doi.org/10.1016/j.jmva.2013.03.013>.
 
 </div>
 
@@ -129,7 +128,7 @@ Fisher Scoring Algorithm.” *Journal of Multivariate Analysis* 119:
 
 Bry, X., and T Verron. 2015. “THEME: THEmatic Model Exploration Through
 Multiple Co-Structure Maximization.” *Journal of Chemometrics* 29 (12):
-637–47. <https://onlinelibrary.wiley.com/doi/10.1002/cem.2759/full>.
+637–47. <https://doi.org/10.1002/cem.2759>.
 
 </div>
 
@@ -138,7 +137,7 @@ Multiple Co-Structure Maximization.” *Journal of Chemometrics* 29 (12):
 Carrascal, Luis M., Ismael Galván, and Oscar Gordo. 2009. “Partial Least
 Squares Regression as an Alternative to Current Regression Methods Used
 in Ecology.” *Oikos* 118 (5): 681–90.
-<https://onlinelibrary.wiley.com/doi/10.1111/j.1600-0706.2008.16881.x/full>.
+<https://doi.org/10.1111/j.1600-0706.2008.16881.x>.
 
 </div>
 

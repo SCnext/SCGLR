@@ -9,7 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r}
+```{r, fig.alt="Mixed SCGLR result plot showing 1/2 component plane"}
 library(SCGLR)
 
 # load sample data

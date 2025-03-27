@@ -1,4 +1,17 @@
-# version 3.0.9000 (dev)
+# version 3.1
+
+## New features
+- preliminary integration of code from `SCnext/mixedSCGLR` written by Jocelyn Chauvet (issue #11)
+- moved parallelization to `future` framework. Need `future.apply` package (issue #16)
+- added progress to `scglrCrossVal` and `scglrThemeBackward` functions using `progressr` package (issue #17)
+
+## Deprecations
+- parameter `nfolds` of `scglrCrossVal` as been renamed to `folds` and now accepts also vectors.
+For now a warning is issued and provided value is used but update your code as it will likely be removed
+in a future version.
+- parameter `mc.cores` of `scglrCrossVal` is now deprecated as of the move to `future` framework for parallelization.
+
+## bug fixes and improvements
 - fix bug happening when providing a single Y variable to `sglrTheme` (issue #1)
 - allow to provide folds for cross validation defined by user (issue #2)
 - individual beta and gamma for themes were not properly computed (issue #5) 
@@ -11,17 +24,6 @@
 - fix some URL in docs
 - move from `plsdepot::plsreg2` to `pls::plsr` to initialize mixed model components (issue #22)
 - fix rstudio bug displaying error message when printing a MultivariateFormula (in fact a Formula) (issue #23).
-
-## New features
-- preliminary integration of code from `SCnext/mixedSCGLR` written by Jocelyn Chauvet (issue #11)
-- moved parallelization to `future` framework. Need `future.apply` package (issue #16)
-- added progress to `scglrCrossVal` and `scglrThemeBackward` functions using `progressr` package (issue #17)
-
-## Deprecations
-- parameter `nfolds` of `scglrCrossVal` as been renamed to `folds` and now accepts also vectors.
-For now a warning is issued and provided value is used but update your code as it will be removed
-in a next version.
-- parameter `mc.cores` of `scglrCrossVal` is now deprecated as of the move to `future` framework for parallelization.
 
 # version 3.0
 This major version introduces a new feature allowing to group covariates in so called **themes**.
