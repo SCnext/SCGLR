@@ -3,6 +3,8 @@
 # SCGLR <img src="man/figures/SCGLR_small.jpg" align="right" alt="SCGLR logo">
 
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/SCGLR)](https://cran.r-project.org/package=SCGLR)
+[![SCGLR status
+badge](https://scnext.r-universe.dev/SCGLR/badges/version)](https://scnext.r-universe.dev/SCGLR)
 
 ## Introduction
 
@@ -50,6 +52,9 @@ install.packages("SCGLR")
 
 # Install development version from GitHub
 remotes::install_github("SCnext/SCGLR")
+
+# Install development version from R universe
+install.packages("SCGLR", repos = c("https://scnext.r-universe.dev", "https://cloud.r-project.org"))
 ```
 
 ## Main functions and works in progress
@@ -79,7 +84,7 @@ model.
 The GAMBAS project funded by the Agence Nationale pour la Recherche
 (ANR-18-CE02-0025). <https://gambas.cirad.fr/>
 
-<img src="man/figures/logo_gambas.jpg">
+<img src="man/figures/logo_gambas.jpg" alt="GAMBAS logo">
 
 ## References
 
